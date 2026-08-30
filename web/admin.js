@@ -5,7 +5,14 @@ import questions from './questions.json';
 const $ = id => document.getElementById(id);
 const tauri = window.__TAURI__;
 const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
-const engine = new QuizEngine(questions, { mode: 'first_correct', roundSeconds: 15, autoDelayMs: 3000, scorePerCorrect: 10, onChange: state => { render(state); tauri?.event?.emit('quiz-state', state).catch(() => {}); } });
+function syncOverlayState(state) {
+  if (!tauri) return;
+  // Native delivery targets the capture Overlay directly; the browser event is
+  // retained as a compatibility fallback.
+  void tauri.core?.invoke('sync_overlay_state', { state }).catch(error => console.error('Overlay state sync failed:', error));
+  void tauri.event?.emit('quiz-state', state).catch(() => {});
+}
+const engine = new QuizEngine(questions, { mode: 'first_correct', roundSeconds: 15, autoDelayMs: 3000, scorePerCorrect: 10, onChange: state => { render(state); syncOverlayState(state); } });
 const directProvider = new DirectDycastProvider({
   onComment: comment => engine.handleComment(comment),
   onStatus: status => engine.setDirectDycastStatus(status)
@@ -36,11 +43,11 @@ function render(state) {
   if (state.directDycastRoom && document.activeElement !== $('roomNumber')) $('roomNumber').value = state.directDycastRoom;
 }
 
-$('startBtn').onclick = () => engine.startRound(); $('pauseBtn').onclick = () => engine.snapshot().phase === 'paused' ? engine.resume() : engine.pause(); $('revealBtn').onclick = () => engine.revealAnswer(false); $('nextBtn').onclick = () => engine.nextQuestion(true); $('prevBtn').onclick = () => engine.previousQuestion();
-$('resetBtn').onclick = () => { if (confirm('确定重新开始并清空所有积分？')) engine.resetGame(); }; $('clearBoardBtn').onclick = () => { if (confirm('确定清空排行榜？')) engine.clearLeaderboard(); }; $('saveSettings').onclick = () => { engine.setMode($('modeSelect').value); engine.setRoundSeconds($('roundSeconds').value); engine.setAutoDelay($('autoDelay').value); engine.setScorePerCorrect($('scorePerCorrect').value); };
-$('levelSelect').onchange = () => engine.filterByLevel($('levelSelect').value);
+$('startBtn').onclick = () => engine.startRound(); $('pauseBtn').onclick = () => engine.snapshot().phase === 'paused' ? engine.resume() : engine.pause(); $('revealBtn').onclick = () => engine.revealAnswer(false); $('nextBtn').onclick = () => engine.nextQuestion(true); $('prevBtn').onclick = () => engine.previousQuestion(); $('shuffleBtn').onclick = () => engine.shuffleQuestions();
+$('resetBtn').onclick = () => { if (confirm('确定重新开始并清空所有积分？')) engine.resetGame(); }; $('clearBoardBtn').onclick = () => { if (confirm('确定清空排行榜？')) engine.clearLeaderboard(); };
+$('levelSelect').onchange = () => engine.filterByLevel($('levelSelect').value); $('modeSelect').onchange = () => engine.setMode($('modeSelect').value); $('roundSeconds').onchange = () => engine.setRoundSeconds($('roundSeconds').value); $('autoDelay').onchange = () => engine.setAutoDelay($('autoDelay').value); $('scorePerCorrect').onchange = () => engine.setScorePerCorrect($('scorePerCorrect').value);
 async function overlayCommand(command, args = {}) { try { await tauri?.core?.invoke(command, args); } catch (error) { alert(`Overlay 操作失败：${error}`); } }
-$('hiddenOverlay').onchange = event => overlayCommand(event.target.checked ? 'hide_overlay' : 'show_overlay'); $('topOverlay').onchange = event => overlayCommand('set_overlay_always_on_top', { enabled: event.target.checked }); $('clickthroughOverlay').onchange = async event => { await overlayCommand('set_overlay_clickthrough', { enabled: event.target.checked }); tauri?.event?.emit('overlay-edit-mode', !event.target.checked).catch(() => {}); };
+$('offscreenOverlay').onchange = event => overlayCommand('set_overlay_offscreen', { offscreen: event.target.checked }); $('topOverlay').onchange = event => overlayCommand('set_overlay_always_on_top', { enabled: event.target.checked }); $('clickthroughOverlay').onchange = async event => { await overlayCommand('set_overlay_clickthrough', { enabled: event.target.checked }); tauri?.event?.emit('overlay-edit-mode', !event.target.checked).catch(() => {}); };
 if (tauri?.event?.listen) { await tauri.event.listen('overlay-ready', () => tauri.event.emit('quiz-state', engine.snapshot())); }
 $('connectRoomBtn').onclick = async () => {
   const button = $('connectRoomBtn');

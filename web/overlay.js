@@ -19,5 +19,15 @@ function render(state) {
   $('rankList').innerHTML = list.length ? list.slice(0, 5).map((p, index) => `<div class="rank-row"><span>${index + 1}</span><span>${escapeHtml(p.nickname)}</span><strong>${p.score}</strong></div>`).join('') : '<div class="empty">等待首位玩家</div>';
 }
 if (tauri?.event?.listen) { await tauri.event.listen('quiz-state', event => render(event.payload)); await tauri.event.listen('overlay-edit-mode', event => $('editBar').classList.toggle('hidden', !event.payload)); }
+// Read the last native snapshot too. This covers an Overlay which is still
+// loading when the first correct-answer event is sent.
+if (tauri?.core?.invoke) {
+  try {
+    const state = await tauri.core.invoke('get_overlay_state');
+    if (state) render(state);
+  } catch (error) {
+    console.error('Overlay initial-state sync failed:', error);
+  }
+}
 $('editBar').addEventListener('mousedown', () => tauri?.core?.invoke('start_overlay_dragging').catch(() => {}));
 tauri?.event?.emit('overlay-ready', true).catch(() => {});

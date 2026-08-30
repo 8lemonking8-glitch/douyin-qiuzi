@@ -180,7 +180,6 @@ button.ghost-danger { background: #fff1f2; color: #b65d71; }
 .settings-panel select:disabled, .settings-panel input:disabled { opacity: .5; background: #f6f1f5; }
 
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.save-button { width: 100%; margin-top: 3px; color: #fff; background: #786ab7; }
 
 .check { display: flex !important; align-items: center; gap: 8px; }
 .check input { width: auto !important; margin: 0 !important; accent-color: #d875a0; }
@@ -205,10 +204,12 @@ button.ghost-danger { background: #fff1f2; color: #b65d71; }
 .recent-item { padding: 11px 12px; border-radius: 13px; background: #f9f5f9; color: #735e70; }
 .recent-item.correct { outline: 1px solid #94cfb9; background: #f0faf6; }
 
-.comments { display: grid; gap: 8px; margin-top: 12px; overflow-y: auto; align-content: start; }
+.comments { display: grid; gap: 8px; margin-top: 12px; overflow-y: auto; align-content: start; flex: 1; min-height: 0; max-height: 300px; }
 .comments .recent-item { min-width: 0; }
 
 .empty { padding: 18px; color: #aa98a8; text-align: center; }
+
+.made-with { margin-top: 24px; text-align: center; color: #bca9ba; font-size: 11px; letter-spacing: .3px; }
 
 @media (max-width: 900px) {
   body { padding: 18px; }

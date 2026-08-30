@@ -74,6 +74,7 @@ export class QuizEngine {
     this.notify();
   }
   filterByLevel(level) { const target = LEVEL_LABELS[level] ? level : 'all'; this.activeLevel = target; this.questions = target === 'all' ? this.allQuestions : this.allQuestions.filter(question => question.level === target); if (!this.questions.length) { this.questions = this.allQuestions; this.activeLevel = 'all'; } this.clearTimers(); this.clearRound(); this.state.idx = 0; this.state.phase = 'idle'; this.state.remaining = this.roundSeconds; this.notify(); }
+  shuffleQuestions() { for (let i = this.allQuestions.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [this.allQuestions[i], this.allQuestions[j]] = [this.allQuestions[j], this.allQuestions[i]]; } this.filterByLevel(this.activeLevel); }
   startRound() {
     if (this.state.phase !== 'idle' && this.state.phase !== 'revealed') return;
     this.clearTimers(); this.clearRound(); this.state.phase = 'answering'; this.state.remaining = this.roundSeconds; this.notify();
