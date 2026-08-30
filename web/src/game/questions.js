@@ -12,7 +12,9 @@ export function normalizeQuestions(input) {
         A: String(options.A || ''), B: String(options.B || ''),
         C: String(options.C || ''), D: String(options.D || '')
       },
-      answer: /^[ABCD]$/.test(answer) ? answer : 'A'
+      answer: /^[ABCD]$/.test(answer) ? answer : 'A',
+      pos: String(item.pos || ''),
+      phonetic: String(item.phonetic || '')
     };
   }).filter(question => question.question && Object.values(question.options).every(Boolean));
 }

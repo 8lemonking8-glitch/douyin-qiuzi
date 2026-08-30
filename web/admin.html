@@ -43,6 +43,7 @@
         <label>切题模式<select id="modeSelect"><option value="first_correct">抢答：首个答对后自动切题</option><option value="timer">倒计时：时间到后自动切题</option><option value="manual">手动：只由主播切题</option></select></label>
         <div class="two-col"><label>答题时长（秒）<input id="roundSeconds" type="number" min="5" max="120" value="15"></label><label>自动切题延迟（秒）<input id="autoDelay" type="number" min="1" max="30" value="3"></label></div>
         <label>答对分数<input id="scorePerCorrect" type="number" min="1" max="9999" value="10"></label>
+        <label class="check"><input id="autoSpeak" type="checkbox"><span>自动朗读单词</span></label>
         <hr><p class="section-kicker">LIVE OVERLAY</p><h3>直播画面</h3>
         <label class="check"><input id="offscreenOverlay" type="checkbox" checked><span>Overlay 离屏（桌面不可见）</span></label>
         <label class="check"><input id="clickthroughOverlay" type="checkbox" checked><span>Overlay 鼠标穿透</span></label><label class="check"><input id="topOverlay" type="checkbox" checked><span>Overlay 始终置顶</span></label>
