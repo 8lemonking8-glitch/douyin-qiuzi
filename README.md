@@ -20,7 +20,7 @@ Windows 直播答题桌面软件。一个 EXE 内置 Dycast Desktop（MIT）采�
 
 ## 透明 Overlay
 
-Overlay 是真实透明、无标题栏、默认置顶和鼠标穿透的独立 Tauri 窗口，启动时默认隐藏；在控制台点击“显示”后才会出现。取消“Overlay 鼠标穿透”后，可拖动红色拖动条调整位置。
+Overlay 是真实透明、无标题栏、默认置顶和鼠标穿透的独立 Tauri 窗口。启动时窗口保持打开，确保抖音直播伴侣能在“窗口”采集列表中找到 `Douyin Quiz Overlay`；透明区域不会形成普通窗口背景。取消“Overlay 鼠标穿透”后，可拖动红色拖动条调整位置。
 
 已验证 Windows 程序启动、透明窗口配置、本地 WebSocket 与打包流程。抖音直播伴侣是否为当前版本保留 Alpha 通道，仍需在其预览中手工确认：题卡外区域应露出底层直播画面；若被采为黑/白色，应记录采集方式和版本后再评估 Win32 layered window / DirectComposition。
 
