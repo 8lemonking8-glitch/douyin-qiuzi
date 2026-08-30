@@ -12,6 +12,10 @@ function render(state) {
   for (const key of ['A', 'B', 'C', 'D']) $(key.toLowerCase()).textContent = q.options[key];
   $('participants').textContent = `${state.participantCount} 人参与`;
   $('hint').textContent = state.phase === 'answering' ? (state.mode === 'first_correct' ? '🎤 评论发送 A / B / C / D 抢答' : `⏱ 剩余 ${state.remaining}s · 评论 A/B/C/D`) : state.phase === 'paused' ? '⏸ 本题已暂停' : '等待主播开始本题';
+  const answerHint = $('answerHint');
+  if (state.phase === 'answering') { answerHint.classList.remove('hidden'); answerHint.textContent = state.mode === 'first_correct' ? '📝 评论区发送 A / B / C / D 参与抢答' : `⏱ 剩余 ${state.remaining}s · 评论区发送 A / B / C / D`; }
+  else if (state.phase === 'paused') { answerHint.classList.remove('hidden'); answerHint.textContent = '⏸ 本题已暂停'; }
+  else answerHint.classList.add('hidden');
   const winner = $('winner');
   if (state.winner) { winner.classList.remove('hidden'); $('winnerLabel').textContent = '抢答成功'; $('winnerName').textContent = state.winner.nickname; $('winnerAnswer').textContent = `✓ 正确答案 ${state.winner.answer} · ${q.options[state.winner.answer]}`; $('winnerScore').textContent = `+${state.winner.awarded} 分`; $('nextTip').textContent = `${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题…`; }
   else if (state.phase === 'revealed' && q.answer) { winner.classList.remove('hidden'); $('winnerLabel').textContent = '正确答案'; $('winnerName').textContent = q.options[q.answer]; $('winnerAnswer').textContent = `✓ ${q.answer}`; $('winnerScore').textContent = ''; $('nextTip').textContent = state.mode === 'manual' ? '等待主播切题' : `${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题…`; }

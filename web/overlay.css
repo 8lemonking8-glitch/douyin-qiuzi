@@ -47,6 +47,8 @@ body { -webkit-user-select: none; user-select: none; }
 
 .footer { display: flex; justify-content: space-between; margin-top: auto; padding-top: 19px; color: #806f82; font-size: 18px; }
 
+.answer-hint { margin-top: 16px; padding: 12px 16px; text-align: center; border-radius: 14px; background: linear-gradient(90deg, #fff0f5, #f2efff); color: #c0608a; font-size: 20px; font-weight: 800; }
+
 .rank-card {
   position: absolute; right: 4%; top: 5%; width: 21%; height: 90%;
   display: flex; flex-direction: column;
@@ -80,8 +82,8 @@ body { -webkit-user-select: none; user-select: none; }
 
 @media (orientation: portrait) {
   .stage { display: flex; flex-direction: column; gap: 14px; padding: 14px 3%; box-sizing: border-box; }
-  .quiz-card { position: static; width: 100%; flex: 1 1 auto; min-height: 0; }
-  .rank-card { position: static; width: 100%; flex: 0 0 auto; }
+  .quiz-card { position: static; width: 100%; height: auto; flex: 1 1 auto; min-height: 0; }
+  .rank-card { position: static; width: 100%; height: auto; flex: 0 0 auto; }
   .quiz-card h1 { font-size: 32px; }
   .q-meta { font-size: 17px; }
   .options div { font-size: 21px; padding: 13px 15px; }
