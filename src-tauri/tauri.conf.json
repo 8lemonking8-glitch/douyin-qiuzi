@@ -8,7 +8,7 @@
     "withGlobalTauri": true,
     "windows": [
       { "label": "main", "title": "抖音直播英语答题助手", "url": "admin.html", "width": 1120, "height": 780, "minWidth": 980, "minHeight": 680, "center": true, "resizable": true },
-      { "label": "overlay", "title": "Douyin Quiz Overlay", "url": "overlay.html", "width": 1280, "height": 720, "resizable": true, "transparent": true, "decorations": false, "shadow": false, "alwaysOnTop": true, "skipTaskbar": false }
+      { "label": "overlay", "title": "Douyin Quiz Overlay", "url": "overlay.html", "width": 1280, "height": 720, "resizable": true, "transparent": true, "decorations": false, "shadow": false, "alwaysOnTop": true, "skipTaskbar": false, "visible": false }
     ],
     "security": { "csp": null }
   },
