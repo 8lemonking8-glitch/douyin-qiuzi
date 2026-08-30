@@ -6,6 +6,7 @@ function render(state) {
   if (!state?.question) return;
   const q = state.question;
   $('progress').textContent = `${state.idx + 1} / ${state.total}`;
+  $('levelTag').textContent = state.activeLevelLabel || '全部';
   $('q').textContent = q.question;
   for (const key of ['A', 'B', 'C', 'D']) $(key.toLowerCase()).textContent = q.options[key];
   $('participants').textContent = `${state.participantCount} 人参与`;

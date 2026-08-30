@@ -10,4 +10,4 @@
 
 本软件显示“Dycast 已转发”后，即可开始答题。
 
-EXE：src-tauri\target\release\douyin-quiz-tauri-mvp.exe
+EXE：src-tauri\target\release\douyin-live-quiz.exe

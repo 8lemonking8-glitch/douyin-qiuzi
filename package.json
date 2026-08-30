@@ -1,8 +1,8 @@
 {
-  "name": "douyin-quiz-tauri-mvp",
+  "name": "douyin-live-quiz",
   "private": true,
-  "version": "0.6.1",
-  "description": "抖音直播答题助手 - Tauri 透明 Overlay MVP",
+  "version": "0.6.2",
+  "description": "抖音直播答题助手 - Tauri 透明 Overlay",
   "scripts": {
     "tauri": "tauri",
     "dev": "tauri dev",

@@ -1,5 +1,4 @@
 import { QuizEngine } from './src/game/engine.js';
-import { DycastCommentProvider } from './src/adapters/dycast-provider.js';
 import { DirectDycastProvider } from './src/adapters/direct-dycast-provider.js';
 import questions from './questions.json';
 
@@ -7,7 +6,6 @@ const $ = id => document.getElementById(id);
 const tauri = window.__TAURI__;
 const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
 const engine = new QuizEngine(questions, { mode: 'first_correct', roundSeconds: 15, autoDelayMs: 3000, scorePerCorrect: 10, onChange: state => { render(state); tauri?.event?.emit('quiz-state', state).catch(() => {}); } });
-const relayProvider = new DycastCommentProvider(payload => engine.handleDycastPayload(payload));
 const directProvider = new DirectDycastProvider({
   onComment: comment => engine.handleComment(comment),
   onStatus: status => engine.setDirectDycastStatus(status)
@@ -17,21 +15,22 @@ function phaseText(state) { return ({ idle: '等待开始', answering: state.mod
 function formatLastMessage(timestamp) { return timestamp ? new Date(timestamp).toLocaleTimeString('zh-CN', { hour12: false }) : '暂无'; }
 function render(state) {
   const q = state.question;
-  $('cur').textContent = state.idx + 1; $('total').textContent = state.total; $('phaseText').textContent = phaseText(state); $('question').textContent = q.question;
-  for (const key of ['A', 'B', 'C', 'D']) { $('o' + key).textContent = q.options[key]; $('s' + key).textContent = state.stats[key]; }
+  $('cur').textContent = state.idx + 1; $('total').textContent = state.total; $('phaseText').textContent = phaseText(state); $('levelTag').textContent = state.activeLevelLabel || '全部题库'; $('question').textContent = q.question; $('appMeta').textContent = state.activeLevelLabel + ' · ' + state.total + ' 题'; $('remainingWrap').classList.toggle('hidden', state.mode !== 'timer'); $('startBtn').disabled = state.phase === 'answering' || state.phase === 'paused'; $('pauseBtn').disabled = state.phase !== 'answering' && state.phase !== 'paused'; $('revealBtn').disabled = state.phase !== 'answering' && state.phase !== 'paused'; $('roundSeconds').disabled = state.mode !== 'timer'; $('autoDelay').disabled = state.mode === 'manual';
+  for (const key of ['A', 'B', 'C', 'D']) { $('o' + key).textContent = q.options[key]; $('s' + key).textContent = state.stats[key]; const opt = document.querySelector('.option-' + key.toLowerCase()); opt.classList.toggle('is-correct', state.phase === 'revealed' && q.answer === key); opt.classList.toggle('is-wrong', state.phase === 'revealed' && q.answer !== key); }
   $('participantCount').textContent = state.participantCount; $('playerCount').textContent = state.playerCount; $('remaining').textContent = state.remaining; $('statsText').textContent = `A ${state.stats.A} · B ${state.stats.B} · C ${state.stats.C} · D ${state.stats.D}`; $('pauseBtn').textContent = state.phase === 'paused' ? '继续' : '暂停';
   const winner = $('winnerBox');
   if (state.winner) { winner.classList.remove('hidden'); winner.textContent = `🎉 ${state.winner.nickname} 抢答成功 · 正确答案 ${state.winner.answer} · +${state.winner.awarded} 分 · ${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题`; }
   else if (state.phase === 'revealed') { winner.classList.remove('hidden'); winner.textContent = `✓ 正确答案：${q.answer} · ${q.options[q.answer]}`; } else winner.classList.add('hidden');
   $('leaderboard').innerHTML = state.leaderboard.length ? state.leaderboard.map((p, index) => `<div class="rank-row"><span>#${index + 1}</span><span>${escapeHtml(p.nickname)}</span><strong>${p.score} 分</strong></div>`).join('') : '<div class="empty">暂无数据</div>';
   $('recent').innerHTML = state.recent.length ? state.recent.map(item => `<div class="recent-item ${item.correct ? 'correct' : ''}"><b>${escapeHtml(item.nickname)}</b> · ${item.answer}<br><small>${item.correct ? `✓ 正确 +${state.scorePerCorrect}` : '✕ 错误'} · 当前 ${item.score} 分</small></div>`).join('') : '<div class="empty">等待答题…</div>';
+  $('commentCount').textContent = state.comments.length + ' 条';
+  $('comments').innerHTML = state.comments.length ? state.comments.map(item => '<div class="recent-item"><b>' + escapeHtml(item.nickname) + '</b><br><span>' + escapeHtml(item.content) + '</span><br><small>' + new Date(item.ts).toLocaleTimeString('zh-CN', { hour12: false }) + '</small></div>').join('') : '<div class="empty">等待直播评论…</div>';
   const status = $('dycastStatus');
   if (state.directDycastConnected > 0) { status.textContent = '内置 Dycast 已连接'; status.className = 'pill live'; status.title = ''; }
   else if (state.directDycastConnecting) { status.textContent = '内置 Dycast 连接中'; status.className = 'pill'; status.title = ''; }
   else if (state.dycastError) { status.textContent = 'Dycast 连接异常'; status.className = 'pill error'; status.title = state.dycastError; }
-  else if (state.externalDycastConnected > 0) { status.textContent = 'Dycast 已转发'; status.className = 'pill live'; status.title = ''; }
   else { status.textContent = '等待 Dycast 连接'; status.className = 'pill'; status.title = ''; }
-  $('roomConnectionDetail').textContent = state.dycastError || (state.dycastConnected > 0 ? 'Dycast Desktop 已连接到本软件，正在接收弹幕。' : '尚未检测到 Dycast Desktop 转发连接。');
+  $('roomConnectionDetail').textContent = state.dycastError || (state.directDycastConnected > 0 ? '内置 Dycast 已连接，正在接收弹幕。' : '请输入公开网页直播间地址后连接。');
   $('lastMessage').textContent = formatLastMessage(state.dycastLastMessageAt);
   if (state.directDycastDetail) $('roomConnectionDetail').textContent = state.directDycastDetail;
   if (state.directDycastRoom && document.activeElement !== $('roomNumber')) $('roomNumber').value = state.directDycastRoom;
@@ -39,10 +38,10 @@ function render(state) {
 
 $('startBtn').onclick = () => engine.startRound(); $('pauseBtn').onclick = () => engine.snapshot().phase === 'paused' ? engine.resume() : engine.pause(); $('revealBtn').onclick = () => engine.revealAnswer(false); $('nextBtn').onclick = () => engine.nextQuestion(true); $('prevBtn').onclick = () => engine.previousQuestion();
 $('resetBtn').onclick = () => { if (confirm('确定重新开始并清空所有积分？')) engine.resetGame(); }; $('clearBoardBtn').onclick = () => { if (confirm('确定清空排行榜？')) engine.clearLeaderboard(); }; $('saveSettings').onclick = () => { engine.setMode($('modeSelect').value); engine.setRoundSeconds($('roundSeconds').value); engine.setAutoDelay($('autoDelay').value); engine.setScorePerCorrect($('scorePerCorrect').value); };
-$('copyWsBtn').onclick = async () => { const button = $('copyWsBtn'); const address = 'ws://127.0.0.1:17891/dycast'; try { await navigator.clipboard.writeText(address); } catch { const input = document.createElement('textarea'); input.value = address; document.body.append(input); input.select(); document.execCommand('copy'); input.remove(); } button.textContent = '已复制'; setTimeout(() => { button.textContent = '复制'; }, 1600); };
+$('levelSelect').onchange = () => engine.filterByLevel($('levelSelect').value);
 async function overlayCommand(command, args = {}) { try { await tauri?.core?.invoke(command, args); } catch (error) { alert(`Overlay 操作失败：${error}`); } }
-$('showOverlay').onclick = () => overlayCommand('show_overlay'); $('hideOverlay').onclick = () => overlayCommand('hide_overlay'); $('topOverlay').onchange = event => overlayCommand('set_overlay_always_on_top', { enabled: event.target.checked }); $('clickthroughOverlay').onchange = async event => { await overlayCommand('set_overlay_clickthrough', { enabled: event.target.checked }); tauri?.event?.emit('overlay-edit-mode', !event.target.checked).catch(() => {}); };
-if (tauri?.event?.listen) { await tauri.event.listen('dycast-payload', event => relayProvider.receive(event.payload)); await tauri.event.listen('dycast-status', event => engine.setDycastStatus(event.payload || {})); await tauri.event.listen('overlay-ready', () => tauri.event.emit('quiz-state', engine.snapshot())); }
+$('hiddenOverlay').onchange = event => overlayCommand(event.target.checked ? 'hide_overlay' : 'show_overlay'); $('topOverlay').onchange = event => overlayCommand('set_overlay_always_on_top', { enabled: event.target.checked }); $('clickthroughOverlay').onchange = async event => { await overlayCommand('set_overlay_clickthrough', { enabled: event.target.checked }); tauri?.event?.emit('overlay-edit-mode', !event.target.checked).catch(() => {}); };
+if (tauri?.event?.listen) { await tauri.event.listen('overlay-ready', () => tauri.event.emit('quiz-state', engine.snapshot())); }
 $('connectRoomBtn').onclick = async () => {
   const button = $('connectRoomBtn');
   const roomInput = $('roomNumber');
@@ -60,4 +59,4 @@ $('connectRoomBtn').onclick = async () => {
 };
 $('disconnectRoomBtn').onclick = () => directProvider.stop();
 
-relayProvider.start(); engine.notify();
+engine.notify();

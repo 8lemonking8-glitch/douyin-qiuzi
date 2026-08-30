@@ -1,16 +1,16 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Douyin Live Quiz Assistant",
-  "version": "0.6.1",
+  "productName": "抖音英语答题助手",
+  "version": "0.6.2",
   "identifier": "com.douyinquiz.assistant",
   "build": { "frontendDist": "../web/dist" },
   "app": {
     "withGlobalTauri": true,
     "windows": [
-      { "label": "main", "title": "抖音直播英语答题助手", "url": "admin.html", "width": 1120, "height": 780, "minWidth": 980, "minHeight": 680, "center": true, "resizable": true },
-      { "label": "overlay", "title": "Douyin Quiz Overlay", "url": "overlay.html", "width": 1280, "height": 720, "resizable": true, "transparent": true, "decorations": false, "shadow": false, "alwaysOnTop": true, "skipTaskbar": false, "visible": true }
+      { "label": "main", "title": "抖音英语答题助手", "url": "admin.html", "width": 1120, "height": 780, "minWidth": 980, "minHeight": 680, "center": true, "resizable": true },
+      { "label": "overlay", "title": "Douyin Quiz Overlay", "url": "overlay.html", "width": 1280, "height": 720, "resizable": true, "transparent": true, "decorations": false, "shadow": false, "alwaysOnTop": true, "skipTaskbar": false, "visible": false }
     ],
     "security": { "csp": null }
   },
-  "bundle": { "active": true, "targets": ["nsis", "msi"], "icon": ["icons/icon.ico"] }
+  "bundle": { "active": true, "targets": ["nsis"], "icon": ["icons/icon.ico"] }
 }

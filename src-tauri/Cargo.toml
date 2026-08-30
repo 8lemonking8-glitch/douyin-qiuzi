@@ -1,12 +1,12 @@
 [package]
-name = "douyin-quiz-tauri-mvp"
-version = "0.6.1"
-description = "Douyin live quiz desktop overlay MVP"
-authors = ["MVP"]
+name = "douyin-live-quiz"
+version = "0.6.2"
+description = "Douyin live quiz desktop overlay"
+authors = ["Douyin Live Quiz Assistant"]
 edition = "2021"
 
 [lib]
-name = "douyin_quiz_tauri_mvp_lib"
+name = "douyin_live_quiz_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
@@ -16,7 +16,6 @@ tauri-build = { version = "2", features = [] }
 tauri = { version = "2", features = [] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-tungstenite = "0.28"
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "sync"] }
 tokio-tungstenite = { version = "0.26", features = ["rustls-tls-webpki-roots"] }
 futures-util = "0.3"

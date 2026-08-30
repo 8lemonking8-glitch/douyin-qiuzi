@@ -752,8 +752,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "douyin-quiz-tauri-mvp"
-version = "0.6.1"
+name = "douyin-live-quiz"
+version = "0.6.2"
 dependencies = [
  "base64 0.22.1",
  "futures-util",
@@ -765,7 +765,6 @@ dependencies = [
  "tauri-build",
  "tokio",
  "tokio-tungstenite",
- "tungstenite 0.28.0",
  "url",
 ]
 
@@ -3848,7 +3847,7 @@ dependencies = [
  "rustls-pki-types",
  "tokio",
  "tokio-rustls",
- "tungstenite 0.26.2",
+ "tungstenite",
  "webpki-roots 0.26.11",
 ]
 
@@ -4097,23 +4096,6 @@ dependencies = [
  "rand 0.9.5",
  "rustls",
  "rustls-pki-types",
- "sha1",
- "thiserror 2.0.20",
- "utf-8",
-]
-
-[[package]]
-name = "tungstenite"
-version = "0.28.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8628dcc84e5a09eb3d8423d6cb682965dea9133204e8fb3efee74c2a0c259442"
-dependencies = [
- "bytes",
- "data-encoding",
- "http",
- "httparse",
- "log",
- "rand 0.9.5",
  "sha1",
  "thiserror 2.0.20",
  "utf-8",

@@ -4,7 +4,7 @@ cd /d "%~dp0"
 set "PATH=%USERPROFILE%\.cargo\bin;%PATH%"
 
 echo ========================================
-echo Douyin Quiz Tauri MVP - Windows Builder
+echo Douyin Live Quiz - Windows Builder
 echo ========================================
 
 where node >nul 2>nul || goto NO_NODE
@@ -26,7 +26,7 @@ if errorlevel 1 goto FAILED
 
 echo.
 echo BUILD COMPLETE.
-echo Portable EXE: src-tauri\target\release\douyin-quiz-tauri-mvp.exe
+echo Portable EXE: src-tauri\target\release\douyin-live-quiz.exe
 echo NSIS installer: src-tauri\target\release\bundle\nsis\
 echo MSI installer: src-tauri\target\release\bundle\msi\
 pause

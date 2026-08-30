@@ -12,3 +12,6 @@ dist/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Temporary / extracted third-party files
+.tmp-*/

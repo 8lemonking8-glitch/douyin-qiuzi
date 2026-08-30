@@ -6,6 +6,7 @@ export function normalizeQuestions(input) {
     const answer = String(item.answer || item.ans || '').trim().toUpperCase();
     return {
       id: item.id ?? index + 1,
+      level: String(item.level || 'general'),
       question: String(item.question || item.q || ''),
       options: {
         A: String(options.A || ''), B: String(options.B || ''),

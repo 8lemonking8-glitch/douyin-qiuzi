@@ -20,5 +20,5 @@ jobs:
         with:
           name: douyin-quiz-windows
           path: |
-            src-tauri/target/release/douyin-quiz-tauri-mvp.exe
+            src-tauri/target/release/douyin-live-quiz.exe
             src-tauri/target/release/bundle/nsis/*

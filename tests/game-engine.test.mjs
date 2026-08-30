@@ -28,4 +28,23 @@ assert.equal(state.phase, 'answering');
 engine.handleDycastPayload(JSON.stringify([{ id: 'array-1', method: 'WebcastChatMessage', user: { id: 'u4', name: '数组用户' }, content: 'A' }]));
 assert.equal(engine.snapshot().winner.nickname, '数组用户', 'array payload is supported');
 engine.clearTimers();
-console.log('PASS: GameEngine scoring, deduplication, auto-next and Dycast array payload');
+const byLevel = new QuizEngine(questions, {});
+byLevel.filterByLevel('cet6');
+assert.ok(byLevel.snapshot().total > 0, 'cet6 bank is non-empty');
+assert.equal(byLevel.snapshot().question.level, 'cet6');
+assert.equal(byLevel.snapshot().activeLevel, 'cet6');
+byLevel.filterByLevel('all');
+assert.equal(byLevel.snapshot().activeLevel, 'all');
+assert.equal(byLevel.snapshot().total, byLevel.snapshot().totalAll);
+// 状态机守卫：idle 时公布答案不得泄露答案或切题
+const guard = new QuizEngine(questions, {});
+guard.revealAnswer(false);
+assert.equal(guard.snapshot().phase, 'idle', 'revealAnswer must be a no-op while idle');
+assert.equal(guard.snapshot().question.answer, null, 'answer must stay private while idle');
+// 状态机守卫：答题中切换模式应重置到 idle，避免计时器与模式脱节
+const modeGuard = new QuizEngine(questions, { mode: 'first_correct' });
+modeGuard.startRound();
+assert.equal(modeGuard.snapshot().phase, 'answering');
+modeGuard.setMode('timer');
+assert.equal(modeGuard.snapshot().phase, 'idle', 'setMode during a round resets to idle');
+console.log('PASS: GameEngine scoring, deduplication, auto-next, Dycast array payload, level filtering and state guards');

@@ -3,51 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>抖音直播英语答题助手</title>
+  <title>抖音英语答题助手</title>
   <link rel="stylesheet" href="admin.css">
   <style>
     .connection-actions{display:flex;gap:8px;margin:10px 0}
     .connection-actions button{padding:8px 11px;font-size:12px}
-    .connection-divider{padding-top:10px;border-top:1px solid #f4dbe6}
   </style>
 </head>
 <body>
   <main class="app-shell">
     <header class="topbar">
-      <div class="brand"><div class="brand-mark">✦</div><div><p class="eyebrow">LIVE QUIZ STUDIO</p><h1>英语弹幕答题台</h1><p class="subtitle">轻松开播，快乐抢答</p></div></div>
-      <div class="status-row"><span class="pill soft">桌面版已启动</span><span class="pill" id="dycastStatus">等待 Dycast 转发</span></div>
+      <div class="brand"><div class="brand-mark"><img src="./brand-cat-logo.png" alt="眼镜小猫比心 Logo"></div><div><p class="eyebrow">LIVE QUIZ STUDIO</p><h1>抖音英语答题助手</h1><p class="subtitle">轻松开播，快乐抢答</p></div></div>
+      <div class="status-row"><span class="pill soft" id="appMeta">全部题库 · 0 题</span><span class="pill" id="dycastStatus">等待 Dycast 连接</span></div>
     </header>
     <section class="grid">
       <article class="panel question-panel">
-        <div class="panel-head"><span class="round-chip">第 <strong id="cur">1</strong> / <span id="total">0</span> 题</span><span id="phaseText" class="phase-pill">等待开始</span></div>
+        <div class="panel-head"><span class="round-chip">第 <strong id="cur">1</strong> / <span id="total">0</span> 题</span><span id="levelTag" class="pill soft">全部题库</span><span id="phaseText" class="phase-pill">等待开始</span></div>
         <p class="section-kicker">CURRENT QUESTION</p><h2 id="question">正在加载题库…</h2>
-        <div class="options"><button class="option option-a"><b>A</b><span id="oA">-</span><em id="sA">0</em></button><button class="option option-b"><b>B</b><span id="oB">-</span><em id="sB">0</em></button><button class="option option-c"><b>C</b><span id="oC">-</span><em id="sC">0</em></button><button class="option option-d"><b>D</b><span id="oD">-</span><em id="sD">0</em></button></div>
-        <div class="meta"><span>🙋 已作答 <b id="participantCount">0</b></span><span>✨ 玩家 <b id="playerCount">0</b></span><span>⏳ 剩余 <b id="remaining">15</b>s</span></div>
+        <div class="options"><div class="option option-a"><b>A</b><span id="oA">-</span><em id="sA">0</em></div><div class="option option-b"><b>B</b><span id="oB">-</span><em id="sB">0</em></div><div class="option option-c"><b>C</b><span id="oC">-</span><em id="sC">0</em></div><div class="option option-d"><b>D</b><span id="oD">-</span><em id="sD">0</em></div></div>
+        <div class="meta"><span>🙋 已作答 <b id="participantCount">0</b></span><span>✨ 玩家 <b id="playerCount">0</b></span><span id="remainingWrap">⏳ 剩余 <b id="remaining">15</b>s</span></div>
         <div id="winnerBox" class="winner-box hidden"></div>
         <div class="game-actions"><button id="startBtn" class="primary">开始本题</button><button id="pauseBtn">暂停</button><button id="revealBtn" class="success">公布答案</button><button id="prevBtn">上一题</button><button id="nextBtn" class="primary ghost-primary">下一题并开始</button><button id="resetBtn" class="danger ghost-danger">重新开始</button></div>
+        <section class="in-card-comments">
+          <div class="panel-head"><div><p class="section-kicker">LIVE COMMENTS</p><h3>实时评论</h3></div><span id="commentCount">0 条</span></div>
+          <div id="comments" class="comments empty">等待直播评论…</div>
+        </section>
       </article>
       <aside class="panel settings-panel">
-        <div class="settings-heading"><div><p class="section-kicker">DANMAKU CONNECTION</p><h3>Dycast 转发</h3></div><span class="mini-heart">♥</span></div>
+        <div class="settings-heading"><div><p class="section-kicker">DANMAKU CONNECTION</p><h3>连接直播间</h3></div><span class="mini-heart">♥</span></div>
         <div class="connection-card">
-          <p><strong>内置 Dycast（推荐尝试）</strong>：粘贴公开网页直播间地址或房间号。</p>
-          <input id="roomNumber" inputmode="numeric" placeholder="https://live.douyin.com/587076826065">
+          <p><strong>内置 Dycast</strong>：粘贴公开网页直播间地址或房间号。</p>
+          <input id="roomNumber" type="text" autocomplete="off" aria-label="直播间地址" placeholder="https://live.douyin.com/587076826065">
           <div class="connection-actions"><button id="connectRoomBtn" class="primary">连接直播间</button><button id="disconnectRoomBtn">断开</button></div>
-          <p class="connection-divider"><strong>独立 Dycast Desktop（备用）</strong>：连接成功后，将 WS 地址填为：</p>
-          <div class="copy-box"><code>ws://127.0.0.1:17891/dycast</code><button id="copyWsBtn" title="复制转发地址">复制</button></div>
           <p id="roomConnectionDetail" class="connection-detail">尚未连接直播间。</p>
         </div>
-        <ol class="setup-steps"><li>优先输入公开的 live.douyin.com 房间号，点击“连接直播间”</li><li>如内置连接不稳定，打开官方 Dycast Desktop</li><li>在 Dycast 填入上方 WS 地址并点击“转发”</li></ol>
+        <ol class="setup-steps"><li>输入公开的 live.douyin.com 房间号</li><li>点击“连接直播间”并等待状态显示成功</li><li>连接后开始本题，观众发送 A/B/C/D 答题</li></ol>
         <hr><p class="section-kicker">GAME SETTINGS</p><h3>答题规则</h3>
+        <label>题库等级<select id="levelSelect"><option value="all">全部题库</option><option value="highschool">高中基础</option><option value="cet4">四级</option><option value="cet6">六级</option><option value="ielts">雅思</option><option value="kaoyan">考研</option><option value="toefl">托福</option><option value="gre">GRE</option></select></label>
         <label>切题模式<select id="modeSelect"><option value="first_correct">抢答：首个答对后自动切题</option><option value="timer">倒计时：时间到后自动切题</option><option value="manual">手动：只由主播切题</option></select></label>
         <div class="two-col"><label>答题时长（秒）<input id="roundSeconds" type="number" min="5" max="120" value="15"></label><label>自动切题延迟（秒）<input id="autoDelay" type="number" min="1" max="30" value="3"></label></div>
         <label>答对分数<input id="scorePerCorrect" type="number" min="1" max="9999" value="10"></label><button id="saveSettings" class="save-button">保存规则</button>
         <hr><p class="section-kicker">LIVE OVERLAY</p><h3>直播画面</h3>
-        <div class="overlay-actions"><button id="showOverlay" class="primary">显示 Overlay</button><button id="hideOverlay">隐藏</button></div>
+        <label class="check"><input id="hiddenOverlay" type="checkbox" checked><span>隐藏 Overlay</span></label>
         <label class="check"><input id="clickthroughOverlay" type="checkbox" checked><span>Overlay 鼠标穿透</span></label><label class="check"><input id="topOverlay" type="checkbox" checked><span>Overlay 始终置顶</span></label>
         <small class="last-message">最近收到消息：<span id="lastMessage">暂无</span></small>
       </aside>
       <article class="panel leaderboard-panel"><div class="panel-head"><div><p class="section-kicker">TOP PLAYERS</p><h3>今日排行榜</h3></div><button id="clearBoardBtn" class="text-button">清空</button></div><div id="leaderboard" class="leaderboard empty">暂无数据</div></article>
-      <article class="panel recent-panel"><div class="panel-head"><div><p class="section-kicker">LIVE ANSWERS</p><h3>最新作答</h3></div><span id="statsText">A 0 · B 0 · C 0 · D 0</span></div><div id="recent" class="recent empty">等待答题…</div></article>
+      <article id="recentPanel" class="panel recent-panel"><div class="panel-head"><div><p class="section-kicker">LIVE ANSWERS</p><h3>最新作答</h3></div><span id="statsText">A 0 · B 0 · C 0 · D 0</span></div><div id="recent" class="recent empty">等待答题…</div></article>
     </section>
   </main>
   <script type="module" src="admin.js"></script>

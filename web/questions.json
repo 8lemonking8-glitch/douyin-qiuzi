@@ -1,32 +1,4382 @@
 [
-  {"id":1,"question":"abandon 含义？","options":{"A":"放弃","B":"吸收","C":"提升","D":"相信"},"answer":"A"},
-  {"id":2,"question":"ability 含义？","options":{"A":"能力","B":"目标","C":"态度","D":"优点"},"answer":"A"},
-  {"id":3,"question":"absorb 含义？","options":{"A":"抽象","B":"吸收","C":"绝对","D":"丰富"},"answer":"B"},
-  {"id":4,"question":"acquire 含义？","options":{"A":"获得","B":"询问","C":"完成","D":"适应"},"answer":"A"},
-  {"id":5,"question":"adapt 含义？","options":{"A":"采纳","B":"适应","C":"添加","D":"调整"},"answer":"B"},
-  {"id":6,"question":"adequate 含义？","options":{"A":"足够的","B":"准确的","C":"实际的","D":"高级的"},"answer":"A"},
-  {"id":7,"question":"adjust 含义？","options":{"A":"调整","B":"钦佩","C":"管理","D":"承认"},"answer":"A"},
-  {"id":8,"question":"adopt 含义？","options":{"A":"适应","B":"采纳","C":"附加","D":"改变"},"answer":"B"},
-  {"id":9,"question":"affect 含义？","options":{"A":"效果","B":"影响","C":"努力","D":"提供"},"answer":"B"},
-  {"id":10,"question":"analyze 含义？","options":{"A":"道路","B":"分析","C":"宣布","D":"分配"},"answer":"B"},
-  {"id":11,"question":"approach 含义？","options":{"A":"方法；靠近","B":"欣赏","C":"申请","D":"接近的"},"answer":"A"},
-  {"id":12,"question":"assess 含义？","options":{"A":"协助","B":"评估","C":"分配","D":"允许"},"answer":"B"},
-  {"id":13,"question":"assume 含义？","options":{"A":"假定；认为","B":"保证","C":"协助","D":"分配"},"answer":"A"},
-  {"id":14,"question":"attain 含义？","options":{"A":"出席","B":"获得；达到","C":"吸引","D":"尝试"},"answer":"B"},
-  {"id":15,"question":"benefit 含义？","options":{"A":"便利","B":"益处","C":"平衡","D":"基础"},"answer":"B"},
-  {"id":16,"question":"barrier 含义？","options":{"A":"障碍","B":"铃铛","C":"行李","D":"栏杆"},"answer":"A"},
-  {"id":17,"question":"circumstance 含义？","options":{"A":"环境；情况","B":"圆圈","C":"循环","D":"仪式"},"answer":"A"},
-  {"id":18,"question":"concentrate 含义？","options":{"A":"概念","B":"集中","C":"结论","D":"关心"},"answer":"B"},
-  {"id":19,"question":"consequence 含义？","options":{"A":"保守","B":"后果","C":"一致","D":"咨询"},"answer":"B"},
-  {"id":20,"question":"considerable 含义？","options":{"A":"体贴的","B":"相当大的","C":"持续的","D":"一致的"},"answer":"B"},
-  {"id":21,"question":"contribute 含义？","options":{"A":"贡献；促成","B":"控制","C":"对比","D":"竞争"},"answer":"A"},
-  {"id":22,"question":"convince 含义？","options":{"A":"合作","B":"说服","C":"转换","D":"创造"},"answer":"B"},
-  {"id":23,"question":"decline 含义？","options":{"A":"宣布","B":"下降；谢绝","C":"装饰","D":"定义"},"answer":"B"},
-  {"id":24,"question":"demonstrate 含义？","options":{"A":"证明；展示","B":"密度","C":"依赖","D":"描述"},"answer":"A"},
-  {"id":25,"question":"determine 含义？","options":{"A":"破坏","B":"决定","C":"区分","D":"减少"},"answer":"B"},
-  {"id":26,"question":"diminish 含义？","options":{"A":"消失","B":"减少；降低","C":"区分","D":"偏离"},"answer":"B"},
-  {"id":27,"question":"efficient 含义？","options":{"A":"努力的","B":"高效的","C":"电子的","D":"完全的"},"answer":"B"},
-  {"id":28,"question":"eliminate 含义？","options":{"A":"消除；排除","B":"强调","C":"出现","D":"建立"},"answer":"A"},
-  {"id":29,"question":"enhance 含义？","options":{"A":"进入","B":"增强；提高","C":"享受","D":"参与"},"answer":"B"},
-  {"id":30,"question":"essential 含义？","options":{"A":"本质的；必要的","B":"额外的","C":"熟悉的","D":"有利的"},"answer":"A"}
+  {
+    "id": 1,
+    "level": "cet4",
+    "question": "abandon 含义？",
+    "options": {
+      "A": "放弃",
+      "B": "吸收",
+      "C": "提升",
+      "D": "相信"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 2,
+    "level": "cet4",
+    "question": "ability 含义？",
+    "options": {
+      "A": "能力",
+      "B": "目标",
+      "C": "态度",
+      "D": "优点"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 3,
+    "level": "cet4",
+    "question": "absorb 含义？",
+    "options": {
+      "A": "抽象",
+      "B": "吸收",
+      "C": "绝对",
+      "D": "丰富"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 4,
+    "level": "cet4",
+    "question": "acquire 含义？",
+    "options": {
+      "A": "获得",
+      "B": "询问",
+      "C": "完成",
+      "D": "适应"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 5,
+    "level": "cet4",
+    "question": "adapt 含义？",
+    "options": {
+      "A": "采纳",
+      "B": "适应",
+      "C": "添加",
+      "D": "调整"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 6,
+    "level": "cet4",
+    "question": "adequate 含义？",
+    "options": {
+      "A": "足够的",
+      "B": "准确的",
+      "C": "实际的",
+      "D": "高级的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 7,
+    "level": "cet4",
+    "question": "adjust 含义？",
+    "options": {
+      "A": "调整",
+      "B": "钦佩",
+      "C": "管理",
+      "D": "承认"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 8,
+    "level": "cet4",
+    "question": "adopt 含义？",
+    "options": {
+      "A": "适应",
+      "B": "采纳",
+      "C": "附加",
+      "D": "改变"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 9,
+    "level": "cet4",
+    "question": "affect 含义？",
+    "options": {
+      "A": "效果",
+      "B": "影响",
+      "C": "努力",
+      "D": "提供"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 10,
+    "level": "cet4",
+    "question": "analyze 含义？",
+    "options": {
+      "A": "道路",
+      "B": "分析",
+      "C": "宣布",
+      "D": "分配"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 11,
+    "level": "cet4",
+    "question": "approach 含义？",
+    "options": {
+      "A": "方法；靠近",
+      "B": "欣赏",
+      "C": "申请",
+      "D": "接近的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 12,
+    "level": "cet4",
+    "question": "assess 含义？",
+    "options": {
+      "A": "协助",
+      "B": "评估",
+      "C": "分配",
+      "D": "允许"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 13,
+    "level": "cet4",
+    "question": "assume 含义？",
+    "options": {
+      "A": "假定；认为",
+      "B": "保证",
+      "C": "协助",
+      "D": "分配"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 14,
+    "level": "cet4",
+    "question": "attain 含义？",
+    "options": {
+      "A": "出席",
+      "B": "获得；达到",
+      "C": "吸引",
+      "D": "尝试"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 15,
+    "level": "cet4",
+    "question": "benefit 含义？",
+    "options": {
+      "A": "便利",
+      "B": "益处",
+      "C": "平衡",
+      "D": "基础"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 16,
+    "level": "cet4",
+    "question": "barrier 含义？",
+    "options": {
+      "A": "障碍",
+      "B": "铃铛",
+      "C": "行李",
+      "D": "栏杆"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 17,
+    "level": "cet4",
+    "question": "circumstance 含义？",
+    "options": {
+      "A": "环境；情况",
+      "B": "圆圈",
+      "C": "循环",
+      "D": "仪式"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 18,
+    "level": "cet4",
+    "question": "concentrate 含义？",
+    "options": {
+      "A": "概念",
+      "B": "集中",
+      "C": "结论",
+      "D": "关心"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 19,
+    "level": "cet4",
+    "question": "consequence 含义？",
+    "options": {
+      "A": "保守",
+      "B": "后果",
+      "C": "一致",
+      "D": "咨询"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 20,
+    "level": "cet4",
+    "question": "considerable 含义？",
+    "options": {
+      "A": "体贴的",
+      "B": "相当大的",
+      "C": "持续的",
+      "D": "一致的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 21,
+    "level": "cet4",
+    "question": "contribute 含义？",
+    "options": {
+      "A": "贡献；促成",
+      "B": "控制",
+      "C": "对比",
+      "D": "竞争"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 22,
+    "level": "cet4",
+    "question": "convince 含义？",
+    "options": {
+      "A": "合作",
+      "B": "说服",
+      "C": "转换",
+      "D": "创造"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 23,
+    "level": "cet4",
+    "question": "decline 含义？",
+    "options": {
+      "A": "宣布",
+      "B": "下降；谢绝",
+      "C": "装饰",
+      "D": "定义"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 24,
+    "level": "cet4",
+    "question": "demonstrate 含义？",
+    "options": {
+      "A": "证明；展示",
+      "B": "密度",
+      "C": "依赖",
+      "D": "描述"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 25,
+    "level": "cet4",
+    "question": "determine 含义？",
+    "options": {
+      "A": "破坏",
+      "B": "决定",
+      "C": "区分",
+      "D": "减少"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 26,
+    "level": "cet4",
+    "question": "diminish 含义？",
+    "options": {
+      "A": "消失",
+      "B": "减少；降低",
+      "C": "区分",
+      "D": "偏离"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 27,
+    "level": "cet4",
+    "question": "efficient 含义？",
+    "options": {
+      "A": "努力的",
+      "B": "高效的",
+      "C": "电子的",
+      "D": "完全的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 28,
+    "level": "cet4",
+    "question": "eliminate 含义？",
+    "options": {
+      "A": "消除；排除",
+      "B": "强调",
+      "C": "出现",
+      "D": "建立"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 29,
+    "level": "cet4",
+    "question": "enhance 含义？",
+    "options": {
+      "A": "进入",
+      "B": "增强；提高",
+      "C": "享受",
+      "D": "参与"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 30,
+    "level": "cet4",
+    "question": "essential 含义？",
+    "options": {
+      "A": "本质的；必要的",
+      "B": "额外的",
+      "C": "熟悉的",
+      "D": "有利的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 31,
+    "level": "highschool",
+    "question": "admire 含义？",
+    "options": {
+      "A": "管理",
+      "B": "承认",
+      "C": "调整",
+      "D": "钦佩；欣赏"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 32,
+    "level": "highschool",
+    "question": "advice 含义？",
+    "options": {
+      "A": "建议",
+      "B": "优势",
+      "C": "广告",
+      "D": "同意"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 33,
+    "level": "highschool",
+    "question": "afford 含义？",
+    "options": {
+      "A": "申请",
+      "B": "负担得起",
+      "C": "允许",
+      "D": "避免"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 34,
+    "level": "highschool",
+    "question": "agreement 含义？",
+    "options": {
+      "A": "安排",
+      "B": "目标",
+      "C": "协议；同意",
+      "D": "争论"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 35,
+    "level": "highschool",
+    "question": "allow 含义？",
+    "options": {
+      "A": "跟随",
+      "B": "避免",
+      "C": "参加",
+      "D": "允许"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 36,
+    "level": "highschool",
+    "question": "ancient 含义？",
+    "options": {
+      "A": "古代的",
+      "B": "现代的",
+      "C": "焦虑的",
+      "D": "勇敢的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 37,
+    "level": "highschool",
+    "question": "announce 含义？",
+    "options": {
+      "A": "欣赏",
+      "B": "宣布",
+      "C": "道歉",
+      "D": "出现"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 38,
+    "level": "highschool",
+    "question": "anxious 含义？",
+    "options": {
+      "A": "好奇的",
+      "B": "诚实的",
+      "C": "焦虑的",
+      "D": "勇敢的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 39,
+    "level": "highschool",
+    "question": "apologize 含义？",
+    "options": {
+      "A": "宣布",
+      "B": "争论",
+      "C": "安排",
+      "D": "道歉"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 40,
+    "level": "highschool",
+    "question": "appear 含义？",
+    "options": {
+      "A": "出现；显得",
+      "B": "申请",
+      "C": "应用",
+      "D": "接近"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 41,
+    "level": "highschool",
+    "question": "apply 含义？",
+    "options": {
+      "A": "安排",
+      "B": "申请；应用",
+      "C": "欣赏",
+      "D": "争论"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 42,
+    "level": "highschool",
+    "question": "appreciate 含义？",
+    "options": {
+      "A": "应用",
+      "B": "争论",
+      "C": "感激；欣赏",
+      "D": "接近"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 43,
+    "level": "highschool",
+    "question": "argue 含义？",
+    "options": {
+      "A": "同意",
+      "B": "道歉",
+      "C": "宣布",
+      "D": "争论"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 44,
+    "level": "highschool",
+    "question": "arrange 含义？",
+    "options": {
+      "A": "安排",
+      "B": "争论",
+      "C": "参加",
+      "D": "宣布"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 45,
+    "level": "highschool",
+    "question": "attend 含义？",
+    "options": {
+      "A": "获得",
+      "B": "出席；参加",
+      "C": "注意",
+      "D": "尝试"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 46,
+    "level": "highschool",
+    "question": "attention 含义？",
+    "options": {
+      "A": "尝试",
+      "B": "态度",
+      "C": "注意",
+      "D": "参加"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 47,
+    "level": "highschool",
+    "question": "avoid 含义？",
+    "options": {
+      "A": "允许",
+      "B": "申请",
+      "C": "接近",
+      "D": "避免"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 48,
+    "level": "highschool",
+    "question": "behavior 含义？",
+    "options": {
+      "A": "行为",
+      "B": "相信",
+      "C": "平衡",
+      "D": "障碍"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 49,
+    "level": "highschool",
+    "question": "believe 含义？",
+    "options": {
+      "A": "留下",
+      "B": "相信",
+      "C": "达到",
+      "D": "收到"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 50,
+    "level": "highschool",
+    "question": "borrow 含义？",
+    "options": {
+      "A": "购买",
+      "B": "租用",
+      "C": "借入",
+      "D": "借出"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 51,
+    "level": "highschool",
+    "question": "brave 含义？",
+    "options": {
+      "A": "焦虑的",
+      "B": "好奇的",
+      "C": "诚实的",
+      "D": "勇敢的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 52,
+    "level": "highschool",
+    "question": "celebrate 含义？",
+    "options": {
+      "A": "庆祝",
+      "B": "比较",
+      "C": "竞争",
+      "D": "完成"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 53,
+    "level": "highschool",
+    "question": "chance 含义？",
+    "options": {
+      "A": "挑战",
+      "B": "机会",
+      "C": "改变",
+      "D": "选择"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 54,
+    "level": "highschool",
+    "question": "choose 含义？",
+    "options": {
+      "A": "机会",
+      "B": "比较",
+      "C": "选择",
+      "D": "改变"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 55,
+    "level": "highschool",
+    "question": "common 含义？",
+    "options": {
+      "A": "完整的",
+      "B": "困难的",
+      "C": "方便的",
+      "D": "常见的；共同的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 56,
+    "level": "highschool",
+    "question": "compare 含义？",
+    "options": {
+      "A": "比较",
+      "B": "竞争",
+      "C": "完成",
+      "D": "考虑"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 57,
+    "level": "highschool",
+    "question": "compete 含义？",
+    "options": {
+      "A": "合作",
+      "B": "竞争",
+      "C": "比较",
+      "D": "完成"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 58,
+    "level": "highschool",
+    "question": "complete 含义？",
+    "options": {
+      "A": "复杂的",
+      "B": "竞争的",
+      "C": "完成；完整的",
+      "D": "常见的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 59,
+    "level": "highschool",
+    "question": "consider 含义？",
+    "options": {
+      "A": "比较",
+      "B": "竞争",
+      "C": "继续",
+      "D": "考虑"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 60,
+    "level": "highschool",
+    "question": "continue 含义？",
+    "options": {
+      "A": "继续",
+      "B": "考虑",
+      "C": "竞争",
+      "D": "比较"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 61,
+    "level": "highschool",
+    "question": "courage 含义？",
+    "options": {
+      "A": "好奇",
+      "B": "勇气",
+      "C": "文化",
+      "D": "选择"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 62,
+    "level": "highschool",
+    "question": "create 含义？",
+    "options": {
+      "A": "比较",
+      "B": "竞争",
+      "C": "创造",
+      "D": "选择"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 63,
+    "level": "highschool",
+    "question": "culture 含义？",
+    "options": {
+      "A": "勇气",
+      "B": "课程",
+      "C": "习俗",
+      "D": "文化"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 64,
+    "level": "highschool",
+    "question": "decide 含义？",
+    "options": {
+      "A": "决定",
+      "B": "描述",
+      "C": "发展",
+      "D": "发现"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 65,
+    "level": "highschool",
+    "question": "describe 含义？",
+    "options": {
+      "A": "讨论",
+      "B": "描述",
+      "C": "决定",
+      "D": "发展"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 66,
+    "level": "highschool",
+    "question": "develop 含义？",
+    "options": {
+      "A": "决定",
+      "B": "发现",
+      "C": "发展；开发",
+      "D": "描述"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 67,
+    "level": "highschool",
+    "question": "difference 含义？",
+    "options": {
+      "A": "困难",
+      "B": "距离",
+      "C": "方向",
+      "D": "差异"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 68,
+    "level": "highschool",
+    "question": "difficult 含义？",
+    "options": {
+      "A": "困难的",
+      "B": "不同的",
+      "C": "危险的",
+      "D": "方便的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 69,
+    "level": "highschool",
+    "question": "discover 含义？",
+    "options": {
+      "A": "发展",
+      "B": "发现",
+      "C": "讨论",
+      "D": "描述"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 70,
+    "level": "highschool",
+    "question": "discuss 含义？",
+    "options": {
+      "A": "决定",
+      "B": "发现",
+      "C": "讨论",
+      "D": "描述"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 71,
+    "level": "highschool",
+    "question": "distance 含义？",
+    "options": {
+      "A": "方向",
+      "B": "差异",
+      "C": "困难",
+      "D": "距离"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 72,
+    "level": "highschool",
+    "question": "education 含义？",
+    "options": {
+      "A": "教育",
+      "B": "能量",
+      "C": "环境",
+      "D": "经验"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 73,
+    "level": "highschool",
+    "question": "encourage 含义？",
+    "options": {
+      "A": "解释",
+      "B": "鼓励",
+      "C": "教育",
+      "D": "经历"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 74,
+    "level": "highschool",
+    "question": "energy 含义？",
+    "options": {
+      "A": "教育",
+      "B": "经验",
+      "C": "能量；精力",
+      "D": "环境"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 75,
+    "level": "highschool",
+    "question": "environment 含义？",
+    "options": {
+      "A": "能量",
+      "B": "教育",
+      "C": "经验",
+      "D": "环境"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 76,
+    "level": "highschool",
+    "question": "experience 含义？",
+    "options": {
+      "A": "经验；经历",
+      "B": "解释",
+      "C": "能量",
+      "D": "环境"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 77,
+    "level": "highschool",
+    "question": "explain 含义？",
+    "options": {
+      "A": "教育",
+      "B": "解释",
+      "C": "鼓励",
+      "D": "经历"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 78,
+    "level": "highschool",
+    "question": "famous 含义？",
+    "options": {
+      "A": "未来的",
+      "B": "熟悉的",
+      "C": "著名的",
+      "D": "最喜爱的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 79,
+    "level": "highschool",
+    "question": "favorite 含义？",
+    "options": {
+      "A": "著名的",
+      "B": "熟悉的",
+      "C": "便利的",
+      "D": "最喜爱的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 80,
+    "level": "highschool",
+    "question": "forget 含义？",
+    "options": {
+      "A": "忘记",
+      "B": "原谅",
+      "C": "跟随",
+      "D": "禁止"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 81,
+    "level": "cet4",
+    "question": "achieve 含义？",
+    "options": {
+      "A": "获得",
+      "B": "实现；达到",
+      "C": "接受",
+      "D": "承认"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 82,
+    "level": "cet4",
+    "question": "admit 含义？",
+    "options": {
+      "A": "调整",
+      "B": "采纳",
+      "C": "承认；准许进入",
+      "D": "钦佩"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 83,
+    "level": "cet4",
+    "question": "advantage 含义？",
+    "options": {
+      "A": "建议",
+      "B": "冒险",
+      "C": "广告",
+      "D": "优势"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 84,
+    "level": "cet4",
+    "question": "aim 含义？",
+    "options": {
+      "A": "目标；瞄准",
+      "B": "帮助",
+      "C": "空气",
+      "D": "目的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 85,
+    "level": "cet4",
+    "question": "amount 含义？",
+    "options": {
+      "A": "目标",
+      "B": "数量",
+      "C": "方法",
+      "D": "优点"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 86,
+    "level": "cet4",
+    "question": "attempt 含义？",
+    "options": {
+      "A": "获得",
+      "B": "注意",
+      "C": "尝试；企图",
+      "D": "参加"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 87,
+    "level": "cet4",
+    "question": "attitude 含义？",
+    "options": {
+      "A": "能力",
+      "B": "优点",
+      "C": "目标",
+      "D": "态度"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 88,
+    "level": "cet4",
+    "question": "average 含义？",
+    "options": {
+      "A": "平均的；平均数",
+      "B": "优势",
+      "C": "态度",
+      "D": "尝试"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 89,
+    "level": "cet4",
+    "question": "basis 含义？",
+    "options": {
+      "A": "利益",
+      "B": "基础；根据",
+      "C": "障碍",
+      "D": "平衡"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 90,
+    "level": "cet4",
+    "question": "candidate 含义？",
+    "options": {
+      "A": "社区",
+      "B": "类别",
+      "C": "候选人",
+      "D": "委员会"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 91,
+    "level": "cet4",
+    "question": "character 含义？",
+    "options": {
+      "A": "特征",
+      "B": "章节",
+      "C": "频道",
+      "D": "性格；角色；字符"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 92,
+    "level": "cet4",
+    "question": "claim 含义？",
+    "options": {
+      "A": "声称；要求",
+      "B": "澄清",
+      "C": "分类",
+      "D": "引用"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 93,
+    "level": "cet4",
+    "question": "community 含义？",
+    "options": {
+      "A": "交流",
+      "B": "社区；群体",
+      "C": "委员会",
+      "D": "竞争"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 94,
+    "level": "cet4",
+    "question": "concern 含义？",
+    "options": {
+      "A": "结论",
+      "B": "咨询",
+      "C": "关心；担忧",
+      "D": "集中"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 95,
+    "level": "cet4",
+    "question": "confident 含义？",
+    "options": {
+      "A": "好奇的",
+      "B": "方便的",
+      "C": "复杂的",
+      "D": "自信的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 96,
+    "level": "cet4",
+    "question": "content 含义？",
+    "options": {
+      "A": "内容；满意的",
+      "B": "持续的",
+      "C": "一致的",
+      "D": "竞争的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 97,
+    "level": "cet4",
+    "question": "convenient 含义？",
+    "options": {
+      "A": "自信的",
+      "B": "方便的",
+      "C": "常见的",
+      "D": "复杂的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 98,
+    "level": "cet4",
+    "question": "curious 含义？",
+    "options": {
+      "A": "勇敢的",
+      "B": "焦虑的",
+      "C": "好奇的",
+      "D": "诚实的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 99,
+    "level": "cet4",
+    "question": "depend 含义？",
+    "options": {
+      "A": "描述",
+      "B": "决定",
+      "C": "发展",
+      "D": "依赖；取决于"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 100,
+    "level": "cet4",
+    "question": "detail 含义？",
+    "options": {
+      "A": "细节",
+      "B": "设备",
+      "C": "方向",
+      "D": "差异"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 101,
+    "level": "cet4",
+    "question": "device 含义？",
+    "options": {
+      "A": "决定",
+      "B": "设备；装置",
+      "C": "细节",
+      "D": "方向"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 102,
+    "level": "cet4",
+    "question": "diet 含义？",
+    "options": {
+      "A": "差异",
+      "B": "困难",
+      "C": "饮食；节食",
+      "D": "方向"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 103,
+    "level": "cet4",
+    "question": "direction 含义？",
+    "options": {
+      "A": "距离",
+      "B": "差异",
+      "C": "细节",
+      "D": "方向；指导"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 104,
+    "level": "cet4",
+    "question": "effect 含义？",
+    "options": {
+      "A": "效果；影响",
+      "B": "努力",
+      "C": "精力",
+      "D": "环境"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 105,
+    "level": "cet4",
+    "question": "effort 含义？",
+    "options": {
+      "A": "能量",
+      "B": "努力",
+      "C": "效果",
+      "D": "影响"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 106,
+    "level": "cet4",
+    "question": "entire 含义？",
+    "options": {
+      "A": "高效的",
+      "B": "本质的",
+      "C": "全部的",
+      "D": "额外的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 107,
+    "level": "cet4",
+    "question": "eventually 含义？",
+    "options": {
+      "A": "频繁地",
+      "B": "逐渐地",
+      "C": "完全地",
+      "D": "最终"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 108,
+    "level": "cet4",
+    "question": "evidence 含义？",
+    "options": {
+      "A": "证据",
+      "B": "环境",
+      "C": "精力",
+      "D": "经验"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 109,
+    "level": "cet4",
+    "question": "exchange 含义？",
+    "options": {
+      "A": "鼓励",
+      "B": "交换；交流",
+      "C": "表达",
+      "D": "解释"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 110,
+    "level": "cet4",
+    "question": "express 含义？",
+    "options": {
+      "A": "解释",
+      "B": "经历",
+      "C": "表达",
+      "D": "交换"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 111,
+    "level": "cet4",
+    "question": "familiar 含义？",
+    "options": {
+      "A": "著名的",
+      "B": "便利的",
+      "C": "未来的",
+      "D": "熟悉的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 112,
+    "level": "cet4",
+    "question": "focus 含义？",
+    "options": {
+      "A": "集中；焦点",
+      "B": "跟随",
+      "C": "功能",
+      "D": "因素"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 113,
+    "level": "cet4",
+    "question": "frequently 含义？",
+    "options": {
+      "A": "完全地",
+      "B": "频繁地",
+      "C": "最终",
+      "D": "逐渐地"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 114,
+    "level": "cet4",
+    "question": "general 含义？",
+    "options": {
+      "A": "慷慨的",
+      "B": "感激的",
+      "C": "普遍的；总的",
+      "D": "逐渐的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 115,
+    "level": "cet4",
+    "question": "goal 含义？",
+    "options": {
+      "A": "勇气",
+      "B": "文化",
+      "C": "课程",
+      "D": "目标"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 116,
+    "level": "cet4",
+    "question": "gradual 含义？",
+    "options": {
+      "A": "逐渐的",
+      "B": "普遍的",
+      "C": "慷慨的",
+      "D": "感激的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 117,
+    "level": "cet4",
+    "question": "grateful 含义？",
+    "options": {
+      "A": "慷慨的",
+      "B": "感激的",
+      "C": "逐渐的",
+      "D": "普遍的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 118,
+    "level": "cet4",
+    "question": "habit 含义？",
+    "options": {
+      "A": "爱好",
+      "B": "危害",
+      "C": "习惯",
+      "D": "诚实"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 119,
+    "level": "cet4",
+    "question": "honest 含义？",
+    "options": {
+      "A": "好奇的",
+      "B": "勇敢的",
+      "C": "焦虑的",
+      "D": "诚实的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 120,
+    "level": "cet4",
+    "question": "imagine 含义？",
+    "options": {
+      "A": "想象",
+      "B": "包含",
+      "C": "影响",
+      "D": "增加"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 121,
+    "level": "cet4",
+    "question": "impact 含义？",
+    "options": {
+      "A": "增加",
+      "B": "影响；冲击",
+      "C": "想象",
+      "D": "包含"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 122,
+    "level": "cet4",
+    "question": "include 含义？",
+    "options": {
+      "A": "影响",
+      "B": "想象",
+      "C": "包括",
+      "D": "增加"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 123,
+    "level": "cet4",
+    "question": "increase 含义？",
+    "options": {
+      "A": "包括",
+      "B": "影响",
+      "C": "想象",
+      "D": "增加"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 124,
+    "level": "cet4",
+    "question": "influence 含义？",
+    "options": {
+      "A": "影响",
+      "B": "信息",
+      "C": "知识",
+      "D": "语言"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 125,
+    "level": "cet4",
+    "question": "instant 含义？",
+    "options": {
+      "A": "重要的",
+      "B": "立即的；瞬间",
+      "C": "内部",
+      "D": "聪明的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 126,
+    "level": "cet4",
+    "question": "issue 含义？",
+    "options": {
+      "A": "收入",
+      "B": "行业",
+      "C": "问题；议题；发行",
+      "D": "瞬间"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 127,
+    "level": "cet6",
+    "question": "abundant 含义？",
+    "options": {
+      "A": "缺席的",
+      "B": "抽象的",
+      "C": "荒谬的",
+      "D": "丰富的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 128,
+    "level": "cet6",
+    "question": "academic 含义？",
+    "options": {
+      "A": "学术的",
+      "B": "准确的",
+      "C": "积极的",
+      "D": "自动的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 129,
+    "level": "cet6",
+    "question": "accelerate 含义？",
+    "options": {
+      "A": "完成",
+      "B": "加速",
+      "C": "积累",
+      "D": "伴随"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 130,
+    "level": "cet6",
+    "question": "accompany 含义？",
+    "options": {
+      "A": "积累",
+      "B": "加速",
+      "C": "陪伴；伴随",
+      "D": "完成"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 131,
+    "level": "cet6",
+    "question": "accomplish 含义？",
+    "options": {
+      "A": "积累",
+      "B": "伴随",
+      "C": "承认",
+      "D": "完成；实现"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 132,
+    "level": "cet6",
+    "question": "accumulate 含义？",
+    "options": {
+      "A": "积累",
+      "B": "加速",
+      "C": "伴随",
+      "D": "完成"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 133,
+    "level": "cet6",
+    "question": "accurate 含义？",
+    "options": {
+      "A": "自动的",
+      "B": "准确的",
+      "C": "丰富的",
+      "D": "学术的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 134,
+    "level": "cet6",
+    "question": "acknowledge 含义？",
+    "options": {
+      "A": "分配",
+      "B": "改变",
+      "C": "承认；致谢",
+      "D": "提倡"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 135,
+    "level": "cet6",
+    "question": "advocate 含义？",
+    "options": {
+      "A": "分配",
+      "B": "承认",
+      "C": "改变",
+      "D": "提倡；拥护者"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 136,
+    "level": "cet6",
+    "question": "allocate 含义？",
+    "options": {
+      "A": "分配",
+      "B": "提倡",
+      "C": "承认",
+      "D": "改变"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 137,
+    "level": "cet6",
+    "question": "alter 含义？",
+    "options": {
+      "A": "承认",
+      "B": "改变",
+      "C": "分配",
+      "D": "提倡"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 138,
+    "level": "cet6",
+    "question": "alternative 含义？",
+    "options": {
+      "A": "显然的",
+      "B": "恰当的",
+      "C": "供替代的；选择",
+      "D": "有雄心的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 139,
+    "level": "cet6",
+    "question": "ambitious 含义？",
+    "options": {
+      "A": "显然的",
+      "B": "恰当的",
+      "C": "大约的",
+      "D": "有雄心的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 140,
+    "level": "cet6",
+    "question": "anticipate 含义？",
+    "options": {
+      "A": "预期；预料",
+      "B": "分配",
+      "C": "关联",
+      "D": "保证"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 141,
+    "level": "cet6",
+    "question": "apparent 含义？",
+    "options": {
+      "A": "任意的",
+      "B": "显然的；表面上的",
+      "C": "恰当的",
+      "D": "大约的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 142,
+    "level": "cet6",
+    "question": "appropriate 含义？",
+    "options": {
+      "A": "大约的",
+      "B": "任意的",
+      "C": "恰当的",
+      "D": "显然的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 143,
+    "level": "cet6",
+    "question": "approximate 含义？",
+    "options": {
+      "A": "任意的",
+      "B": "恰当的",
+      "C": "显然的",
+      "D": "大约的；接近"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 144,
+    "level": "cet6",
+    "question": "arbitrary 含义？",
+    "options": {
+      "A": "任意的；专断的",
+      "B": "大约的",
+      "C": "恰当的",
+      "D": "显然的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 145,
+    "level": "cet6",
+    "question": "assign 含义？",
+    "options": {
+      "A": "使确信",
+      "B": "分配；指派",
+      "C": "联想",
+      "D": "保证"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 146,
+    "level": "cet6",
+    "question": "associate 含义？",
+    "options": {
+      "A": "保证",
+      "B": "使确信",
+      "C": "联想；关联；伙伴",
+      "D": "分配"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 147,
+    "level": "cet6",
+    "question": "assure 含义？",
+    "options": {
+      "A": "分配",
+      "B": "联想",
+      "C": "关联",
+      "D": "保证；使确信"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 148,
+    "level": "cet6",
+    "question": "atmosphere 含义？",
+    "options": {
+      "A": "气氛；大气",
+      "B": "权威",
+      "C": "态度",
+      "D": "属性"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 149,
+    "level": "cet6",
+    "question": "authority 含义？",
+    "options": {
+      "A": "属性",
+      "B": "权威；当局",
+      "C": "气氛",
+      "D": "态度"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 150,
+    "level": "cet6",
+    "question": "automatic 含义？",
+    "options": {
+      "A": "意识到的",
+      "B": "尴尬的",
+      "C": "自动的",
+      "D": "可获得的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 151,
+    "level": "cet6",
+    "question": "available 含义？",
+    "options": {
+      "A": "意识到的",
+      "B": "自动的",
+      "C": "尴尬的",
+      "D": "可获得的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 152,
+    "level": "cet6",
+    "question": "aware 含义？",
+    "options": {
+      "A": "意识到的",
+      "B": "可获得的",
+      "C": "自动的",
+      "D": "尴尬的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 153,
+    "level": "cet6",
+    "question": "awkward 含义？",
+    "options": {
+      "A": "自动的",
+      "B": "尴尬的；笨拙的",
+      "C": "可获得的",
+      "D": "意识到的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 154,
+    "level": "cet6",
+    "question": "boundary 含义？",
+    "options": {
+      "A": "类别",
+      "B": "能力",
+      "C": "边界",
+      "D": "预算"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 155,
+    "level": "cet6",
+    "question": "brief 含义？",
+    "options": {
+      "A": "预算",
+      "B": "边界",
+      "C": "类别",
+      "D": "简短的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 156,
+    "level": "cet6",
+    "question": "budget 含义？",
+    "options": {
+      "A": "预算",
+      "B": "边界",
+      "C": "类别",
+      "D": "能力"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 157,
+    "level": "cet6",
+    "question": "calculate 含义？",
+    "options": {
+      "A": "引用",
+      "B": "计算",
+      "C": "澄清",
+      "D": "分类"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 158,
+    "level": "cet6",
+    "question": "campaign 含义？",
+    "options": {
+      "A": "类别",
+      "B": "挑战",
+      "C": "运动；活动",
+      "D": "容量"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 159,
+    "level": "cet6",
+    "question": "capacity 含义？",
+    "options": {
+      "A": "类别",
+      "B": "挑战",
+      "C": "运动",
+      "D": "容量；能力"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 160,
+    "level": "cet6",
+    "question": "category 含义？",
+    "options": {
+      "A": "类别",
+      "B": "容量",
+      "C": "挑战",
+      "D": "运动"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 161,
+    "level": "cet6",
+    "question": "cautious 含义？",
+    "options": {
+      "A": "复杂的",
+      "B": "谨慎的",
+      "C": "认知的",
+      "D": "有能力的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 162,
+    "level": "cet6",
+    "question": "challenge 含义？",
+    "options": {
+      "A": "容量",
+      "B": "运动",
+      "C": "挑战",
+      "D": "类别"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 163,
+    "level": "cet6",
+    "question": "cite 含义？",
+    "options": {
+      "A": "澄清",
+      "B": "分类",
+      "C": "计算",
+      "D": "引用"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 164,
+    "level": "cet6",
+    "question": "clarify 含义？",
+    "options": {
+      "A": "澄清",
+      "B": "引用",
+      "C": "分类",
+      "D": "计算"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 165,
+    "level": "cet6",
+    "question": "classify 含义？",
+    "options": {
+      "A": "计算",
+      "B": "分类",
+      "C": "澄清",
+      "D": "引用"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 166,
+    "level": "cet6",
+    "question": "cognitive 含义？",
+    "options": {
+      "A": "有能力的",
+      "B": "复杂的",
+      "C": "认知的",
+      "D": "谨慎的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 167,
+    "level": "cet6",
+    "question": "collaborate 含义？",
+    "options": {
+      "A": "倒塌",
+      "B": "命令",
+      "C": "提交",
+      "D": "合作"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 168,
+    "level": "cet6",
+    "question": "collapse 含义？",
+    "options": {
+      "A": "倒塌；崩溃",
+      "B": "合作",
+      "C": "命令",
+      "D": "提交"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 169,
+    "level": "cet6",
+    "question": "colleague 含义？",
+    "options": {
+      "A": "社区",
+      "B": "同事",
+      "C": "委员会",
+      "D": "竞争"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 170,
+    "level": "cet6",
+    "question": "command 含义？",
+    "options": {
+      "A": "补偿",
+      "B": "交流",
+      "C": "命令；掌握",
+      "D": "提交"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 171,
+    "level": "cet6",
+    "question": "commit 含义？",
+    "options": {
+      "A": "命令",
+      "B": "补偿",
+      "C": "交流",
+      "D": "犯（罪）；承诺；提交"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 172,
+    "level": "cet6",
+    "question": "committee 含义？",
+    "options": {
+      "A": "委员会",
+      "B": "同事",
+      "C": "社区",
+      "D": "竞争"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 173,
+    "level": "cet6",
+    "question": "communicate 含义？",
+    "options": {
+      "A": "提交",
+      "B": "交流；沟通",
+      "C": "补偿",
+      "D": "命令"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 174,
+    "level": "cet6",
+    "question": "compensate 含义？",
+    "options": {
+      "A": "命令",
+      "B": "提交",
+      "C": "补偿",
+      "D": "交流"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 175,
+    "level": "cet6",
+    "question": "competent 含义？",
+    "options": {
+      "A": "认知的",
+      "B": "谨慎的",
+      "C": "复杂的",
+      "D": "有能力的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 176,
+    "level": "cet6",
+    "question": "competition 含义？",
+    "options": {
+      "A": "竞争；比赛",
+      "B": "委员会",
+      "C": "社区",
+      "D": "同事"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 177,
+    "level": "cet6",
+    "question": "complex 含义？",
+    "options": {
+      "A": "谨慎的",
+      "B": "复杂的",
+      "C": "有能力的",
+      "D": "认知的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 178,
+    "level": "cet6",
+    "question": "component 含义？",
+    "options": {
+      "A": "竞争",
+      "B": "委员会",
+      "C": "组成部分",
+      "D": "妥协"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 179,
+    "level": "cet6",
+    "question": "comprehensive 含义？",
+    "options": {
+      "A": "复杂的",
+      "B": "有能力的",
+      "C": "谨慎的",
+      "D": "全面的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 180,
+    "level": "cet6",
+    "question": "compromise 含义？",
+    "options": {
+      "A": "妥协",
+      "B": "组成部分",
+      "C": "竞争",
+      "D": "委员会"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 181,
+    "level": "ielts",
+    "question": "access 含义？",
+    "options": {
+      "A": "属性",
+      "B": "通道；访问；获取",
+      "C": "住宿",
+      "D": "相邻的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 182,
+    "level": "ielts",
+    "question": "accommodation 含义？",
+    "options": {
+      "A": "属性",
+      "B": "意识",
+      "C": "住宿",
+      "D": "通道"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 183,
+    "level": "ielts",
+    "question": "adjacent 含义？",
+    "options": {
+      "A": "显然的",
+      "B": "适当的",
+      "C": "兼容的",
+      "D": "相邻的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 184,
+    "level": "ielts",
+    "question": "apparently 含义？",
+    "options": {
+      "A": "显然地",
+      "B": "大约",
+      "C": "接近地",
+      "D": "绝对地"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 185,
+    "level": "ielts",
+    "question": "approximately 含义？",
+    "options": {
+      "A": "逐渐地",
+      "B": "大约",
+      "C": "显然地",
+      "D": "完全地"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 186,
+    "level": "ielts",
+    "question": "arise 含义？",
+    "options": {
+      "A": "属性",
+      "B": "意识",
+      "C": "出现；产生",
+      "D": "协助"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 187,
+    "level": "ielts",
+    "question": "assist 含义？",
+    "options": {
+      "A": "评估",
+      "B": "假定",
+      "C": "分配",
+      "D": "协助；帮助"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 188,
+    "level": "ielts",
+    "question": "attribute 含义？",
+    "options": {
+      "A": "属性；归因于",
+      "B": "协助",
+      "C": "出现",
+      "D": "意识"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 189,
+    "level": "ielts",
+    "question": "awareness 含义？",
+    "options": {
+      "A": "商品",
+      "B": "意识",
+      "C": "属性",
+      "D": "偏见"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 190,
+    "level": "ielts",
+    "question": "bias 含义？",
+    "options": {
+      "A": "属性",
+      "B": "商品",
+      "C": "偏见；偏差",
+      "D": "意识"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 191,
+    "level": "ielts",
+    "question": "cease 含义？",
+    "options": {
+      "A": "开始",
+      "B": "巧合",
+      "C": "强迫",
+      "D": "停止"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 192,
+    "level": "ielts",
+    "question": "coherent 含义？",
+    "options": {
+      "A": "连贯的；一致的",
+      "B": "巧合的",
+      "C": "兼容的",
+      "D": "具体的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 193,
+    "level": "ielts",
+    "question": "coincide 含义？",
+    "options": {
+      "A": "强迫",
+      "B": "巧合；同时发生",
+      "C": "开始",
+      "D": "停止"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 194,
+    "level": "ielts",
+    "question": "commence 含义？",
+    "options": {
+      "A": "巧合",
+      "B": "强迫",
+      "C": "开始",
+      "D": "停止"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 195,
+    "level": "ielts",
+    "question": "commodity 含义？",
+    "options": {
+      "A": "社区",
+      "B": "委员会",
+      "C": "竞争",
+      "D": "商品"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 196,
+    "level": "ielts",
+    "question": "compatible 含义？",
+    "options": {
+      "A": "兼容的",
+      "B": "连贯的",
+      "C": "具体的",
+      "D": "有说服力的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 197,
+    "level": "ielts",
+    "question": "compel 含义？",
+    "options": {
+      "A": "构成",
+      "B": "强迫",
+      "C": "补充",
+      "D": "包含"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 198,
+    "level": "ielts",
+    "question": "complement 含义？",
+    "options": {
+      "A": "包含",
+      "B": "构成",
+      "C": "补充",
+      "D": "强迫"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 199,
+    "level": "ielts",
+    "question": "comprise 含义？",
+    "options": {
+      "A": "补充",
+      "B": "强迫",
+      "C": "构成",
+      "D": "包含；由…组成"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 200,
+    "level": "ielts",
+    "question": "conceive 含义？",
+    "options": {
+      "A": "构想；设想",
+      "B": "包含",
+      "C": "构成",
+      "D": "补充"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 201,
+    "level": "ielts",
+    "question": "concrete 含义？",
+    "options": {
+      "A": "有说服力的",
+      "B": "具体的；混凝土",
+      "C": "连贯的",
+      "D": "兼容的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 202,
+    "level": "ielts",
+    "question": "conduct 含义？",
+    "options": {
+      "A": "限制",
+      "B": "符合",
+      "C": "实施；进行；行为",
+      "D": "授予"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 203,
+    "level": "ielts",
+    "question": "confer 含义？",
+    "options": {
+      "A": "限制",
+      "B": "符合",
+      "C": "冲突",
+      "D": "授予；商议"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 204,
+    "level": "ielts",
+    "question": "confine 含义？",
+    "options": {
+      "A": "限制",
+      "B": "授予",
+      "C": "符合",
+      "D": "冲突"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 205,
+    "level": "ielts",
+    "question": "conflict 含义？",
+    "options": {
+      "A": "授予",
+      "B": "冲突",
+      "C": "限制",
+      "D": "符合"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 206,
+    "level": "ielts",
+    "question": "conform 含义？",
+    "options": {
+      "A": "限制",
+      "B": "授予",
+      "C": "遵守；符合",
+      "D": "冲突"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 207,
+    "level": "ielts",
+    "question": "consist 含义？",
+    "options": {
+      "A": "构成",
+      "B": "限制",
+      "C": "消耗",
+      "D": "组成；在于"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 208,
+    "level": "ielts",
+    "question": "constant 含义？",
+    "options": {
+      "A": "持续的；不变的",
+      "B": "构成的",
+      "C": "消耗的",
+      "D": "受约束的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 209,
+    "level": "ielts",
+    "question": "constitute 含义？",
+    "options": {
+      "A": "限制",
+      "B": "构成",
+      "C": "组成",
+      "D": "消耗"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 210,
+    "level": "ielts",
+    "question": "constrain 含义？",
+    "options": {
+      "A": "消耗",
+      "B": "建造",
+      "C": "约束；限制",
+      "D": "构成"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 211,
+    "level": "ielts",
+    "question": "construct 含义？",
+    "options": {
+      "A": "约束",
+      "B": "消耗",
+      "C": "构成",
+      "D": "建造；构造"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 212,
+    "level": "ielts",
+    "question": "consume 含义？",
+    "options": {
+      "A": "消耗；消费",
+      "B": "建造",
+      "C": "约束",
+      "D": "构成"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 213,
+    "level": "kaoyan",
+    "question": "abolish 含义？",
+    "options": {
+      "A": "荒谬的",
+      "B": "废除",
+      "C": "缺席",
+      "D": "突然的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 214,
+    "level": "kaoyan",
+    "question": "abrupt 含义？",
+    "options": {
+      "A": "荒谬的",
+      "B": "抽象的",
+      "C": "突然的",
+      "D": "缺席的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 215,
+    "level": "kaoyan",
+    "question": "absurd 含义？",
+    "options": {
+      "A": "突然的",
+      "B": "缺席的",
+      "C": "抽象的",
+      "D": "荒谬的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 216,
+    "level": "kaoyan",
+    "question": "accuse 含义？",
+    "options": {
+      "A": "指控；指责",
+      "B": "采纳",
+      "C": "管理",
+      "D": "坚持；粘附"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 217,
+    "level": "kaoyan",
+    "question": "address 含义？",
+    "options": {
+      "A": "不利的",
+      "B": "处理；演讲；地址",
+      "C": "坚持",
+      "D": "管理"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 218,
+    "level": "kaoyan",
+    "question": "adhere 含义？",
+    "options": {
+      "A": "管理",
+      "B": "处理",
+      "C": "坚持；粘附",
+      "D": "指控"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 219,
+    "level": "kaoyan",
+    "question": "administer 含义？",
+    "options": {
+      "A": "坚持",
+      "B": "指控",
+      "C": "处理",
+      "D": "管理；实施"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 220,
+    "level": "kaoyan",
+    "question": "adolescent 含义？",
+    "options": {
+      "A": "青少年",
+      "B": "建筑师",
+      "C": "拥护者",
+      "D": "权威"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 221,
+    "level": "kaoyan",
+    "question": "adverse 含义？",
+    "options": {
+      "A": "人工的",
+      "B": "不利的",
+      "C": "审美的",
+      "D": "模棱两可的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 222,
+    "level": "kaoyan",
+    "question": "aesthetic 含义？",
+    "options": {
+      "A": "模棱两可的",
+      "B": "人工的",
+      "C": "审美的",
+      "D": "不利的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 223,
+    "level": "kaoyan",
+    "question": "affiliate 含义？",
+    "options": {
+      "A": "断言",
+      "B": "加重",
+      "C": "减轻",
+      "D": "隶属；分支机构"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 224,
+    "level": "kaoyan",
+    "question": "affirm 含义？",
+    "options": {
+      "A": "断言；肯定",
+      "B": "加重",
+      "C": "减轻",
+      "D": "隶属"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 225,
+    "level": "kaoyan",
+    "question": "aggravate 含义？",
+    "options": {
+      "A": "隶属",
+      "B": "加重；恶化",
+      "C": "减轻",
+      "D": "断言"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 226,
+    "level": "kaoyan",
+    "question": "alleviate 含义？",
+    "options": {
+      "A": "断言",
+      "B": "隶属",
+      "C": "减轻；缓解",
+      "D": "加重"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 227,
+    "level": "kaoyan",
+    "question": "ambiguous 含义？",
+    "options": {
+      "A": "审美的",
+      "B": "不利的",
+      "C": "人工的",
+      "D": "模棱两可的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 228,
+    "level": "kaoyan",
+    "question": "amend 含义？",
+    "options": {
+      "A": "修正；修改",
+      "B": "类比",
+      "C": "呼吁",
+      "D": "表达清楚"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 229,
+    "level": "kaoyan",
+    "question": "analogy 含义？",
+    "options": {
+      "A": "表达清楚",
+      "B": "类比",
+      "C": "修正",
+      "D": "呼吁"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 230,
+    "level": "kaoyan",
+    "question": "appeal 含义？",
+    "options": {
+      "A": "修正",
+      "B": "表达清楚",
+      "C": "呼吁；吸引；上诉",
+      "D": "类比"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 231,
+    "level": "kaoyan",
+    "question": "architect 含义？",
+    "options": {
+      "A": "青少年",
+      "B": "拥护者",
+      "C": "权威",
+      "D": "建筑师"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 232,
+    "level": "kaoyan",
+    "question": "articulate 含义？",
+    "options": {
+      "A": "表达清楚；发音清晰",
+      "B": "呼吁",
+      "C": "类比",
+      "D": "修正"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 233,
+    "level": "kaoyan",
+    "question": "artificial 含义？",
+    "options": {
+      "A": "模棱两可的",
+      "B": "人工的；人造的",
+      "C": "审美的",
+      "D": "不利的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 234,
+    "level": "kaoyan",
+    "question": "assert 含义？",
+    "options": {
+      "A": "假定",
+      "B": "分配",
+      "C": "断言；主张",
+      "D": "评估"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 235,
+    "level": "toefl",
+    "question": "aggregate 含义？",
+    "options": {
+      "A": "仪器",
+      "B": "附加",
+      "C": "资产",
+      "D": "总计；聚合"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 236,
+    "level": "toefl",
+    "question": "analogous 含义？",
+    "options": {
+      "A": "类似的",
+      "B": "模棱两可的",
+      "C": "人工的",
+      "D": "审美的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 237,
+    "level": "toefl",
+    "question": "apparatus 含义？",
+    "options": {
+      "A": "属性",
+      "B": "仪器；设备",
+      "C": "附加",
+      "D": "资产"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 238,
+    "level": "toefl",
+    "question": "append 含义？",
+    "options": {
+      "A": "资产",
+      "B": "属性",
+      "C": "附加；追加",
+      "D": "仪器"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 239,
+    "level": "toefl",
+    "question": "asset 含义？",
+    "options": {
+      "A": "仪器",
+      "B": "附加",
+      "C": "属性",
+      "D": "资产；有价值的事物"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 240,
+    "level": "toefl",
+    "question": "beneficial 含义？",
+    "options": {
+      "A": "有益的",
+      "B": "良性的",
+      "C": "坦率的",
+      "D": "有说服力的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 241,
+    "level": "toefl",
+    "question": "compound 含义？",
+    "options": {
+      "A": "概念",
+      "B": "化合物；复合的",
+      "C": "会议",
+      "D": "冲突"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 242,
+    "level": "toefl",
+    "question": "conference 含义？",
+    "options": {
+      "A": "冲突",
+      "B": "概念",
+      "C": "会议",
+      "D": "化合物"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 243,
+    "level": "toefl",
+    "question": "consensus 含义？",
+    "options": {
+      "A": "会议",
+      "B": "冲突",
+      "C": "概念",
+      "D": "共识"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 244,
+    "level": "toefl",
+    "question": "controversial 含义？",
+    "options": {
+      "A": "有争议的",
+      "B": "连续的",
+      "C": "一致的",
+      "D": "有说服力的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 245,
+    "level": "toefl",
+    "question": "corporate 含义？",
+    "options": {
+      "A": "一致的",
+      "B": "公司的；团体的",
+      "C": "有争议的",
+      "D": "连续的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 246,
+    "level": "toefl",
+    "question": "crucial 含义？",
+    "options": {
+      "A": "连续的",
+      "B": "一致的",
+      "C": "关键的；至关重要的",
+      "D": "有争议的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 247,
+    "level": "toefl",
+    "question": "derive 含义？",
+    "options": {
+      "A": "描述",
+      "B": "决定",
+      "C": "发展",
+      "D": "获得；源于"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 248,
+    "level": "toefl",
+    "question": "dimension 含义？",
+    "options": {
+      "A": "维度；尺寸",
+      "B": "方向",
+      "C": "差异",
+      "D": "距离"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 249,
+    "level": "toefl",
+    "question": "distinct 含义？",
+    "options": {
+      "A": "方便的",
+      "B": "不同的；明显的",
+      "C": "困难的",
+      "D": "危险的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 250,
+    "level": "toefl",
+    "question": "distribute 含义？",
+    "options": {
+      "A": "决定",
+      "B": "发展",
+      "C": "分配；分发",
+      "D": "描述"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 251,
+    "level": "toefl",
+    "question": "diverse 含义？",
+    "options": {
+      "A": "不同的",
+      "B": "困难的",
+      "C": "方便的",
+      "D": "多样的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 252,
+    "level": "toefl",
+    "question": "domain 含义？",
+    "options": {
+      "A": "领域；域",
+      "B": "维度",
+      "C": "方向",
+      "D": "差异"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 253,
+    "level": "toefl",
+    "question": "dynamic 含义？",
+    "options": {
+      "A": "困难的",
+      "B": "动态的；有活力的",
+      "C": "多样的",
+      "D": "不同的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 254,
+    "level": "toefl",
+    "question": "elaborate 含义？",
+    "options": {
+      "A": "动态的",
+      "B": "多样的",
+      "C": "精心制作的；详述",
+      "D": "高效的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 255,
+    "level": "toefl",
+    "question": "emerge 含义？",
+    "options": {
+      "A": "强调",
+      "B": "消除",
+      "C": "建立",
+      "D": "出现；浮现"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 256,
+    "level": "toefl",
+    "question": "emphasis 含义？",
+    "options": {
+      "A": "强调；重点",
+      "B": "出现",
+      "C": "消除",
+      "D": "建立"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 257,
+    "level": "toefl",
+    "question": "empirical 含义？",
+    "options": {
+      "A": "多样的",
+      "B": "经验主义的；实证的",
+      "C": "高效的",
+      "D": "动态的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 258,
+    "level": "toefl",
+    "question": "exceed 含义？",
+    "options": {
+      "A": "强调",
+      "B": "消除",
+      "C": "超过；超越",
+      "D": "出现"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 259,
+    "level": "toefl",
+    "question": "enormous 含义？",
+    "options": {
+      "A": "丰富的",
+      "B": "高效的",
+      "C": "动态的",
+      "D": "巨大的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 260,
+    "level": "toefl",
+    "question": "entity 含义？",
+    "options": {
+      "A": "实体",
+      "B": "证据",
+      "C": "能量",
+      "D": "环境"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 261,
+    "level": "toefl",
+    "question": "equivalent 含义？",
+    "options": {
+      "A": "动态的",
+      "B": "等价的；等同物",
+      "C": "实证的",
+      "D": "高效的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 262,
+    "level": "toefl",
+    "question": "evaluate 含义？",
+    "options": {
+      "A": "强调",
+      "B": "消除",
+      "C": "评估；评价",
+      "D": "出现"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 263,
+    "level": "toefl",
+    "question": "explicit 含义？",
+    "options": {
+      "A": "等价的",
+      "B": "实证的",
+      "C": "高效的",
+      "D": "明确的；清楚的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 264,
+    "level": "toefl",
+    "question": "facilitate 含义？",
+    "options": {
+      "A": "促进；使便利",
+      "B": "评估",
+      "C": "出现",
+      "D": "强调"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 265,
+    "level": "toefl",
+    "question": "fundamental 含义？",
+    "options": {
+      "A": "高效的",
+      "B": "基本的；根本的",
+      "C": "巨大的",
+      "D": "丰富的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 266,
+    "level": "toefl",
+    "question": "generate 含义？",
+    "options": {
+      "A": "评估",
+      "B": "出现",
+      "C": "产生；生成",
+      "D": "促进"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 267,
+    "level": "toefl",
+    "question": "hypothesis 含义？",
+    "options": {
+      "A": "巨大的",
+      "B": "基本的",
+      "C": "丰富的",
+      "D": "假设；假说"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 268,
+    "level": "toefl",
+    "question": "implement 含义？",
+    "options": {
+      "A": "实施；执行",
+      "B": "产生",
+      "C": "促进",
+      "D": "评估"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 269,
+    "level": "toefl",
+    "question": "implicit 含义？",
+    "options": {
+      "A": "实证的",
+      "B": "含蓄的；隐含的",
+      "C": "明确的",
+      "D": "等价的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 270,
+    "level": "toefl",
+    "question": "indicate 含义？",
+    "options": {
+      "A": "产生",
+      "B": "促进",
+      "C": "表明；指示",
+      "D": "实施"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 271,
+    "level": "toefl",
+    "question": "infrastructure 含义？",
+    "options": {
+      "A": "假设",
+      "B": "巨大的",
+      "C": "基本的",
+      "D": "基础设施"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 272,
+    "level": "toefl",
+    "question": "innovation 含义？",
+    "options": {
+      "A": "创新",
+      "B": "基础设施",
+      "C": "假设",
+      "D": "巨大的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 273,
+    "level": "toefl",
+    "question": "integrate 含义？",
+    "options": {
+      "A": "促进",
+      "B": "整合；融合",
+      "C": "实施",
+      "D": "产生"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 274,
+    "level": "toefl",
+    "question": "interpret 含义？",
+    "options": {
+      "A": "实施",
+      "B": "产生",
+      "C": "解释；口译",
+      "D": "整合"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 275,
+    "level": "toefl",
+    "question": "legislation 含义？",
+    "options": {
+      "A": "创新",
+      "B": "基础设施",
+      "C": "假设",
+      "D": "立法；法律"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 276,
+    "level": "toefl",
+    "question": "mechanism 含义？",
+    "options": {
+      "A": "机制；机理",
+      "B": "立法",
+      "C": "创新",
+      "D": "基础设施"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 277,
+    "level": "toefl",
+    "question": "notion 含义？",
+    "options": {
+      "A": "创新",
+      "B": "概念；观念",
+      "C": "机制",
+      "D": "立法"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 278,
+    "level": "toefl",
+    "question": "phenomenon 含义？",
+    "options": {
+      "A": "机制",
+      "B": "立法",
+      "C": "现象",
+      "D": "概念"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 279,
+    "level": "toefl",
+    "question": "significant 含义？",
+    "options": {
+      "A": "含蓄的",
+      "B": "明确的",
+      "C": "等价的",
+      "D": "重要的；显著的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 280,
+    "level": "toefl",
+    "question": "subsequent 含义？",
+    "options": {
+      "A": "随后的；后来的",
+      "B": "重要的",
+      "C": "含蓄的",
+      "D": "明确的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 281,
+    "level": "toefl",
+    "question": "transform 含义？",
+    "options": {
+      "A": "实施",
+      "B": "转变；改造",
+      "C": "解释",
+      "D": "整合"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 282,
+    "level": "toefl",
+    "question": "undergo 含义？",
+    "options": {
+      "A": "解释",
+      "B": "整合",
+      "C": "经历；经受",
+      "D": "转变"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 283,
+    "level": "toefl",
+    "question": "vary 含义？",
+    "options": {
+      "A": "经历",
+      "B": "转变",
+      "C": "解释",
+      "D": "变化；不同"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 284,
+    "level": "gre",
+    "question": "abate 含义？",
+    "options": {
+      "A": "减弱；减少",
+      "B": "异常的",
+      "C": "中止",
+      "D": "发誓放弃"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 285,
+    "level": "gre",
+    "question": "aberrant 含义？",
+    "options": {
+      "A": "发誓放弃",
+      "B": "异常的",
+      "C": "减弱",
+      "D": "中止"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 286,
+    "level": "gre",
+    "question": "abeyance 含义？",
+    "options": {
+      "A": "减弱",
+      "B": "发誓放弃",
+      "C": "中止；搁置",
+      "D": "异常的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 287,
+    "level": "gre",
+    "question": "abjure 含义？",
+    "options": {
+      "A": "中止",
+      "B": "异常的",
+      "C": "减弱",
+      "D": "发誓放弃"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 288,
+    "level": "gre",
+    "question": "abscond 含义？",
+    "options": {
+      "A": "潜逃",
+      "B": "弃权",
+      "C": "荣誉",
+      "D": "敏锐"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 289,
+    "level": "gre",
+    "question": "abstain 含义？",
+    "options": {
+      "A": "敏锐",
+      "B": "弃权；戒除",
+      "C": "潜逃",
+      "D": "荣誉"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 290,
+    "level": "gre",
+    "question": "accolade 含义？",
+    "options": {
+      "A": "潜逃",
+      "B": "敏锐",
+      "C": "荣誉；赞扬",
+      "D": "弃权"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 291,
+    "level": "gre",
+    "question": "acumen 含义？",
+    "options": {
+      "A": "荣誉",
+      "B": "弃权",
+      "C": "潜逃",
+      "D": "敏锐；精明"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 292,
+    "level": "gre",
+    "question": "adamant 含义？",
+    "options": {
+      "A": "坚决的；固执的",
+      "B": "告诫",
+      "C": "灵巧的",
+      "D": "奉承"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 293,
+    "level": "gre",
+    "question": "admonish 含义？",
+    "options": {
+      "A": "坚决的",
+      "B": "告诫；劝告",
+      "C": "灵巧的",
+      "D": "奉承"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 294,
+    "level": "gre",
+    "question": "adroit 含义？",
+    "options": {
+      "A": "坚决的",
+      "B": "告诫",
+      "C": "灵巧的；机敏的",
+      "D": "奉承"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 295,
+    "level": "gre",
+    "question": "adulation 含义？",
+    "options": {
+      "A": "灵巧的",
+      "B": "坚决的",
+      "C": "告诫",
+      "D": "奉承；谄媚"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 296,
+    "level": "gre",
+    "question": "alacrity 含义？",
+    "options": {
+      "A": "敏捷；乐意",
+      "B": "利他主义",
+      "C": "异常",
+      "D": "反感"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 297,
+    "level": "gre",
+    "question": "altruism 含义？",
+    "options": {
+      "A": "反感",
+      "B": "利他主义",
+      "C": "敏捷",
+      "D": "异常"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 298,
+    "level": "gre",
+    "question": "ameliorate 含义？",
+    "options": {
+      "A": "反感",
+      "B": "冷漠",
+      "C": "改善",
+      "D": "异常"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 299,
+    "level": "gre",
+    "question": "anomaly 含义？",
+    "options": {
+      "A": "改善",
+      "B": "反感",
+      "C": "冷漠",
+      "D": "异常；反常"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 300,
+    "level": "gre",
+    "question": "antipathy 含义？",
+    "options": {
+      "A": "反感；厌恶",
+      "B": "冷漠",
+      "C": "异常",
+      "D": "改善"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 301,
+    "level": "gre",
+    "question": "apathy 含义？",
+    "options": {
+      "A": "改善",
+      "B": "冷漠；无兴趣",
+      "C": "反感",
+      "D": "异常"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 302,
+    "level": "gre",
+    "question": "appease 含义？",
+    "options": {
+      "A": "反感",
+      "B": "异常",
+      "C": "平息；安抚",
+      "D": "冷漠"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 303,
+    "level": "gre",
+    "question": "archaic 含义？",
+    "options": {
+      "A": "艰巨的",
+      "B": "大胆的",
+      "C": "朴素的",
+      "D": "古老的；过时的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 304,
+    "level": "gre",
+    "question": "arduous 含义？",
+    "options": {
+      "A": "艰巨的；费力的",
+      "B": "大胆的",
+      "C": "朴素的",
+      "D": "古老的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 305,
+    "level": "gre",
+    "question": "audacious 含义？",
+    "options": {
+      "A": "艰巨的",
+      "B": "大胆的",
+      "C": "朴素的",
+      "D": "古老的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 306,
+    "level": "gre",
+    "question": "austere 含义？",
+    "options": {
+      "A": "古老的",
+      "B": "艰巨的",
+      "C": "朴素的；严峻的",
+      "D": "大胆的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 307,
+    "level": "gre",
+    "question": "banal 含义？",
+    "options": {
+      "A": "良性的",
+      "B": "支持",
+      "C": "浮夸的",
+      "D": "平庸的；陈腐的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 308,
+    "level": "gre",
+    "question": "benign 含义？",
+    "options": {
+      "A": "良性的；和善的",
+      "B": "平庸的",
+      "C": "支持",
+      "D": "浮夸的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 309,
+    "level": "gre",
+    "question": "bolster 含义？",
+    "options": {
+      "A": "平庸的",
+      "B": "支持；加强",
+      "C": "浮夸的",
+      "D": "良性的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 310,
+    "level": "gre",
+    "question": "bombastic 含义？",
+    "options": {
+      "A": "支持",
+      "B": "平庸的",
+      "C": "夸大的；浮夸的",
+      "D": "良性的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 311,
+    "level": "gre",
+    "question": "cacophony 含义？",
+    "options": {
+      "A": "坦率",
+      "B": "反复无常的",
+      "C": "催化剂",
+      "D": "刺耳的声音"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 312,
+    "level": "gre",
+    "question": "candor 含义？",
+    "options": {
+      "A": "坦率；直率",
+      "B": "刺耳的声音",
+      "C": "反复无常的",
+      "D": "催化剂"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 313,
+    "level": "gre",
+    "question": "capricious 含义？",
+    "options": {
+      "A": "刺耳的声音",
+      "B": "反复无常的",
+      "C": "催化剂",
+      "D": "坦率"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 314,
+    "level": "gre",
+    "question": "catalyst 含义？",
+    "options": {
+      "A": "坦率",
+      "B": "刺耳的声音",
+      "C": "催化剂",
+      "D": "反复无常的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 315,
+    "level": "gre",
+    "question": "censure 含义？",
+    "options": {
+      "A": "诡计",
+      "B": "有说服力的",
+      "C": "自满的",
+      "D": "谴责"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 316,
+    "level": "gre",
+    "question": "chicanery 含义？",
+    "options": {
+      "A": "诡计；欺骗",
+      "B": "谴责",
+      "C": "有说服力的",
+      "D": "自满的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 317,
+    "level": "gre",
+    "question": "cogent 含义？",
+    "options": {
+      "A": "诡计",
+      "B": "有说服力的",
+      "C": "自满的",
+      "D": "谴责"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 318,
+    "level": "gre",
+    "question": "complacent 含义？",
+    "options": {
+      "A": "谴责",
+      "B": "诡计",
+      "C": "自满的",
+      "D": "有说服力的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 319,
+    "level": "gre",
+    "question": "corroborate 含义？",
+    "options": {
+      "A": "自满的",
+      "B": "有说服力的",
+      "C": "谴责",
+      "D": "证实；确证"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 320,
+    "level": "ielts",
+    "question": "agriculture 含义？",
+    "options": {
+      "A": "农业",
+      "B": "工业",
+      "C": "商业",
+      "D": "文化"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 321,
+    "level": "ielts",
+    "question": "biodiversity 含义？",
+    "options": {
+      "A": "生态学",
+      "B": "生物多样性",
+      "C": "生物学",
+      "D": "地理学"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 322,
+    "level": "ielts",
+    "question": "conservation 含义？",
+    "options": {
+      "A": "建设",
+      "B": "消耗",
+      "C": "保护；保存",
+      "D": "谈话"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 323,
+    "level": "ielts",
+    "question": "demographic 含义？",
+    "options": {
+      "A": "民主的",
+      "B": "地质的",
+      "C": "经济的",
+      "D": "人口统计的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 324,
+    "level": "ielts",
+    "question": "deteriorate 含义？",
+    "options": {
+      "A": "恶化",
+      "B": "改善",
+      "C": "削弱",
+      "D": "腐烂"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 325,
+    "level": "ielts",
+    "question": "ecosystem 含义？",
+    "options": {
+      "A": "设备",
+      "B": "生态系统",
+      "C": "经济",
+      "D": "环境"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 326,
+    "level": "ielts",
+    "question": "emission 含义？",
+    "options": {
+      "A": "迁移",
+      "B": "紧急",
+      "C": "排放",
+      "D": "使命"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 327,
+    "level": "ielts",
+    "question": "epidemic 含义？",
+    "options": {
+      "A": "事件",
+      "B": "编辑",
+      "C": "能量",
+      "D": "流行病"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 328,
+    "level": "ielts",
+    "question": "erosion 含义？",
+    "options": {
+      "A": "侵蚀",
+      "B": "爆发",
+      "C": "错误",
+      "D": "蒸发"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 329,
+    "level": "ielts",
+    "question": "expenditure 含义？",
+    "options": {
+      "A": "出口",
+      "B": "支出；花费",
+      "C": "实验",
+      "D": "专家"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 330,
+    "level": "ielts",
+    "question": "habitat 含义？",
+    "options": {
+      "A": "危害",
+      "B": "遗产",
+      "C": "栖息地",
+      "D": "习惯"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 331,
+    "level": "ielts",
+    "question": "indigenous 含义？",
+    "options": {
+      "A": "勤奋的",
+      "B": "独立的",
+      "C": "个人的",
+      "D": "本土的；土著的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 332,
+    "level": "ielts",
+    "question": "migration 含义？",
+    "options": {
+      "A": "迁移；移民",
+      "B": "使命",
+      "C": "错误",
+      "D": "混合"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 333,
+    "level": "ielts",
+    "question": "nutrition 含义？",
+    "options": {
+      "A": "新奇的",
+      "B": "营养",
+      "C": "农业",
+      "D": "护士"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 334,
+    "level": "ielts",
+    "question": "poverty 含义？",
+    "options": {
+      "A": "财产",
+      "B": "人口",
+      "C": "贫困",
+      "D": "权力"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 335,
+    "level": "ielts",
+    "question": "productivity 含义？",
+    "options": {
+      "A": "繁荣",
+      "B": "财产",
+      "C": "人口",
+      "D": "生产力"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 336,
+    "level": "ielts",
+    "question": "sustainability 含义？",
+    "options": {
+      "A": "可持续性",
+      "B": "敏感性",
+      "C": "稳定性",
+      "D": "生存"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 337,
+    "level": "ielts",
+    "question": "urban 含义？",
+    "options": {
+      "A": "用途",
+      "B": "城市的",
+      "C": "农村的",
+      "D": "紧急的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 338,
+    "level": "kaoyan",
+    "question": "abide 含义？",
+    "options": {
+      "A": "缺席",
+      "B": "突然的",
+      "C": "遵守；容忍",
+      "D": "废除"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 339,
+    "level": "kaoyan",
+    "question": "acquaint 含义？",
+    "options": {
+      "A": "使确信",
+      "B": "使困惑",
+      "C": "使满足",
+      "D": "使熟悉"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 340,
+    "level": "kaoyan",
+    "question": "activate 含义？",
+    "options": {
+      "A": "激活；使活动",
+      "B": "积累",
+      "C": "加速",
+      "D": "完成"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 341,
+    "level": "kaoyan",
+    "question": "acute 含义？",
+    "options": {
+      "A": "严重的",
+      "B": "敏锐的；急性的",
+      "C": "慢性的",
+      "D": "迟钝的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 342,
+    "level": "kaoyan",
+    "question": "agency 含义？",
+    "options": {
+      "A": "议程",
+      "B": "边缘",
+      "C": "机构；代理",
+      "D": "紧急"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 343,
+    "level": "kaoyan",
+    "question": "ally 含义？",
+    "options": {
+      "A": "孤独",
+      "B": "分配",
+      "C": "允许",
+      "D": "盟友；结盟"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 344,
+    "level": "kaoyan",
+    "question": "applaud 含义？",
+    "options": {
+      "A": "鼓掌；称赞",
+      "B": "申请",
+      "C": "欣赏",
+      "D": "争论"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 345,
+    "level": "kaoyan",
+    "question": "apt 含义？",
+    "options": {
+      "A": "大胆的",
+      "B": "恰当的；易于…的",
+      "C": "意外的",
+      "D": "古老的"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 346,
+    "level": "kaoyan",
+    "question": "ascend 含义？",
+    "options": {
+      "A": "缺席",
+      "B": "加速",
+      "C": "上升；攀登",
+      "D": "下降"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 347,
+    "level": "kaoyan",
+    "question": "authentic 含义？",
+    "options": {
+      "A": "人工的",
+      "B": "审美的",
+      "C": "权威的",
+      "D": "真实的；可靠的"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 348,
+    "level": "kaoyan",
+    "question": "behalf 含义？",
+    "options": {
+      "A": "代表；利益",
+      "B": "行为",
+      "C": "相信",
+      "D": "平衡"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 349,
+    "level": "kaoyan",
+    "question": "betray 含义？",
+    "options": {
+      "A": "购买",
+      "B": "背叛；泄露",
+      "C": "相信",
+      "D": "埋葬"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 350,
+    "level": "kaoyan",
+    "question": "bewilder 含义？",
+    "options": {
+      "A": "使确信",
+      "B": "使满足",
+      "C": "使困惑",
+      "D": "使熟悉"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 351,
+    "level": "kaoyan",
+    "question": "boost 含义？",
+    "options": {
+      "A": "减速",
+      "B": "约束",
+      "C": "加重",
+      "D": "促进；提升"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 352,
+    "level": "kaoyan",
+    "question": "casual 含义？",
+    "options": {
+      "A": "随意的；偶然的",
+      "B": "慢性的",
+      "C": "关键的",
+      "D": "谨慎的"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 353,
+    "level": "kaoyan",
+    "question": "cater 含义？",
+    "options": {
+      "A": "分类",
+      "B": "迎合；提供饮食",
+      "C": "捕获",
+      "D": "计算"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 354,
+    "level": "kaoyan",
+    "question": "chronic 含义？",
+    "options": {
+      "A": "随意的",
+      "B": "关键的",
+      "C": "慢性的；长期的",
+      "D": "急性的"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 355,
+    "level": "kaoyan",
+    "question": "collide 含义？",
+    "options": {
+      "A": "合作",
+      "B": "协调",
+      "C": "符合",
+      "D": "碰撞；冲突"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 356,
+    "level": "kaoyan",
+    "question": "commitment 含义？",
+    "options": {
+      "A": "承诺；投入",
+      "B": "委员会",
+      "C": "交流",
+      "D": "补偿"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 357,
+    "level": "kaoyan",
+    "question": "compile 含义？",
+    "options": {
+      "A": "构成",
+      "B": "汇编；编写",
+      "C": "强迫",
+      "D": "包含"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 358,
+    "level": "kaoyan",
+    "question": "comply 含义？",
+    "options": {
+      "A": "限制",
+      "B": "授予",
+      "C": "遵守；服从",
+      "D": "冲突"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 359,
+    "level": "kaoyan",
+    "question": "conceal 含义？",
+    "options": {
+      "A": "承认",
+      "B": "让步",
+      "C": "谴责",
+      "D": "隐藏；隐瞒"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 360,
+    "level": "kaoyan",
+    "question": "concede 含义？",
+    "options": {
+      "A": "承认；让步",
+      "B": "隐藏",
+      "C": "谴责",
+      "D": "同意"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 361,
+    "level": "kaoyan",
+    "question": "condemn 含义？",
+    "options": {
+      "A": "隐藏",
+      "B": "谴责",
+      "C": "承认",
+      "D": "让步"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 362,
+    "level": "kaoyan",
+    "question": "consent 含义？",
+    "options": {
+      "A": "让步",
+      "B": "隐藏",
+      "C": "同意；准许",
+      "D": "谴责"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 363,
+    "level": "kaoyan",
+    "question": "consult 含义？",
+    "options": {
+      "A": "消耗",
+      "B": "建造",
+      "C": "构成",
+      "D": "咨询；请教"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 364,
+    "level": "kaoyan",
+    "question": "controversy 含义？",
+    "options": {
+      "A": "争议；争论",
+      "B": "共识",
+      "C": "会议",
+      "D": "冲突"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 365,
+    "level": "kaoyan",
+    "question": "convey 含义？",
+    "options": {
+      "A": "建造",
+      "B": "传达；运送",
+      "C": "咨询",
+      "D": "消耗"
+    },
+    "answer": "B"
+  }
 ]
