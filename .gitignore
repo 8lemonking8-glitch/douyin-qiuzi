@@ -5,6 +5,7 @@ npm-debug.log*
 # Tauri / Rust build output
 src-tauri/target/
 src-tauri/gen/
+dist/
 
 # Editor and OS files
 .vscode/

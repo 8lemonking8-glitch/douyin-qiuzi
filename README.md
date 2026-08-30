@@ -1,48 +1,35 @@
 # 抖音直播英语弹幕答题助手
 
-Windows 桌面软件：主播用控制台出题，观众在抖音直播间发送 `A/B/C/D` 作答；独立透明 Overlay 可由抖音直播伴侣采集。
+Windows 直播答题桌面软件。一个 EXE 内置 Dycast Desktop（MIT）采集核心：输入抖音直播间房间号即可接收弹幕并自动判题，不需要单独运行 Dycast。
 
-## 安装与启动
+## 主播使用
 
-面向主播只需要安装，不需要 Node.js 或 Rust：
+1. 安装 NSIS/MSI 安装包或双击便携 EXE。
+2. 在控制台“内置 Dycast 直播间连接”输入直播间 URL 或房间号，例如 `https://live.douyin.com/123456789` 或 `123456789`。
+3. 点击“连接直播间”，顶部显示“直播间已连接”后点击“开始本题”。
+4. 观众评论 `A`、`B`、`C`、`D` 即可作答；抢答模式下首位答对者加分、锁题，并按设置自动进入下一题。
+5. 在抖音直播伴侣优先使用“游戏进程”采集 `Douyin Quiz Overlay`；未识别时改用“窗口”。
 
-1. 优先运行 `Douyin Live Quiz Assistant_0.3.0_x64-setup.exe` 完成安装；也可直接双击便携版 `douyin-quiz-tauri-mvp.exe`。
-2. 启动后会出现控制台和标题为 **Douyin Quiz Overlay** 的透明窗口。
-3. 控制台点击“开始本题”，可先以 Mock 用户“小明”点击 A/B/C/D 验证流程。
+首次开播前可用 Mock 区域的“小明”和 A/B/C/D 验证整套判题、积分和 Overlay 动画。
 
-## Dycast 配置
+## 弹幕来源
 
-在 Dycast / Dycast Desktop 的 WebSocket 转发目标中填写：
+默认使用**内置 Dycast**，不需填写 WebSocket 地址。软件不会显示 Cookie 输入框，也不持久化登录凭据。
 
-`ws://127.0.0.1:17891/dycast`
+为兼容已有工作流，仍保留外部 Dycast 转发入口：`ws://127.0.0.1:17891/dycast`。接收 `WebcastChatMessage` 单对象或数组；同一 `eventId` 和同一用户同一题均不会重复计分。
 
-程序接收 `WebcastChatMessage` 单对象或 JSON 数组。它只读取消息 ID、用户 ID、昵称、头像和评论文本；不使用 Cookie、不抓取抖音协议。
+## 透明 Overlay
 
-示例：
+Overlay 是真实透明、无标题栏、默认置顶和鼠标穿透的独立 Tauri 窗口。取消“Overlay 鼠标穿透”后，可拖动红色拖动条调整位置。
 
-```json
-{"id":"7649725129967285311","method":"WebcastChatMessage","user":{"id":"123456","name":"小明"},"content":"A"}
-```
+已验证 Windows 程序启动、透明窗口配置、本地 WebSocket 与打包流程。抖音直播伴侣是否为当前版本保留 Alpha 通道，仍需在其预览中手工确认：题卡外区域应露出底层直播画面；若被采为黑/白色，应记录采集方式和版本后再评估 Win32 layered window / DirectComposition。
 
-## 直播伴侣采集与透明测试
+## 隐私、许可证与日志
 
-在抖音直播伴侣中，先尝试“游戏进程”采集并选择 `Douyin Quiz Overlay` / 本程序；没有识别时再尝试“窗口”采集。确认预览中只有题卡、排行榜和答对卡片可见，题卡外区域能透出底层直播画面。
+- 不保存评论内容或用户资料到日志；运行日志在 `%LOCALAPPDATA%\Douyin Live Quiz Assistant\logs\app.log`。
+- 内置 Dycast Desktop 核心以 Git 子模块锁定，版权和 MIT 许可证见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+- 请只在符合平台规则、拥有相应直播间管理权限的场景中使用。
 
-本版本实际验证了 Windows Tauri 配置和运行时窗口：`transparent: true`、无标题栏、无阴影、始终置顶、鼠标穿透，以及应用可启动并接收本地 WebSocket。**是否能由某个具体版本的抖音直播伴侣保留 Alpha 通道，必须在该软件预览中人工验证；当前开发环境没有直播伴侣，不能将此项标为已实际采集成功。** 如果透明区域被采成黑/白色，请记录采集模式和版本，不要改走 OBS；下一步应评估 Win32 layered window / DirectComposition 路线。
+## 开发
 
-## 功能
-
-- 默认抢答自动模式：首位答对者加分、锁题、3 秒后下一题。
-- 倒计时和手动模式；可设置时长、自动切题延迟和分数。
-- 同一用户同题只取首次有效回答；同一个 `eventId` 最多处理一次。
-- Top 5 实时排行榜、答案公布、暂停、前后切题、重新开始和清空排行榜。
-- 独立 JSON 题库：`web/questions.json`。未来可在此基础增加 JSON/Excel 导入和题库切换。
-- 运行日志：`%LOCALAPPDATA%\Douyin Live Quiz Assistant\logs\app.log`（不记录评论内容和用户资料）。
-
-## 已知限制
-
-- 尚未实现题库导入界面、积分/设置持久化及安装包签名。
-- Overlay 的真实透明采集兼容性取决于抖音直播伴侣的版本和采集模式，需按上述步骤人工验收。
-- Dycast 断开不会导致程序退出；控制台状态会显示连接数，重新连接后可继续使用。
-
-开发与重新打包请见 [BUILD.md](BUILD.md)。
+构建、子模块初始化与产物位置见 [BUILD.md](BUILD.md)。

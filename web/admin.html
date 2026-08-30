@@ -1,13 +1,48 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>抖音直播英语答题助手</title><link rel="stylesheet" href="admin.css"></head>
-<body><main class="app-shell">
-  <header class="topbar"><div><h1>🎙 抖音直播英语答题助手</h1><p>透明 Overlay · Dycast 弹幕接入 · 本地答题控制台</p></div><div class="status-row"><span class="pill ok">桌面版已启动</span><span class="pill" id="dycastStatus">Dycast 未连接</span></div></header>
-  <section class="grid">
-    <article class="panel question-panel"><div class="panel-head"><span>第 <strong id="cur">1</strong>/<span id="total">0</span> 题</span><span id="phaseText">等待开始</span></div><h2 id="question">正在加载题库…</h2><div class="options"><button class="option"><b>A</b><span id="oA">-</span><em id="sA">0</em></button><button class="option"><b>B</b><span id="oB">-</span><em id="sB">0</em></button><button class="option"><b>C</b><span id="oC">-</span><em id="sC">0</em></button><button class="option"><b>D</b><span id="oD">-</span><em id="sD">0</em></button></div><div class="meta"><span>已作答 <b id="participantCount">0</b></span><span>玩家 <b id="playerCount">0</b></span><span>剩余 <b id="remaining">15</b>s</span></div><div id="winnerBox" class="winner-box hidden"></div><div class="buttons"><button id="startBtn" class="primary">开始本题</button><button id="pauseBtn">暂停</button><button id="revealBtn" class="success">公布答案</button><button id="prevBtn">上一题</button><button id="nextBtn" class="primary">下一题并开始</button><button id="resetBtn" class="danger">重新开始</button></div></article>
-    <aside class="panel settings-panel"><h3>运行模式</h3><label>切题模式<select id="modeSelect"><option value="first_correct">抢答：首个答对后自动切题</option><option value="timer">倒计时：时间到后自动切题</option><option value="manual">手动：只由主播切题</option></select></label><div class="two-col"><label>答题时长（秒）<input id="roundSeconds" type="number" min="5" max="120" value="15"></label><label>自动切题延迟（秒）<input id="autoDelay" type="number" min="1" max="30" value="3"></label></div><label>答对分数<input id="scorePerCorrect" type="number" min="1" max="9999" value="10"></label><button id="saveSettings">保存规则</button><hr><h3>透明 Overlay</h3><p class="muted">需要移动窗口时，请先关闭鼠标穿透，再拖动 Overlay 顶部红色拖动条。</p><div class="buttons compact"><button id="showOverlay">显示</button><button id="hideOverlay">隐藏</button></div><label class="check"><input id="clickthroughOverlay" type="checkbox" checked> Overlay 鼠标穿透</label><label class="check"><input id="topOverlay" type="checkbox" checked> Overlay 始终置顶</label><hr><h3>Dycast</h3><div class="copy-box"><code>ws://127.0.0.1:17891/dycast</code><small>连接：<span id="lastMessage">暂无</span> 最近收到消息</small></div></aside>
-    <article class="panel mock-panel"><div class="panel-head"><h3>🧪 Mock 弹幕测试</h3><span>无须开播即可验证</span></div><div class="mock-row"><input id="mockName" value="小明" maxlength="24"><button data-answer="A">A</button><button data-answer="B">B</button><button data-answer="C">C</button><button data-answer="D">D</button></div><p class="muted">同一用户在同一题只记录第一次有效回答；同一 eventId 也只处理一次。</p></article>
-    <article class="panel leaderboard-panel"><div class="panel-head"><h3>🏆 排行榜（Top 5）</h3><button id="clearBoardBtn">清空排行榜</button></div><div id="leaderboard" class="leaderboard empty">暂无数据</div></article>
-    <article class="panel recent-panel"><div class="panel-head"><h3>最新作答</h3><span id="statsText">A 0 · B 0 · C 0 · D 0</span></div><div id="recent" class="recent empty">等待答题…</div></article>
-  </section>
-</main><script type="module" src="admin.js"></script></body></html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>抖音直播英语答题助手</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div><h1>🎙 抖音直播英语答题助手</h1><p>内置 Dycast 采集 · 透明 Overlay · 本地答题控制台</p></div>
+      <div class="status-row"><span class="pill ok">桌面版已启动</span><span class="pill" id="dycastStatus">弹幕未连接</span></div>
+    </header>
+    <section class="grid">
+      <article class="panel question-panel">
+        <div class="panel-head"><span>第 <strong id="cur">1</strong>/<span id="total">0</span> 题</span><span id="phaseText">等待开始</span></div>
+        <h2 id="question">正在加载题库…</h2>
+        <div class="options"><button class="option"><b>A</b><span id="oA">-</span><em id="sA">0</em></button><button class="option"><b>B</b><span id="oB">-</span><em id="sB">0</em></button><button class="option"><b>C</b><span id="oC">-</span><em id="sC">0</em></button><button class="option"><b>D</b><span id="oD">-</span><em id="sD">0</em></button></div>
+        <div class="meta"><span>已作答 <b id="participantCount">0</b></span><span>玩家 <b id="playerCount">0</b></span><span>剩余 <b id="remaining">15</b>s</span></div>
+        <div id="winnerBox" class="winner-box hidden"></div>
+        <div class="buttons"><button id="startBtn" class="primary">开始本题</button><button id="pauseBtn">暂停</button><button id="revealBtn" class="success">公布答案</button><button id="prevBtn">上一题</button><button id="nextBtn" class="primary">下一题并开始</button><button id="resetBtn" class="danger">重新开始</button></div>
+      </article>
+      <aside class="panel settings-panel">
+        <h3>内置 Dycast 直播间连接</h3>
+        <p class="muted">输入直播间 URL 或房间号，无需再单独打开 Dycast。默认不提供 Cookie 输入，也不保存凭据。</p>
+        <label>直播间 URL / 房间号<input id="roomNumber" placeholder="例如 123456789 或 live.douyin.com/123456789"></label>
+        <div class="buttons compact"><button id="connectRoomBtn" class="primary">连接直播间</button><button id="disconnectRoomBtn">断开</button></div>
+        <p id="roomConnectionDetail" class="muted">尚未连接</p>
+        <hr>
+        <h3>运行模式</h3>
+        <label>切题模式<select id="modeSelect"><option value="first_correct">抢答：首个答对后自动切题</option><option value="timer">倒计时：时间到后自动切题</option><option value="manual">手动：只由主播切题</option></select></label>
+        <div class="two-col"><label>答题时长（秒）<input id="roundSeconds" type="number" min="5" max="120" value="15"></label><label>自动切题延迟（秒）<input id="autoDelay" type="number" min="1" max="30" value="3"></label></div>
+        <label>答对分数<input id="scorePerCorrect" type="number" min="1" max="9999" value="10"></label><button id="saveSettings">保存规则</button>
+        <hr>
+        <h3>透明 Overlay</h3>
+        <div class="buttons compact"><button id="showOverlay">显示</button><button id="hideOverlay">隐藏</button></div>
+        <label class="check"><input id="clickthroughOverlay" type="checkbox" checked> Overlay 鼠标穿透</label><label class="check"><input id="topOverlay" type="checkbox" checked> Overlay 始终置顶</label>
+        <hr><h3>兼容外部 Dycast</h3><div class="copy-box"><code>ws://127.0.0.1:17891/dycast</code><small>最近收到消息：<span id="lastMessage">暂无</span></small></div>
+      </aside>
+      <article class="panel mock-panel"><div class="panel-head"><h3>🧪 Mock 弹幕测试</h3><span>无须开播即可验证</span></div><div class="mock-row"><input id="mockName" value="小明" maxlength="24"><button data-answer="A">A</button><button data-answer="B">B</button><button data-answer="C">C</button><button data-answer="D">D</button></div><p class="muted">同一用户同题只记录第一次回答；相同 eventId 不会重复计分。</p></article>
+      <article class="panel leaderboard-panel"><div class="panel-head"><h3>🏆 排行榜（Top 5）</h3><button id="clearBoardBtn">清空排行榜</button></div><div id="leaderboard" class="leaderboard empty">暂无数据</div></article>
+      <article class="panel recent-panel"><div class="panel-head"><h3>最新作答</h3><span id="statsText">A 0 · B 0 · C 0 · D 0</span></div><div id="recent" class="recent empty">等待答题…</div></article>
+    </section>
+  </main>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

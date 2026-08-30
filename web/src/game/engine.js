@@ -21,7 +21,7 @@ export class QuizEngine {
   }
 
   initialState() {
-    return { idx: 0, phase: 'idle', remaining: this.roundSeconds, stats: { A: 0, B: 0, C: 0, D: 0 }, answers: {}, players: {}, recent: [], winner: null, dycastConnected: 0, dycastLastMessageAt: null, dycastError: null };
+    return { idx: 0, phase: 'idle', remaining: this.roundSeconds, stats: { A: 0, B: 0, C: 0, D: 0 }, answers: {}, players: {}, recent: [], winner: null, dycastConnected: 0, directDycastConnected: 0, directDycastConnecting: false, directDycastRoom: null, externalDycastConnected: 0, dycastLastMessageAt: null, dycastError: null };
   }
   get question() { return this.questions[this.state.idx]; }
   notify() { this.onChange(this.snapshot()); }
@@ -35,7 +35,7 @@ export class QuizEngine {
       stats: { ...this.state.stats }, participantCount: Object.keys(this.state.answers).length,
       playerCount: Object.keys(this.state.players).length, leaderboard: rankedPlayers(this.state.players),
       recent: [...this.state.recent].slice(-8).reverse(), winner: this.state.winner,
-      dycastConnected: this.state.dycastConnected, dycastLastMessageAt: this.state.dycastLastMessageAt, dycastError: this.state.dycastError
+      dycastConnected: this.state.dycastConnected, directDycastConnected: this.state.directDycastConnected, directDycastConnecting: this.state.directDycastConnecting, directDycastRoom: this.state.directDycastRoom, dycastLastMessageAt: this.state.dycastLastMessageAt, dycastError: this.state.dycastError
     };
   }
   clearTimers() { if (this.timer) clearInterval(this.timer); if (this.autoNextTimer) clearTimeout(this.autoNextTimer); this.timer = null; this.autoNextTimer = null; }
@@ -44,7 +44,8 @@ export class QuizEngine {
   setRoundSeconds(seconds) { const n = Number(seconds); if (Number.isFinite(n) && n >= 5 && n <= 120) { this.roundSeconds = Math.round(n); if (this.state.phase !== 'answering') this.state.remaining = this.roundSeconds; this.notify(); } }
   setAutoDelay(seconds) { const n = Number(seconds); if (Number.isFinite(n) && n >= 1 && n <= 30) { this.autoDelayMs = Math.round(n * 1000); this.notify(); } }
   setScorePerCorrect(score) { const n = Number(score); if (Number.isFinite(n) && n >= 1 && n <= 9999) { this.scorePerCorrect = Math.round(n); this.notify(); } }
-  setDycastStatus({ connected = 0, error = null } = {}) { this.state.dycastConnected = Number(connected) || 0; this.state.dycastError = error; this.notify(); }
+  setDycastStatus({ connected = 0, error = null } = {}) { this.state.externalDycastConnected = Number(connected) || 0; this.state.dycastConnected = this.state.directDycastConnected || this.state.externalDycastConnected; this.state.dycastError = error; this.notify(); }
+  setDirectDycastStatus({ connected = 0, error = null, connecting = false, roomNumber = null } = {}) { this.state.directDycastConnected = Number(connected) || 0; this.state.directDycastConnecting = Boolean(connecting); this.state.directDycastRoom = roomNumber; this.state.dycastConnected = this.state.directDycastConnected || this.state.externalDycastConnected; this.state.dycastError = error; this.notify(); }
   startRound() {
     this.clearTimers(); this.clearRound(); this.state.phase = 'answering'; this.state.remaining = this.roundSeconds; this.notify();
     if (this.mode === 'timer') this.timer = setInterval(() => { this.state.remaining -= 1; this.state.remaining <= 0 ? this.revealAnswer(true) : this.notify(); }, 1000);

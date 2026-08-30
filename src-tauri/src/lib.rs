@@ -1,4 +1,9 @@
 mod logging;
+// Reused verbatim from the MIT-licensed Dycast Desktop submodule.
+#[path = "../../vendor/dycast-desktop/src-tauri/src/live_info.rs"]
+mod live_info;
+#[path = "../../vendor/dycast-desktop/src-tauri/src/ws_relay.rs"]
+mod ws_relay;
 
 use serde::Serialize;
 use std::net::TcpListener;
@@ -134,6 +139,8 @@ fn set_overlay_always_on_top(app: AppHandle, enabled: bool) -> Result<(), String
 
 pub fn run() {
     tauri::Builder::default()
+        .manage(Arc::new(live_info::HttpState::new()))
+        .manage(Arc::new(std::sync::Mutex::new(ws_relay::WsState::new())))
         .setup(|app| {
             logging::write("INFO", "Application started");
             if let Some(overlay) = app.get_webview_window("overlay") {
@@ -148,6 +155,15 @@ pub fn run() {
             set_overlay_clickthrough,
             start_overlay_dragging,
             set_overlay_always_on_top
+            ,
+            live_info::fetch_binary,
+            live_info::fetch_head,
+            live_info::fetch_live_html,
+            live_info::fetch_live_info,
+            ws_relay::ws_connect,
+            ws_relay::ws_send,
+            ws_relay::ws_send_text,
+            ws_relay::ws_close
         ])
         .run(tauri::generate_context!())
         .expect("error while running Tauri application");
