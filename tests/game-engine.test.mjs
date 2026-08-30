@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { QuizEngine } from '../web/src/game/engine.js';
+
+const questions = JSON.parse(fs.readFileSync(new URL('../web/questions.json', import.meta.url), 'utf8'));
+const engine = new QuizEngine(questions, { mode: 'first_correct', autoDelayMs: 40, scorePerCorrect: 10 });
+
+engine.startRound();
+assert.equal(engine.snapshot().phase, 'answering');
+assert.equal(engine.snapshot().question.answer, null, 'answer must remain private while answering');
+engine.handleComment({ id: 'wrong-1', method: 'WebcastChatMessage', user: { id: 'u1', name: '张三' }, content: 'B' });
+assert.equal(engine.snapshot().participantCount, 1);
+assert.equal(engine.snapshot().leaderboard[0].score, 0);
+engine.handleComment({ id: 'same-user-2', method: 'WebcastChatMessage', user: { id: 'u1', name: '张三' }, content: 'A' });
+assert.equal(engine.snapshot().participantCount, 1, 'one user gets only one valid answer per question');
+engine.handleComment({ id: 'correct-1', method: 'WebcastChatMessage', user: { id: 'u2', name: '李四' }, content: 'Ａ' });
+let state = engine.snapshot();
+assert.equal(state.phase, 'revealed');
+assert.equal(state.winner.nickname, '李四');
+assert.equal(state.leaderboard[0].score, 10);
+assert.equal(state.question.answer, 'A');
+engine.handleComment({ id: 'correct-1', method: 'WebcastChatMessage', user: { id: 'u3', name: '重复事件' }, content: 'A' });
+assert.equal(engine.snapshot().playerCount, 2, 'duplicate eventId must not create a player');
+await new Promise(resolve => setTimeout(resolve, 80));
+state = engine.snapshot();
+assert.equal(state.idx, 1, 'correct answer advances automatically');
+assert.equal(state.phase, 'answering');
+engine.handleDycastPayload(JSON.stringify([{ id: 'array-1', method: 'WebcastChatMessage', user: { id: 'u4', name: '数组用户' }, content: 'A' }]));
+assert.equal(engine.snapshot().winner.nickname, '数组用户', 'array payload is supported');
+engine.clearTimers();
+console.log('PASS: GameEngine scoring, deduplication, auto-next and Dycast array payload');

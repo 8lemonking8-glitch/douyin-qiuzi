@@ -1,0 +1,16 @@
+{
+  "name": "douyin-quiz-tauri-mvp",
+  "private": true,
+  "version": "0.3.0",
+  "description": "抖音直播答题助手 - Tauri 透明 Overlay MVP",
+  "scripts": {
+    "tauri": "tauri",
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "test": "node tests/game-engine.test.mjs"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.8.0"
+  },
+  "type": "module"
+}

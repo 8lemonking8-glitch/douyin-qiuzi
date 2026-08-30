@@ -1,0 +1,13 @@
+# JavaScript dependencies and local diagnostics
+node_modules/
+npm-debug.log*
+
+# Tauri / Rust build output
+src-tauri/target/
+src-tauri/gen/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
