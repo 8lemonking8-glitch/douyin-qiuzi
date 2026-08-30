@@ -1,5 +1,4 @@
 import { QuizEngine } from './src/game/engine.js';
-import { MockCommentProvider } from './src/adapters/mock-provider.js';
 import { DycastCommentProvider } from './src/adapters/dycast-provider.js';
 import { DirectDycastProvider } from './src/adapters/direct-dycast-provider.js';
 import questions from './questions.json';
@@ -8,7 +7,6 @@ const $ = id => document.getElementById(id);
 const tauri = window.__TAURI__;
 const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
 const engine = new QuizEngine(questions, { mode: 'first_correct', roundSeconds: 15, autoDelayMs: 3000, scorePerCorrect: 10, onChange: state => { render(state); tauri?.event?.emit('quiz-state', state).catch(() => {}); } });
-const mockProvider = new MockCommentProvider(comment => engine.handleComment(comment));
 const relayProvider = new DycastCommentProvider(payload => engine.handleDycastPayload(payload));
 const directProvider = new DirectDycastProvider({
   onComment: comment => engine.handleComment(comment),
@@ -42,7 +40,6 @@ function render(state) {
 $('startBtn').onclick = () => engine.startRound(); $('pauseBtn').onclick = () => engine.snapshot().phase === 'paused' ? engine.resume() : engine.pause(); $('revealBtn').onclick = () => engine.revealAnswer(false); $('nextBtn').onclick = () => engine.nextQuestion(true); $('prevBtn').onclick = () => engine.previousQuestion();
 $('resetBtn').onclick = () => { if (confirm('确定重新开始并清空所有积分？')) engine.resetGame(); }; $('clearBoardBtn').onclick = () => { if (confirm('确定清空排行榜？')) engine.clearLeaderboard(); }; $('saveSettings').onclick = () => { engine.setMode($('modeSelect').value); engine.setRoundSeconds($('roundSeconds').value); engine.setAutoDelay($('autoDelay').value); engine.setScorePerCorrect($('scorePerCorrect').value); };
 $('copyWsBtn').onclick = async () => { const button = $('copyWsBtn'); const address = 'ws://127.0.0.1:17891/dycast'; try { await navigator.clipboard.writeText(address); } catch { const input = document.createElement('textarea'); input.value = address; document.body.append(input); input.select(); document.execCommand('copy'); input.remove(); } button.textContent = '已复制'; setTimeout(() => { button.textContent = '复制'; }, 1600); };
-document.querySelectorAll('[data-answer]').forEach(button => button.onclick = () => mockProvider.send($('mockName').value.trim() || '测试观众', button.dataset.answer));
 async function overlayCommand(command, args = {}) { try { await tauri?.core?.invoke(command, args); } catch (error) { alert(`Overlay 操作失败：${error}`); } }
 $('showOverlay').onclick = () => overlayCommand('show_overlay'); $('hideOverlay').onclick = () => overlayCommand('hide_overlay'); $('topOverlay').onchange = event => overlayCommand('set_overlay_always_on_top', { enabled: event.target.checked }); $('clickthroughOverlay').onchange = async event => { await overlayCommand('set_overlay_clickthrough', { enabled: event.target.checked }); tauri?.event?.emit('overlay-edit-mode', !event.target.checked).catch(() => {}); };
 if (tauri?.event?.listen) { await tauri.event.listen('dycast-payload', event => relayProvider.receive(event.payload)); await tauri.event.listen('dycast-status', event => engine.setDycastStatus(event.payload || {})); await tauri.event.listen('overlay-ready', () => tauri.event.emit('quiz-state', engine.snapshot())); }
@@ -63,4 +60,4 @@ $('connectRoomBtn').onclick = async () => {
 };
 $('disconnectRoomBtn').onclick = () => directProvider.stop();
 
-mockProvider.start(); relayProvider.start(); engine.notify();
+relayProvider.start(); engine.notify();
