@@ -14,7 +14,6 @@ const directProvider = new DirectDycastProvider({ onComment: comment => engine.h
 
 function phaseText(state) { return ({ idle: '等待开始', answering: state.mode === 'first_correct' ? '抢答中' : '答题中', paused: '已暂停', revealed: '答案已公布' })[state.phase] || state.phase; }
 function formatLastMessage(timestamp) { return timestamp ? new Date(timestamp).toLocaleTimeString('zh-CN', { hour12: false }) : '暂无'; }
-function roomNumber(value) { const match = String(value || '').match(/(\d{5,})/); return match?.[1] || ''; }
 function render(state) {
   const q = state.question;
   $('cur').textContent = state.idx + 1; $('total').textContent = state.total; $('phaseText').textContent = phaseText(state); $('question').textContent = q.question;
@@ -33,7 +32,7 @@ function render(state) {
 
 $('startBtn').onclick = () => engine.startRound(); $('pauseBtn').onclick = () => engine.snapshot().phase === 'paused' ? engine.resume() : engine.pause(); $('revealBtn').onclick = () => engine.revealAnswer(false); $('nextBtn').onclick = () => engine.nextQuestion(true); $('prevBtn').onclick = () => engine.previousQuestion();
 $('resetBtn').onclick = () => { if (confirm('确定重新开始并清空所有积分？')) engine.resetGame(); }; $('clearBoardBtn').onclick = () => { if (confirm('确定清空排行榜？')) engine.clearLeaderboard(); }; $('saveSettings').onclick = () => { engine.setMode($('modeSelect').value); engine.setRoundSeconds($('roundSeconds').value); engine.setAutoDelay($('autoDelay').value); engine.setScorePerCorrect($('scorePerCorrect').value); };
-$('connectRoomBtn').onclick = () => { try { directProvider.start(roomNumber($('roomNumber').value)); } catch (error) { engine.setDirectDycastStatus({ error: error.message }); } }; $('disconnectRoomBtn').onclick = () => directProvider.stop();
+$('connectRoomBtn').onclick = async () => { try { await directProvider.start($('roomNumber').value); } catch (error) { engine.setDirectDycastStatus({ error: error.message }); } }; $('disconnectRoomBtn').onclick = () => directProvider.stop();
 document.querySelectorAll('[data-answer]').forEach(button => button.onclick = () => mockProvider.send($('mockName').value.trim() || '测试观众', button.dataset.answer));
 async function overlayCommand(command, args = {}) { try { await tauri?.core?.invoke(command, args); } catch (error) { alert(`Overlay 操作失败：${error}`); } }
 $('showOverlay').onclick = () => overlayCommand('show_overlay'); $('hideOverlay').onclick = () => overlayCommand('hide_overlay'); $('topOverlay').onchange = event => overlayCommand('set_overlay_always_on_top', { enabled: event.target.checked }); $('clickthroughOverlay').onchange = async event => { await overlayCommand('set_overlay_clickthrough', { enabled: event.target.checked }); tauri?.event?.emit('overlay-edit-mode', !event.target.checked).catch(() => {}); };
