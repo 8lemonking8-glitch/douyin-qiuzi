@@ -33,11 +33,11 @@ body { -webkit-user-select: none; user-select: none; }
 .live-badge { display: flex; align-items: center; gap: 9px; color: #c0608a; }
 .live-badge i { width: 9px; height: 9px; border-radius: 50%; background: #e778a4; box-shadow: 0 0 0 5px rgba(231, 120, 164, .18); }
 
-.quiz-card h1 { margin: 22px 0 6px; text-align: center; font-size: 42px; letter-spacing: -1px; color: var(--ink); }
+.quiz-card h1 { margin: auto 0 6px; text-align: center; font-size: 42px; letter-spacing: -1px; color: var(--ink); }
 .q-meta { margin: 0 0 24px; text-align: center; color: #a3879f; font-size: 20px; font-weight: 600; }
 .q-meta:empty { display: none; }
 
-.options { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; flex: 1 1 auto; align-content: center; }
+.options { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
 .options div { display: grid; grid-template-columns: 43px 1fr; align-items: center; gap: 11px; padding: 15px 17px; border: 1px solid transparent; border-radius: 16px; font-size: 24px; font-weight: 700; color: var(--ink); }
 .options b { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 13px; color: #fff; font-size: 23px; }
 .answer-a { background: #fff0f5; border-color: #ffd6e5; } .answer-a b { background: #ed77a6; }
@@ -45,7 +45,7 @@ body { -webkit-user-select: none; user-select: none; }
 .answer-c { background: #fff5e9; border-color: #ffe1bb; } .answer-c b { background: #e8a15e; }
 .answer-d { background: #effaf6; border-color: #cfeee1; } .answer-d b { background: #6fbaa3; }
 
-.footer { display: flex; justify-content: space-between; margin-top: 19px; color: #806f82; font-size: 18px; }
+.footer { display: flex; justify-content: space-between; margin-top: auto; padding-top: 19px; color: #806f82; font-size: 18px; }
 
 .rank-card {
   position: absolute; right: 4%; top: 5%; width: 21%; height: 90%;
@@ -58,8 +58,8 @@ body { -webkit-user-select: none; user-select: none; }
 }
 .rank-title { display: flex; align-items: center; gap: 7px; color: #c0608a; }
 .rank-title h2 { margin: 0; font-size: 21px; color: var(--ink); }
-#rankList { flex: 1 1 auto; display: flex; flex-direction: column; }
-.rank-row { display: grid; grid-template-columns: 30px 1fr auto; gap: 6px; padding: 9px 5px; border-top: 1px solid var(--line); font-size: 16px; color: #6e596c; flex: 1 1 auto; align-items: center; }
+#rankList { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; }
+.rank-row { display: grid; grid-template-columns: 30px 1fr auto; gap: 6px; padding: 14px 5px; border-top: 1px solid var(--line); font-size: 16px; color: #6e596c; }
 .rank-row strong { color: #c45d8a; }
 .empty { padding: 12px 0; color: #aa98a8; }
 
