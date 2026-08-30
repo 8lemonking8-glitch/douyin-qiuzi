@@ -6,9 +6,10 @@
   "scripts": {
     "tauri": "tauri",
     "dev": "tauri dev",
-    "build:frontend": "vite build",
-    "build": "npm run build:frontend && tauri build",
-    "test": "node tests/game-engine.test.mjs"
+    "build:frontend": "node scripts/clean-frontend-dist.mjs && vite build",
+    "build": "npm run build:frontend && npm run verify:bundle && tauri build",
+    "test": "node tests/game-engine.test.mjs",
+    "verify:bundle": "node tests/verify-frontend-bundle.mjs"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.11.0"
