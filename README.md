@@ -4,7 +4,7 @@ Windows 直播答题桌面软件：主播控制台、透明 Overlay、排行榜�
 
 ## 使用方法
 
-1. 启动本软件。Overlay 默认隐藏；需要被直播伴侣采集时，在控制台点“显示”。
+1. 启动本软件。Overlay 会保持打开，以便抖音直播伴侣在“窗口”列表中识别 `Douyin Quiz Overlay`；控制台可随时隐藏或显示它。
 2. 启动官方 Dycast Desktop，在其中输入公开且正在开播的 `live.douyin.com/房间号` 并连接。
 3. 在 Dycast Desktop 右侧“WS地址”填写：`ws://127.0.0.1:17891/dycast`，点击“转发”。
 4. 本软件右上角显示“Dycast 已转发”后，点击“开始本题”。观众发送 `A/B/C/D` 即可参与。
