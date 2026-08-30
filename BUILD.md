@@ -15,5 +15,5 @@ npm run build
 ## 产物
 
 - `src-tauri\target\release\douyin-quiz-tauri-mvp.exe`
-- `src-tauri\target\release\bundle\nsis\Douyin Live Quiz Assistant_0.5.1_x64-setup.exe`
-- `src-tauri\target\release\bundle\msi\Douyin Live Quiz Assistant_0.5.1_x64_en-US.msi`
+- `src-tauri\target\release\bundle\nsis\Douyin Live Quiz Assistant_0.5.2_x64-setup.exe`
+- `src-tauri\target\release\bundle\msi\Douyin Live Quiz Assistant_0.5.2_x64_en-US.msi`
