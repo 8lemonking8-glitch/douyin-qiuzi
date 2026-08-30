@@ -18,10 +18,10 @@ function render(state) {
   else answerHint.classList.add('hidden');
   const winner = $('winner');
   if (state.winner) { winner.classList.remove('hidden'); $('winnerLabel').textContent = '抢答成功'; $('winnerName').textContent = state.winner.nickname; $('winnerAnswer').textContent = `✓ 正确答案 ${state.winner.answer} · ${q.options[state.winner.answer]}`; $('winnerScore').textContent = `+${state.winner.awarded} 分`; $('nextTip').textContent = `${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题…`; }
-  else if (state.phase === 'revealed' && q.answer) { winner.classList.remove('hidden'); $('winnerLabel').textContent = '正确答案'; $('winnerName').textContent = q.options[q.answer]; $('winnerAnswer').textContent = `✓ ${q.answer}`; $('winnerScore').textContent = ''; $('nextTip').textContent = state.mode === 'manual' ? '等待主播切题' : `${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题…`; }
+  else if (state.phase === 'revealed' && q.answer) { winner.classList.remove('hidden'); const lastCorrect = (state.recent || []).find(r => r.correct); $('winnerLabel').textContent = '正确答案'; $('winnerName').textContent = lastCorrect ? `${lastCorrect.nickname} +${state.scorePerCorrect} 分` : q.options[q.answer]; $('winnerAnswer').textContent = `✓ ${q.answer}`; $('winnerScore').textContent = ''; $('nextTip').textContent = state.mode === 'manual' ? '等待主播切题' : `${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题…`; }
   else winner.classList.add('hidden');
   const list = state.leaderboard || [];
-  $('rankList').innerHTML = list.length ? list.slice(0, 5).map((p, index) => `<div class="rank-row"><span>${index + 1}</span><span>${escapeHtml(p.nickname)}</span><strong>${p.score}</strong></div>`).join('') : '<div class="empty">等待首位玩家</div>';
+  $('rankList').innerHTML = list.length ? list.slice(0, 3).map((p, index) => `<div class="rank-row"><span>${index + 1}</span><span>${escapeHtml(p.nickname)}</span><strong>${p.score}</strong></div>`).join('') : '<div class="empty">等待首位玩家</div>';
 }
 if (tauri?.event?.listen) { await tauri.event.listen('quiz-state', event => render(event.payload)); await tauri.event.listen('overlay-edit-mode', event => $('editBar').classList.toggle('hidden', !event.payload)); }
 // Read the last native snapshot too. This covers an Overlay which is still

@@ -60,7 +60,7 @@ body { -webkit-user-select: none; user-select: none; }
 }
 .rank-title { display: flex; align-items: center; gap: 7px; color: #c0608a; }
 .rank-title h2 { margin: 0; font-size: 21px; color: var(--ink); }
-#rankList { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; }
+#rankList { flex: 1 1 auto; display: flex; flex-direction: column; }
 .rank-row { display: grid; grid-template-columns: 30px 1fr auto; gap: 6px; padding: 14px 5px; border-top: 1px solid var(--line); font-size: 16px; color: #6e596c; }
 .rank-row strong { color: #c45d8a; }
 .empty { padding: 12px 0; color: #aa98a8; }
@@ -80,8 +80,26 @@ body { -webkit-user-select: none; user-select: none; }
 .edit-bar { position: fixed; z-index: 99; left: 50%; top: 5px; transform: translateX(-50%); padding: 9px 16px; border-radius: 0 0 10px 10px; background: rgba(215, 93, 142, .97); color: #fff; font-size: 14px; cursor: move; pointer-events: auto; }
 @keyframes pop { 0% { opacity: 0; transform: translateY(-7px) scale(.97); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
 
+/* A short, feminine celebration that stays inside the answer card. */
+.winner-card { position: relative; isolation: isolate; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.75) inset, 0 12px 32px rgba(110,73,111,.14), 0 0 24px rgba(129,211,160,.2); animation: winner-enter .42s cubic-bezier(.18,.8,.25,1); }
+.winner-card::before { content: ""; position: absolute; z-index: -1; top: -50%; left: -35%; width: 22%; height: 200%; transform: rotate(18deg); background: linear-gradient(90deg,transparent,rgba(255,241,171,.72),transparent); animation: winner-shine 1.3s .1s ease-out both; }
+.winner-card > :not(.celebration-particles) { position: relative; z-index: 1; }
+.sparkles { text-shadow: 0 0 10px rgba(232,161,94,.58); animation: sparkle 1.1s ease-in-out infinite; }
+.winner-name { animation: name-pop .48s .08s both; }
+.winner-score { text-shadow: 0 0 12px rgba(232,161,94,.42); animation: score-pop .52s .16s both; }
+.celebration-particles { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.celebration-particles i { position: absolute; left: 50%; top: 52%; width: 7px; height: 7px; border-radius: 50%; background: #ffc65c; box-shadow: 0 0 8px currentColor; opacity: 0; animation: particle 1.12s .04s ease-out both; }
+.celebration-particles i:nth-child(2n) { background: #a2e6bb; }.celebration-particles i:nth-child(3n) { width: 5px; height: 10px; border-radius: 2px; background: #f5a8c6; }
+.celebration-particles i:nth-child(1) { --x:-125px; --y:-40px; }.celebration-particles i:nth-child(2) { --x:-82px; --y:36px; }.celebration-particles i:nth-child(3) { --x:-31px; --y:-52px; }.celebration-particles i:nth-child(4) { --x:36px; --y:47px; }.celebration-particles i:nth-child(5) { --x:84px; --y:-43px; }.celebration-particles i:nth-child(6) { --x:130px; --y:28px; }.celebration-particles i:nth-child(7) { --x:160px; --y:-18px; }.celebration-particles i:nth-child(8) { --x:-158px; --y:16px; }
+@keyframes winner-enter { 0% { opacity: 0; transform: translateY(-10px) scale(.96); filter: brightness(1.35); } 100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1); } }
+@keyframes winner-shine { from { left: -35%; } to { left: 115%; } }
+@keyframes sparkle { 50% { transform: scale(1.18) rotate(8deg); filter: brightness(1.25); } }
+@keyframes name-pop { 0% { opacity: 0; transform: translateX(-9px); } 100% { opacity: 1; transform: translateX(0); } }
+@keyframes score-pop { 0% { opacity: 0; transform: scale(.72); } 62% { transform: scale(1.16); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes particle { 0% { opacity: 0; transform: translate(0,0) scale(.2) rotate(0); } 18% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--x),var(--y)) scale(.95) rotate(150deg); } }
+
 @media (orientation: portrait) {
-  .stage { display: flex; flex-direction: column; gap: 14px; padding: 14px 3%; box-sizing: border-box; }
+  .stage { display: flex; flex-direction: column; gap: 12px; padding: 12px 3%; box-sizing: border-box; }
   .quiz-card { position: static; width: 100%; height: auto; flex: 1 1 auto; min-height: 0; }
   .rank-card { position: static; width: 100%; height: auto; flex: 0 0 auto; }
   .quiz-card h1 { font-size: 32px; }
@@ -89,6 +107,6 @@ body { -webkit-user-select: none; user-select: none; }
   .options div { font-size: 21px; padding: 13px 15px; }
   .options b { width: 34px; height: 34px; font-size: 20px; }
   .footer { font-size: 16px; }
-  .rank-row { font-size: 15px; }
+  .rank-row { font-size: 14px; padding: 10px 6px; }
   .winner-name { font-size: 25px; }
 }
