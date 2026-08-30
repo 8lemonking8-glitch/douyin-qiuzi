@@ -5,6 +5,11 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   root: 'web',
   publicDir: false,
+  resolve: {
+    alias: {
+      '@': path.resolve(import.meta.dirname, 'vendor/dycast-desktop/src')
+    }
+  },
   build: {
     outDir: 'dist',
     emptyOutDir: true,

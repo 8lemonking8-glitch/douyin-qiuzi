@@ -1,6 +1,7 @@
 import { QuizEngine } from './src/game/engine.js';
 import { MockCommentProvider } from './src/adapters/mock-provider.js';
 import { DycastCommentProvider } from './src/adapters/dycast-provider.js';
+import { DirectDycastProvider } from './src/adapters/direct-dycast-provider.js';
 import questions from './questions.json';
 
 const $ = id => document.getElementById(id);
@@ -9,6 +10,10 @@ const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, char => ({ 
 const engine = new QuizEngine(questions, { mode: 'first_correct', roundSeconds: 15, autoDelayMs: 3000, scorePerCorrect: 10, onChange: state => { render(state); tauri?.event?.emit('quiz-state', state).catch(() => {}); } });
 const mockProvider = new MockCommentProvider(comment => engine.handleComment(comment));
 const relayProvider = new DycastCommentProvider(payload => engine.handleDycastPayload(payload));
+const directProvider = new DirectDycastProvider({
+  onComment: comment => engine.handleComment(comment),
+  onStatus: status => engine.setDirectDycastStatus(status)
+});
 
 function phaseText(state) { return ({ idle: '等待开始', answering: state.mode === 'first_correct' ? '抢答中' : '答题中', paused: '已暂停', revealed: '答案已公布' })[state.phase] || state.phase; }
 function formatLastMessage(timestamp) { return timestamp ? new Date(timestamp).toLocaleTimeString('zh-CN', { hour12: false }) : '暂无'; }
@@ -23,9 +28,15 @@ function render(state) {
   $('leaderboard').innerHTML = state.leaderboard.length ? state.leaderboard.map((p, index) => `<div class="rank-row"><span>#${index + 1}</span><span>${escapeHtml(p.nickname)}</span><strong>${p.score} 分</strong></div>`).join('') : '<div class="empty">暂无数据</div>';
   $('recent').innerHTML = state.recent.length ? state.recent.map(item => `<div class="recent-item ${item.correct ? 'correct' : ''}"><b>${escapeHtml(item.nickname)}</b> · ${item.answer}<br><small>${item.correct ? `✓ 正确 +${state.scorePerCorrect}` : '✕ 错误'} · 当前 ${item.score} 分</small></div>`).join('') : '<div class="empty">等待答题…</div>';
   const status = $('dycastStatus');
-  if (state.dycastError) { status.textContent = '转发服务异常'; status.className = 'pill error'; status.title = state.dycastError; } else if (state.dycastConnected > 0) { status.textContent = 'Dycast 已转发'; status.className = 'pill live'; } else { status.textContent = '等待 Dycast 转发'; status.className = 'pill'; }
+  if (state.directDycastConnected > 0) { status.textContent = '内置 Dycast 已连接'; status.className = 'pill live'; status.title = ''; }
+  else if (state.directDycastConnecting) { status.textContent = '内置 Dycast 连接中'; status.className = 'pill'; status.title = ''; }
+  else if (state.dycastError) { status.textContent = 'Dycast 连接异常'; status.className = 'pill error'; status.title = state.dycastError; }
+  else if (state.externalDycastConnected > 0) { status.textContent = 'Dycast 已转发'; status.className = 'pill live'; status.title = ''; }
+  else { status.textContent = '等待 Dycast 连接'; status.className = 'pill'; status.title = ''; }
   $('roomConnectionDetail').textContent = state.dycastError || (state.dycastConnected > 0 ? 'Dycast Desktop 已连接到本软件，正在接收弹幕。' : '尚未检测到 Dycast Desktop 转发连接。');
   $('lastMessage').textContent = formatLastMessage(state.dycastLastMessageAt);
+  if (state.directDycastDetail) $('roomConnectionDetail').textContent = state.directDycastDetail;
+  if (state.directDycastRoom && document.activeElement !== $('roomNumber')) $('roomNumber').value = state.directDycastRoom;
 }
 
 $('startBtn').onclick = () => engine.startRound(); $('pauseBtn').onclick = () => engine.snapshot().phase === 'paused' ? engine.resume() : engine.pause(); $('revealBtn').onclick = () => engine.revealAnswer(false); $('nextBtn').onclick = () => engine.nextQuestion(true); $('prevBtn').onclick = () => engine.previousQuestion();
@@ -35,4 +46,21 @@ document.querySelectorAll('[data-answer]').forEach(button => button.onclick = ()
 async function overlayCommand(command, args = {}) { try { await tauri?.core?.invoke(command, args); } catch (error) { alert(`Overlay 操作失败：${error}`); } }
 $('showOverlay').onclick = () => overlayCommand('show_overlay'); $('hideOverlay').onclick = () => overlayCommand('hide_overlay'); $('topOverlay').onchange = event => overlayCommand('set_overlay_always_on_top', { enabled: event.target.checked }); $('clickthroughOverlay').onchange = async event => { await overlayCommand('set_overlay_clickthrough', { enabled: event.target.checked }); tauri?.event?.emit('overlay-edit-mode', !event.target.checked).catch(() => {}); };
 if (tauri?.event?.listen) { await tauri.event.listen('dycast-payload', event => relayProvider.receive(event.payload)); await tauri.event.listen('dycast-status', event => engine.setDycastStatus(event.payload || {})); await tauri.event.listen('overlay-ready', () => tauri.event.emit('quiz-state', engine.snapshot())); }
+$('connectRoomBtn').onclick = async () => {
+  const button = $('connectRoomBtn');
+  const roomInput = $('roomNumber');
+  button.disabled = true;
+  roomInput.disabled = true;
+  try {
+    await directProvider.start(roomInput.value);
+  } catch (error) {
+    const detail = error && error.message ? error.message : String(error);
+    engine.setDirectDycastStatus({ connected: 0, connecting: false, error: detail, detail });
+  } finally {
+    button.disabled = false;
+    roomInput.disabled = false;
+  }
+};
+$('disconnectRoomBtn').onclick = () => directProvider.stop();
+
 mockProvider.start(); relayProvider.start(); engine.notify();

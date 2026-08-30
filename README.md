@@ -1,27 +1,35 @@
 # 抖音直播英语答题助手
 
-Windows 直播答题桌面软件：主播控制台、透明 Overlay、排行榜和抢答判题均在本程序中运行；**直播弹幕采集由官方 Dycast Desktop 独立完成**，再通过本地 WebSocket 转发给本软件。
+Windows 直播答题桌面软件：主播控制台、透明 Overlay、排行榜、抢答判题都在同一个程序中运行。
+
+## 弹幕接入
+
+本版本提供两条 Dycast 路径：
+
+1. 内置 Dycast：在控制台输入公开网页直播间地址（例如 https://live.douyin.com/587076826065）或网页房间号，点击“连接直播间”。
+2. 官方 Dycast Desktop 转发（备用）：在官方 Dycast Desktop 连接公开直播间，将 WS 地址设置为 ws://127.0.0.1:17891/dycast，再点“转发”。
+
+内置方式复用官方 Dycast Desktop 的固定版本核心；项目不自行设计或维护抖音弹幕协议。内置连接出现错误时，控制台会显示具体原因；主播可立即切换到独立 Dycast Desktop 转发方式。
+
+手机“复制链接”产生的 v.douyin.com 短链、以及其中的 18/19 位内部 room_id，不能作为网页房间号使用。请在电脑浏览器打开公开直播间，再复制地址栏中的 live.douyin.com/数字。
 
 ## 使用方法
 
-1. 启动本软件。Overlay 会保持打开，以便抖音直播伴侣在“窗口”列表中识别 `Douyin Quiz Overlay`；控制台可随时隐藏或显示它。
-2. 启动官方 Dycast Desktop，在其中输入公开且正在开播的 `live.douyin.com/房间号` 并连接。
-3. 在 Dycast Desktop 右侧“WS地址”填写：`ws://127.0.0.1:17891/dycast`，点击“转发”。
-4. 本软件右上角显示“Dycast 已转发”后，点击“开始本题”。观众发送 `A/B/C/D` 即可参与。
+1. 双击 EXE 或安装包启动软件。
+2. 在“Dycast 连接”卡片里选择内置连接，或配置官方 Desktop 转发。
+3. 连接状态显示成功后，点击“开始本题”。
+4. 观众发送 A/B/C/D；抢答模式下第一个答对的观众加分并在 Overlay 显示。
+5. 在抖音直播伴侣选择“窗口”，并选择 Douyin Quiz Overlay。
 
-手机“复制链接”得到的 `v.douyin.com` 短链和其中的 18/19 位内部 `room_id` 不能直接作为 Dycast 房间号。请在电脑浏览器打开公开直播间后，复制地址栏中的 `https://live.douyin.com/数字`。
+Overlay 为单独透明窗口，启动时保持打开，以便被直播伴侣的窗口列表识别；控制台可随时显示或隐藏它。
 
-## 弹幕协议
+## 规则与兼容
 
-本程序监听 `ws://127.0.0.1:17891/dycast`，兼容 Dycast 转发的单个 JSON 对象或 JSON 数组，重点处理 `WebcastChatMessage`。同一 `eventId`、同一用户同一题都不会重复计分。
+- 接收单个 JSON 对象或 JSON 数组。
+- 重点处理 WebcastChatMessage；相同 eventId 和同一用户同一题不会重复计分。
+- 支持抢答自动、倒计时和手动模式。
+- 题库位于 web/questions.json，已在打包时校验进入最终前端资源。
 
-## 架构边界
+## 构建
 
-- Dycast Desktop：连接抖音直播间、采集并转发消息。
-- 本软件：接收消息、标准化、判题、计分、排行榜、Overlay 和主播控制。
-
-本软件不内置 Dycast 源码，不处理 Cookie，也不实现抖音私有直播协议。
-
-## 构建与产物
-
-详见 [BUILD.md](BUILD.md)。Windows 安装包、透明采集说明和已知限制见 [KNOWN_ISSUES.md](KNOWN_ISSUES.md)。
+参见 [BUILD.md](BUILD.md)。已知限制与透明采集说明见 [KNOWN_ISSUES.md](KNOWN_ISSUES.md)。

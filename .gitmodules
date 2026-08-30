@@ -1,0 +1,3 @@
+[submodule "vendor/dycast-desktop"]
+	path = vendor/dycast-desktop
+	url = https://github.com/qinant/dycast-desktop.git

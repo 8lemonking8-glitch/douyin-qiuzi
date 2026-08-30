@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>抖音直播英语答题助手</title>
   <link rel="stylesheet" href="admin.css">
+  <style>
+    .connection-actions{display:flex;gap:8px;margin:10px 0}
+    .connection-actions button{padding:8px 11px;font-size:12px}
+    .connection-divider{padding-top:10px;border-top:1px solid #f4dbe6}
+  </style>
 </head>
 <body>
   <main class="app-shell">
@@ -23,8 +28,15 @@
       </article>
       <aside class="panel settings-panel">
         <div class="settings-heading"><div><p class="section-kicker">DANMAKU CONNECTION</p><h3>Dycast 转发</h3></div><span class="mini-heart">♥</span></div>
-        <div class="connection-card"><p>在官方 Dycast Desktop 中连接直播间后，将 WS 地址填为：</p><div class="copy-box"><code>ws://127.0.0.1:17891/dycast</code><button id="copyWsBtn" title="复制转发地址">复制</button></div><p id="roomConnectionDetail" class="connection-detail">尚未检测到 Dycast Desktop 转发连接。</p></div>
-        <ol class="setup-steps"><li>确认 Dycast 显示“房间连接成功”</li><li>填入上方 WS 地址</li><li>点击“转发”后即可开始答题</li></ol>
+        <div class="connection-card">
+          <p><strong>内置 Dycast（推荐尝试）</strong>：粘贴公开网页直播间地址或房间号。</p>
+          <input id="roomNumber" inputmode="numeric" placeholder="https://live.douyin.com/587076826065">
+          <div class="connection-actions"><button id="connectRoomBtn" class="primary">连接直播间</button><button id="disconnectRoomBtn">断开</button></div>
+          <p class="connection-divider"><strong>独立 Dycast Desktop（备用）</strong>：连接成功后，将 WS 地址填为：</p>
+          <div class="copy-box"><code>ws://127.0.0.1:17891/dycast</code><button id="copyWsBtn" title="复制转发地址">复制</button></div>
+          <p id="roomConnectionDetail" class="connection-detail">尚未连接直播间。</p>
+        </div>
+        <ol class="setup-steps"><li>优先输入公开的 live.douyin.com 房间号，点击“连接直播间”</li><li>如内置连接不稳定，打开官方 Dycast Desktop</li><li>在 Dycast 填入上方 WS 地址并点击“转发”</li></ol>
         <hr><p class="section-kicker">GAME SETTINGS</p><h3>答题规则</h3>
         <label>切题模式<select id="modeSelect"><option value="first_correct">抢答：首个答对后自动切题</option><option value="timer">倒计时：时间到后自动切题</option><option value="manual">手动：只由主播切题</option></select></label>
         <div class="two-col"><label>答题时长（秒）<input id="roundSeconds" type="number" min="5" max="120" value="15"></label><label>自动切题延迟（秒）<input id="autoDelay" type="number" min="1" max="30" value="3"></label></div>
