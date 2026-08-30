@@ -18,6 +18,8 @@ Windows 直播答题桌面软件。一个 EXE 内置 Dycast Desktop（MIT）采�
 
 Dycast Desktop 需要网页直播间号（`web_rid`）。手机“复制链接”得到的 `v.douyin.com` 短链会跳到 `webcast.amemv.com/douyin/webcast/reflow/内部room_id`，其中的 18/19 位 `room_id` 不能代替 `web_rid`。本软件会明确拒绝这种输入，避免出现一直连接但没有结果的假象。
 
+实测普通网页直播间可由官方 Dycast Desktop 正常连接。此前一次无法访问网页直播间的情况，已确认是直播间未公开造成；请先公开并开播，再使用网页房间号连接。完整测试证据和边界见 [KNOWN_ISSUES.md](KNOWN_ISSUES.md)。
+
 为兼容已有工作流，仍保留外部 Dycast 转发入口：`ws://127.0.0.1:17891/dycast`。接收 `WebcastChatMessage` 单对象或数组；同一 `eventId` 和同一用户同一题均不会重复计分。
 
 ## 透明 Overlay

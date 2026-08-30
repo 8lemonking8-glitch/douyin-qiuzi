@@ -29,8 +29,8 @@ npm run build
 ## 产物
 
 - `src-tauri\target\release\douyin-quiz-tauri-mvp.exe`
-- `src-tauri\target\release\bundle\nsis\Douyin Live Quiz Assistant_0.4.3_x64-setup.exe`
-- `src-tauri\target\release\bundle\msi\Douyin Live Quiz Assistant_0.4.3_x64_en-US.msi`
+- `src-tauri\target\release\bundle\nsis\Douyin Live Quiz Assistant_0.4.4_x64-setup.exe`
+- `src-tauri\target\release\bundle\msi\Douyin Live Quiz Assistant_0.4.4_x64_en-US.msi`
 
 ## 回归检查
 
