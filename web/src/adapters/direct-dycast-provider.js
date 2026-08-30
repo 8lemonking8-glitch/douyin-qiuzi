@@ -11,6 +11,7 @@ export class DirectDycastProvider {
 
   async start(roomNumber) {
     const input = String(roomNumber || '').trim();
+    this.onStatus({ connected: 0, error: null, connecting: true, roomNumber: '正在解析链接' });
     let room = input.match(/(?:live\.douyin\.com\/|reflow\/)?(\d{5,})/)?.[1] || '';
     if (!room && /https?:\/\/v\.douyin\.com\//i.test(input)) {
       room = await window.__TAURI__?.core?.invoke('resolve_room_number', { input });
