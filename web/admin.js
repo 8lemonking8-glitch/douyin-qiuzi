@@ -1,11 +1,11 @@
 import { QuizEngine } from './src/game/engine.js';
 import { MockCommentProvider } from './src/adapters/mock-provider.js';
 import { DycastCommentProvider } from './src/adapters/dycast-provider.js';
+import questions from './questions.json';
 
 const $ = id => document.getElementById(id);
 const tauri = window.__TAURI__;
 const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
-const questions = await fetch('./questions.json').then(response => { if (!response.ok) throw new Error('题库加载失败'); return response.json(); });
 const engine = new QuizEngine(questions, { mode: 'first_correct', roundSeconds: 15, autoDelayMs: 3000, scorePerCorrect: 10, onChange: state => { render(state); tauri?.event?.emit('quiz-state', state).catch(() => {}); } });
 const mockProvider = new MockCommentProvider(comment => engine.handleComment(comment));
 const relayProvider = new DycastCommentProvider(payload => engine.handleDycastPayload(payload));
