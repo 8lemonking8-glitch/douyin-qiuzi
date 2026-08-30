@@ -1,6 +1,7 @@
 // MIT-licensed Dycast Desktop core is vendored as a Git submodule.
 import '../../../vendor/dycast-desktop/public/mssdk.js';
 import { DyCast } from '../../../vendor/dycast-desktop/src/core/dycast.ts';
+import { parseDycastRoomInput } from './dycast-room-input.js';
 
 export class DirectDycastProvider {
   constructor({ onComment, onStatus }) {
@@ -10,13 +11,7 @@ export class DirectDycastProvider {
   }
 
   async start(roomNumber) {
-    const input = String(roomNumber || '').trim();
-    this.onStatus({ connected: 0, error: null, connecting: true, roomNumber: '正在解析链接' });
-    let room = input.match(/(?:live\.douyin\.com\/|reflow\/)?(\d{5,})/)?.[1] || '';
-    if (!room && /https?:\/\/v\.douyin\.com\//i.test(input)) {
-      room = await window.__TAURI__?.core?.invoke('resolve_room_number', { input });
-    }
-    if (!/^\d{5,}$/.test(room)) throw new Error('请输入直播间链接、分享短链或房间号。');
+    const room = parseDycastRoomInput(roomNumber);
     this.stop();
     this.onStatus({ connected: 0, error: null, connecting: true, roomNumber: room });
     const cast = new DyCast(room, { maxReconnectCount: 5 });

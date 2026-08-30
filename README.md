@@ -5,7 +5,7 @@ Windows 直播答题桌面软件。一个 EXE 内置 Dycast Desktop（MIT）采�
 ## 主播使用
 
 1. 安装 NSIS/MSI 安装包或双击便携 EXE。
-2. 在控制台“内置 Dycast 直播间连接”输入直播间 URL、房间号或抖音“复制链接”得到的整段分享文案；短链会在本机自动解析。
+2. 在电脑浏览器进入直播间，复制地址栏中的 `https://live.douyin.com/数字`，粘贴到控制台“内置 Dycast 直播间连接”。也可以只输入其中的数字。
 3. 点击“连接直播间”，顶部显示“直播间已连接”后点击“开始本题”。
 4. 观众评论 `A`、`B`、`C`、`D` 即可作答；抢答模式下首位答对者加分、锁题，并按设置自动进入下一题。
 5. 在抖音直播伴侣优先使用“游戏进程”采集 `Douyin Quiz Overlay`；未识别时改用“窗口”。
@@ -15,6 +15,8 @@ Windows 直播答题桌面软件。一个 EXE 内置 Dycast Desktop（MIT）采�
 ## 弹幕来源
 
 默认使用**内置 Dycast**，不需填写 WebSocket 地址。软件不会显示 Cookie 输入框，也不持久化登录凭据。
+
+Dycast Desktop 需要网页直播间号（`web_rid`）。手机“复制链接”得到的 `v.douyin.com` 短链会跳到 `webcast.amemv.com/douyin/webcast/reflow/内部room_id`，其中的 18/19 位 `room_id` 不能代替 `web_rid`。本软件会明确拒绝这种输入，避免出现一直连接但没有结果的假象。
 
 为兼容已有工作流，仍保留外部 Dycast 转发入口：`ws://127.0.0.1:17891/dycast`。接收 `WebcastChatMessage` 单对象或数组；同一 `eventId` 和同一用户同一题均不会重复计分。
 

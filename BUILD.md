@@ -29,9 +29,9 @@ npm run build
 ## 产物
 
 - `src-tauri\target\release\douyin-quiz-tauri-mvp.exe`
-- `src-tauri\target\release\bundle\nsis\Douyin Live Quiz Assistant_0.4.2_x64-setup.exe`
-- `src-tauri\target\release\bundle\msi\Douyin Live Quiz Assistant_0.4.2_x64_en-US.msi`
+- `src-tauri\target\release\bundle\nsis\Douyin Live Quiz Assistant_0.4.3_x64-setup.exe`
+- `src-tauri\target\release\bundle\msi\Douyin Live Quiz Assistant_0.4.3_x64_en-US.msi`
 
 ## 回归检查
 
-构建后应启动 EXE，输入一个合法房间号并点击“连接直播间”。无直播间可使用 Mock 区域验证游戏规则。使用抖音直播伴侣测试“游戏进程”与“窗口”两种采集模式，确认透明区域没有黑/白底。
+构建后应启动 EXE，输入一个合法的 `live.douyin.com/数字` 网页房间号并点击“连接直播间”。同时确认 `v.douyin.com` 手机分享短链会显示明确的格式错误，而不会被误当作房间号。无直播间可使用 Mock 区域验证游戏规则。使用抖音直播伴侣测试“游戏进程”与“窗口”两种采集模式，确认透明区域没有黑/白底。

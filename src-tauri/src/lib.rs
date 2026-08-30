@@ -9,7 +9,6 @@ use serde::Serialize;
 use std::net::TcpListener;
 use std::sync::{Arc, atomic::{AtomicUsize, Ordering}};
 use std::thread;
-use regex::Regex;
 use tauri::{AppHandle, Emitter, Manager};
 use tungstenite::Message;
 
@@ -138,31 +137,6 @@ fn set_overlay_always_on_top(app: AppHandle, enabled: bool) -> Result<(), String
     Ok(())
 }
 
-/// Expands a user-copied Douyin share link locally and returns the numeric live room id.
-/// Only douyin.com URLs are accepted; the original share text is never persisted or logged.
-#[tauri::command]
-async fn resolve_room_number(input: String) -> Result<String, String> {
-    let url_text = input.split_whitespace().find(|part| part.starts_with("http"))
-        .ok_or("未找到直播间链接。")?;
-    let parsed = url::Url::parse(url_text).map_err(|_| "直播间链接格式无效。")?;
-    let host = parsed.host_str().unwrap_or_default();
-    if !host.ends_with("douyin.com") { return Err("只支持抖音直播间链接。".to_string()); }
-    let room_pattern = Regex::new(r"/(?:douyin/webcast/reflow/)?([0-9]{5,})").expect("valid room regex");
-    if let Some(captures) = room_pattern.captures(parsed.path()) {
-        return Ok(captures[1].to_string());
-    }
-    let client = reqwest::Client::builder()
-        .redirect(reqwest::redirect::Policy::limited(8))
-        .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/134 Safari/537.36")
-        .build().map_err(|_| "无法创建链接解析请求。")?;
-    let response = client.get(parsed).send().await.map_err(|_| "无法解析分享短链，请检查网络后重试。")?;
-    let final_url = response.url();
-    let final_host = final_url.host_str().unwrap_or_default();
-    if !(final_host.ends_with("douyin.com") || final_host.ends_with("amemv.com")) { return Err("短链没有跳转到抖音直播间。".to_string()); }
-    room_pattern.captures(final_url.path()).map(|captures| captures[1].to_string())
-        .ok_or_else(|| "未能从分享链接识别直播间号。".to_string())
-}
-
 pub fn run() {
     tauri::Builder::default()
         .manage(Arc::new(live_info::HttpState::new()))
@@ -182,7 +156,6 @@ pub fn run() {
             start_overlay_dragging,
             set_overlay_always_on_top
             ,
-            resolve_room_number,
             live_info::fetch_binary,
             live_info::fetch_head,
             live_info::fetch_live_html,
