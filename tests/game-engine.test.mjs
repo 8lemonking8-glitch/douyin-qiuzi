@@ -5,13 +5,6 @@ import { QuizEngine } from '../web/src/game/engine.js';
 const questions = JSON.parse(fs.readFileSync(new URL('../web/questions.json', import.meta.url), 'utf8'));
 const engine = new QuizEngine(questions, { mode: 'first_correct', autoDelayMs: 40, scorePerCorrect: 10 });
 
-engine.setDirectDycastStatus({ connecting: true, roomNumber: '587076826065', detail: '正在连接房间 587076826065，请稍候…' });
-assert.equal(engine.snapshot().directDycastDetail, '正在连接房间 587076826065，请稍候…');
-engine.setDirectDycastStatus({ connected: 1, roomNumber: '587076826065', detail: '已连接房间 587076826065，正在接收弹幕。' });
-assert.equal(engine.snapshot().directDycastConnected, 1);
-engine.setDirectDycastStatus({ connected: 0, error: null, detail: '已断开直播间连接' });
-assert.equal(engine.snapshot().directDycastDetail, '已断开直播间连接');
-
 engine.startRound();
 assert.equal(engine.snapshot().phase, 'answering');
 assert.equal(engine.snapshot().question.answer, null, 'answer must remain private while answering');

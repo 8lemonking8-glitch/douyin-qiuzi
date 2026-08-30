@@ -1,19 +1,13 @@
-抖音直播答题助手 Tauri MVP
+抖音直播英语答题助手
 
-本版用途：验证“透明 EXE 窗口 + 抖音直播伴侣采集”，并测试自动抢答。
+本软件只负责答题、计分、排行榜和透明 Overlay。
+请单独运行官方 Dycast Desktop 采集弹幕。
 
-注意：这个 ZIP 是完整 Tauri 工程源码。当前生成环境不是 Windows，无法可靠产出已经验证的 Windows EXE。
+在 Dycast Desktop 中：
+1. 连接公开且正在开播的直播间。
+2. 在“WS地址”填写：ws://127.0.0.1:17891/dycast
+3. 点击“转发”。
 
-Windows 构建：
-1. 安装 Node.js 20+
-2. 安装 Rust (rustup)
-3. 安装 Microsoft Visual Studio Build Tools（Desktop development with C++）
-4. 双击 build-windows.bat
+本软件显示“Dycast 已转发”后，即可开始答题。
 
-编译完成后 EXE 位于：
-src-tauri\target\release\douyin-quiz-tauri-mvp.exe
-
-Dycast 转发地址：
-ws://127.0.0.1:17891/dycast
-
-直播伴侣：添加素材 -> 游戏进程 -> 选择 Overlay / 本程序。
+EXE：src-tauri\target\release\douyin-quiz-tauri-mvp.exe

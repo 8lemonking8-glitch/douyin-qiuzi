@@ -9,7 +9,7 @@
 <body>
   <main class="app-shell">
     <header class="topbar">
-      <div><h1>🎙 抖音直播英语答题助手</h1><p>内置 Dycast 采集 · 透明 Overlay · 本地答题控制台</p></div>
+      <div><h1>🎙 抖音直播英语答题助手</h1><p>Dycast Desktop 转发 · 透明 Overlay · 本地答题控制台</p></div>
       <div class="status-row"><span class="pill ok">桌面版已启动</span><span class="pill" id="dycastStatus">弹幕未连接</span></div>
     </header>
     <section class="grid">
@@ -22,10 +22,9 @@
         <div class="buttons"><button id="startBtn" class="primary">开始本题</button><button id="pauseBtn">暂停</button><button id="revealBtn" class="success">公布答案</button><button id="prevBtn">上一题</button><button id="nextBtn" class="primary">下一题并开始</button><button id="resetBtn" class="danger">重新开始</button></div>
       </article>
       <aside class="panel settings-panel">
-        <h3>内置 Dycast 直播间连接</h3>
-        <p class="muted">无需单独打开 Dycast。请输入电脑网页直播间地址中的网页房间号（web_rid）。</p>
-        <label>网页直播间地址 / 房间号<input id="roomNumber" placeholder="例如 https://live.douyin.com/123456789"></label>
-        <div class="buttons compact"><button id="connectRoomBtn" class="primary">连接直播间</button><button id="disconnectRoomBtn">断开</button></div>
+        <h3>Dycast Desktop 转发连接</h3>
+        <p class="muted">请独立启动官方 Dycast Desktop，在其中连接公开且正在开播的直播间。</p>
+        <ol class="muted setup-steps"><li>在 Dycast Desktop 输入网页直播间号并确认“房间连接成功”。</li><li>在右侧“WS地址”填入下方地址。</li><li>点击“转发”，本软件状态会自动变为“Dycast 已转发”。</li></ol>
         <p id="roomConnectionDetail" class="muted">尚未连接</p>
         <p class="muted">注意：直播间须设为公开并处于开播状态；手机“复制链接”产生的 v.douyin.com 短链不能直接用于 Dycast，请填写电脑浏览器地址栏中的 live.douyin.com 房间号。</p>
         <hr>
@@ -37,7 +36,7 @@
         <h3>透明 Overlay</h3>
         <div class="buttons compact"><button id="showOverlay">显示</button><button id="hideOverlay">隐藏</button></div>
         <label class="check"><input id="clickthroughOverlay" type="checkbox" checked> Overlay 鼠标穿透</label><label class="check"><input id="topOverlay" type="checkbox" checked> Overlay 始终置顶</label>
-        <hr><h3>兼容外部 Dycast</h3><div class="copy-box"><code>ws://127.0.0.1:17891/dycast</code><small>最近收到消息：<span id="lastMessage">暂无</span></small></div>
+        <hr><h3>Dycast WS 转发地址</h3><div class="copy-box"><code>ws://127.0.0.1:17891/dycast</code><small>最近收到消息：<span id="lastMessage">暂无</span></small></div>
       </aside>
       <article class="panel mock-panel"><div class="panel-head"><h3>🧪 Mock 弹幕测试</h3><span>无须开播即可验证</span></div><div class="mock-row"><input id="mockName" value="小明" maxlength="24"><button data-answer="A">A</button><button data-answer="B">B</button><button data-answer="C">C</button><button data-answer="D">D</button></div><p class="muted">同一用户同题只记录第一次回答；相同 eventId 不会重复计分。</p></article>
       <article class="panel leaderboard-panel"><div class="panel-head"><h3>🏆 排行榜（Top 5）</h3><button id="clearBoardBtn">清空排行榜</button></div><div id="leaderboard" class="leaderboard empty">暂无数据</div></article>
