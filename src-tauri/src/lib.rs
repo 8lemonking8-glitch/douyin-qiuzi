@@ -85,6 +85,18 @@ fn set_overlay_offscreen(app: AppHandle, offscreen: bool) -> Result<(), String> 
     Ok(())
 }
 
+#[tauri::command]
+fn set_overlay_orientation(app: AppHandle, portrait: bool) -> Result<(), String> {
+    let window = app.get_webview_window("overlay").ok_or("Overlay 窗口不存在")?;
+    let size = if portrait {
+        tauri::Size::Logical(tauri::LogicalSize::new(720.0, 1280.0))
+    } else {
+        tauri::Size::Logical(tauri::LogicalSize::new(1280.0, 720.0))
+    };
+    window.set_size(size).map_err(|e| e.to_string())?;
+    Ok(())
+}
+
 pub fn run() {
     tauri::Builder::default()
         .manage(Arc::new(live_info::HttpState::new()))
@@ -109,6 +121,7 @@ pub fn run() {
             start_overlay_dragging,
             set_overlay_always_on_top,
             set_overlay_offscreen,
+            set_overlay_orientation,
             live_info::fetch_binary,
             live_info::fetch_head,
             live_info::fetch_live_html,

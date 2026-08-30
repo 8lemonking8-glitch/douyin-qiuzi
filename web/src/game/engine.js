@@ -78,11 +78,11 @@ export class QuizEngine {
   startRound() {
     if (this.state.phase !== 'idle' && this.state.phase !== 'revealed') return;
     this.clearTimers(); this.clearRound(); this.state.phase = 'answering'; this.state.remaining = this.roundSeconds; this.notify();
-    if (this.mode === 'timer') this.timer = setInterval(() => { this.state.remaining -= 1; this.state.remaining <= 0 ? this.revealAnswer(true) : this.notify(); }, 1000);
+    if (this.mode !== 'manual') this.timer = setInterval(() => { this.state.remaining -= 1; this.state.remaining <= 0 ? this.revealAnswer(true) : this.notify(); }, 1000);
   }
   pause() { if (this.state.phase !== 'answering') return; this.clearTimers(); this.state.phase = 'paused'; this.notify(); }
-  resume() { if (this.state.phase !== 'paused') return; this.state.phase = 'answering'; this.notify(); if (this.mode === 'timer') this.timer = setInterval(() => { this.state.remaining -= 1; this.state.remaining <= 0 ? this.revealAnswer(true) : this.notify(); }, 1000); }
-  revealAnswer(scheduleNext = false) { if (this.state.phase !== 'answering' && this.state.phase !== 'paused') return; this.clearTimers(); this.state.phase = 'revealed'; if (this.mode === 'timer') this.state.remaining = 0; this.notify(); if (scheduleNext && this.mode !== 'manual') this.scheduleNext(); }
+  resume() { if (this.state.phase !== 'paused') return; this.state.phase = 'answering'; this.notify(); if (this.mode !== 'manual') this.timer = setInterval(() => { this.state.remaining -= 1; this.state.remaining <= 0 ? this.revealAnswer(true) : this.notify(); }, 1000); }
+  revealAnswer(scheduleNext = false) { if (this.state.phase !== 'answering' && this.state.phase !== 'paused') return; this.clearTimers(); this.state.phase = 'revealed'; if (this.mode !== 'manual') this.state.remaining = 0; this.notify(); if (scheduleNext && this.mode !== 'manual') this.scheduleNext(); }
   scheduleNext() { this.autoNextTimer = setTimeout(() => { this.nextQuestion(true); this.onAutoNext(); }, this.autoDelayMs); }
   nextQuestion(autoStart = true) { this.clearTimers(); this.state.idx = (this.state.idx + 1) % this.questions.length; this.clearRound(); this.state.phase = 'idle'; this.state.remaining = this.roundSeconds; this.notify(); if (autoStart) this.startRound(); }
   previousQuestion() { this.clearTimers(); this.state.idx = (this.state.idx - 1 + this.questions.length) % this.questions.length; this.clearRound(); this.state.phase = 'idle'; this.state.remaining = this.roundSeconds; this.notify(); }
@@ -116,7 +116,7 @@ export class QuizEngine {
     if (correct) { player.score += this.scorePerCorrect; player.correct += 1; }
     this.state.recent.push({ userId: comment.userId, nickname: comment.nickname, answer, correct, score: player.score, ts: Date.now() });
     if (this.state.recent.length > 30) this.state.recent.shift();
-    if (correct && this.mode === 'first_correct' && !this.state.winner) { this.state.winner = { ...comment, answer, awarded: this.scorePerCorrect, score: player.score }; this.state.phase = 'revealed'; this.notify(); this.scheduleNext(); return true; }
+    if (correct && this.mode === 'first_correct' && !this.state.winner) { this.state.winner = { ...comment, answer, awarded: this.scorePerCorrect, score: player.score }; this.state.phase = 'revealed'; this.clearTimers(); this.state.remaining = 0; this.notify(); this.scheduleNext(); return true; }
     this.notify(); return true;
   }
 }
