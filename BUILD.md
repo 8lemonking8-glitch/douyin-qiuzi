@@ -17,5 +17,4 @@ Windows 10/11、Node.js 20+、Rust stable MSVC、Visual Studio C++ Build Tools �
 ## 产物
 
 - src-tauri\target\release\douyin-live-quiz.exe
-- src-tauri\target\release\bundle\nsis\Douyin Live Quiz Assistant_0.6.2_x64-setup.exe
-- src-tauri\target\release\bundle\msi\Douyin Live Quiz Assistant_0.6.2_x64_en-US.msi
+- src-tauri\target\release\bundle\nsis\抖音英语答题助手_0.7.0_x64-setup.exe

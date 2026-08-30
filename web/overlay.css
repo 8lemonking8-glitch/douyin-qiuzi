@@ -26,7 +26,7 @@ body { -webkit-user-select: none; user-select: none; }
 .winner-card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 15px; margin-top: 18px; padding: 14px 18px; text-align: left; border: 1px solid rgba(255,215,112,.72); border-radius: 18px; background: linear-gradient(100deg,rgba(46,111,79,.93),rgba(73,55,76,.94)); box-shadow: 0 12px 32px rgba(27,9,31,.28); animation: pop .28s ease-out; }
 .sparkles { color: #ffd97e; font-size: 20px; letter-spacing: 3px; }
 .winner-label { color: #b8f2cf; font-size: 16px; font-weight: 800; }.winner-name { margin-top: 2px; font-size: 29px; font-weight: 900; }
-.winner-result { text-align: right; }.winner-answer { font-size: 18px; color: #f9dbeb; font-weight: 700; }.winner-score { margin-top: 2px; color: #ffe088; font-size: 27px; font-weight: 900; }.next-tip { margin-top: 2px; color: #d6c5d5; font-size: 14px; }
+.winner-result { text-align: right; }.winner-answer { font-size: 18px; color: #f9dbeb; font-weight: 700; }.winner-score { margin-top: 2px; color: #ffe088; font-size: 27px; font-weight: 900; }.winner-score:empty { display: none; }.next-tip { margin-top: 2px; color: #d6c5d5; font-size: 14px; }
 .hidden { display: none !important; }
 .edit-bar { position: fixed; z-index: 99; left: 50%; top: 5px; transform: translateX(-50%); padding: 9px 16px; border-radius: 0 0 10px 10px; background: rgba(215,93,142,.97); font-size: 14px; cursor: move; pointer-events: auto; }
 @keyframes pop { 0% { opacity: 0; transform: translateY(-7px) scale(.97); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
