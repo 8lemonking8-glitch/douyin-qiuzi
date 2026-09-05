@@ -2,6 +2,31 @@ const $ = id => document.getElementById(id);
 const tauri = window.__TAURI__;
 const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
 
+const MEDALS = ['🥇', '🥈', '🥉'];
+let lastRankKey = null;
+
+function renderRank(list, speed) {
+  const pinned = list.slice(0, 3);
+  const rest = list.slice(3);
+  $('rankPinned').innerHTML = list.length
+    ? pinned.map((p, i) => `<div class="rank-row pinned"><span class="medal">${MEDALS[i]}</span><span>${escapeHtml(p.nickname)}</span><strong>${p.score}</strong></div>`).join('')
+    : '<div class="empty">等待首位玩家</div>';
+  const scroll = $('rankScroll');
+  const track = $('rankTrack');
+  scroll.classList.toggle('hidden', !rest.length);
+  track.classList.remove('scrolling');
+  track.style.animationDuration = '';
+  if (!rest.length) { track.innerHTML = ''; return; }
+  track.innerHTML = rest.map((p, i) => `<div class="rank-row"><span>${i + 4}</span><span>${escapeHtml(p.nickname)}</span><strong>${p.score}</strong></div>`).join('');
+  const pxPerSec = Number.isFinite(Number(speed)) ? Number(speed) : 30;
+  const copyHeight = track.scrollHeight;
+  if (pxPerSec > 0 && copyHeight > scroll.clientHeight) {
+    track.innerHTML += track.innerHTML;
+    track.style.animationDuration = `${copyHeight / pxPerSec}s`;
+    track.classList.add('scrolling');
+  }
+}
+
 function render(state) {
   if (!state?.question) return;
   const q = state.question;
@@ -17,11 +42,12 @@ function render(state) {
   else if (state.phase === 'paused') { answerHint.classList.remove('hidden'); answerHint.textContent = '⏸ 本题已暂停'; }
   else answerHint.classList.add('hidden');
   const winner = $('winner');
-  if (state.winner) { winner.classList.remove('hidden'); $('winnerLabel').textContent = '抢答成功'; $('winnerName').textContent = state.winner.nickname; $('winnerAnswer').textContent = `✓ 正确答案 ${state.winner.answer} · ${q.options[state.winner.answer]}`; $('winnerScore').textContent = `+${state.winner.awarded} 分`; $('nextTip').textContent = `${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题…`; }
+  if (state.winner) { winner.classList.remove('hidden'); $('winnerLabel').textContent = '抢答成功'; $('winnerName').textContent = state.winner.nickname; $('winnerAnswer').textContent = `正确答案：${state.winner.answer}（${q.options[state.winner.answer]}）`; $('winnerScore').textContent = `+${state.winner.awarded} 分`; $('nextTip').textContent = `${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题…`; }
   else if (state.phase === 'revealed' && q.answer) { winner.classList.remove('hidden'); const lastCorrect = (state.recent || []).find(r => r.correct); $('winnerLabel').textContent = '正确答案'; $('winnerName').textContent = lastCorrect ? `${lastCorrect.nickname} +${state.scorePerCorrect} 分` : q.options[q.answer]; $('winnerAnswer').textContent = `✓ ${q.answer}`; $('winnerScore').textContent = ''; $('nextTip').textContent = state.mode === 'manual' ? '等待主播切题' : `${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题…`; }
   else winner.classList.add('hidden');
   const list = state.leaderboard || [];
-  $('rankList').innerHTML = list.length ? list.slice(0, 3).map((p, index) => `<div class="rank-row"><span>${index + 1}</span><span>${escapeHtml(p.nickname)}</span><strong>${p.score}</strong></div>`).join('') : '<div class="empty">等待首位玩家</div>';
+  const rankKey = JSON.stringify(list) + '|' + state.leaderboardScrollSpeed;
+  if (rankKey !== lastRankKey) { lastRankKey = rankKey; renderRank(list, state.leaderboardScrollSpeed); }
 }
 if (tauri?.event?.listen) { await tauri.event.listen('quiz-state', event => render(event.payload)); await tauri.event.listen('overlay-edit-mode', event => $('editBar').classList.toggle('hidden', !event.payload)); }
 // Read the last native snapshot too. This covers an Overlay which is still

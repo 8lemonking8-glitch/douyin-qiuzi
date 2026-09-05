@@ -1,6 +1,6 @@
 [package]
 name = "douyin-live-quiz"
-version = "0.9.0"
+version = "0.9.5"
 description = "Douyin live quiz desktop overlay"
 authors = ["Douyin Live Quiz Assistant"]
 edition = "2021"

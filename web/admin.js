@@ -17,6 +17,64 @@ const directProvider = new DirectDycastProvider({
   onComment: comment => engine.handleComment(comment),
   onStatus: status => engine.setDirectDycastStatus(status)
 });
+const SETTINGS_STORAGE_KEY = 'douyin-live-quiz.settings.v1';
+const SAVED_SETTING_IDS = ['roomNumber', 'levelSelect', 'modeSelect', 'roundSeconds', 'autoDelay', 'scorePerCorrect', 'autoSpeak', 'offscreenOverlay', 'portraitOverlay', 'clickthroughOverlay', 'topOverlay', 'leaderboardScrollSpeed', 'leaderboardLimit'];
+
+function collectSettings() {
+  return Object.fromEntries(SAVED_SETTING_IDS.map(id => {
+    const element = $(id);
+    return [id, element.type === 'checkbox' ? element.checked : element.value];
+  }));
+}
+
+function applySettings(saved) {
+  if (!saved || typeof saved !== 'object') return;
+  for (const id of SAVED_SETTING_IDS) {
+    if (!(id in saved)) continue;
+    const element = $(id);
+    if (element.type === 'checkbox') element.checked = Boolean(saved[id]);
+    else element.value = String(saved[id]);
+  }
+  engine.filterByLevel($('levelSelect').value);
+  engine.setMode($('modeSelect').value);
+  engine.setRoundSeconds($('roundSeconds').value);
+  engine.setAutoDelay($('autoDelay').value);
+  engine.setScorePerCorrect($('scorePerCorrect').value);
+  engine.setLeaderboardScrollSpeed($('leaderboardScrollSpeed').value);
+  engine.setLeaderboardLimit($('leaderboardLimit').value);
+  void overlayCommand('set_overlay_offscreen', { offscreen: $('offscreenOverlay').checked });
+  void overlayCommand('set_overlay_orientation', { portrait: $('portraitOverlay').checked });
+  void overlayCommand('set_overlay_clickthrough', { enabled: $('clickthroughOverlay').checked });
+  void overlayCommand('set_overlay_always_on_top', { enabled: $('topOverlay').checked });
+}
+
+function saveSettings() {
+  try {
+    const settings = collectSettings();
+    localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(settings));
+    // Native storage is deliberately outside the installation directory, so a
+    // normal NSIS upgrade neither needs an uninstall nor loses user settings.
+    void tauri?.core?.invoke('save_persistent_settings', { settings }).catch(error => console.warn('Unable to save persistent settings:', error));
+  } catch (error) {
+    console.warn('Unable to save settings:', error);
+  }
+}
+
+async function restoreSettings() {
+  try {
+    const nativeSettings = await tauri?.core?.invoke('load_persistent_settings');
+    if (nativeSettings && typeof nativeSettings === 'object') {
+      applySettings(nativeSettings);
+      localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(nativeSettings));
+      return;
+    }
+    const legacySettings = JSON.parse(localStorage.getItem(SETTINGS_STORAGE_KEY) || '{}');
+    applySettings(legacySettings);
+    if (Object.keys(legacySettings).length) saveSettings();
+  } catch (error) {
+    console.warn('Unable to restore settings:', error);
+  }
+}
 
 function phaseText(state) { return ({ idle: '等待开始', answering: state.mode === 'first_correct' ? '抢答中' : '答题中', paused: '已暂停', revealed: '答案已公布' })[state.phase] || state.phase; }
 function formatLastMessage(timestamp) { return timestamp ? new Date(timestamp).toLocaleTimeString('zh-CN', { hour12: false }) : '暂无'; }
@@ -51,9 +109,9 @@ function render(state) {
 
 $('startBtn').onclick = () => engine.startRound(); $('pauseBtn').onclick = () => engine.snapshot().phase === 'paused' ? engine.resume() : engine.pause(); $('revealBtn').onclick = () => engine.revealAnswer(false); $('nextBtn').onclick = () => engine.nextQuestion(true); $('prevBtn').onclick = () => engine.previousQuestion(); $('shuffleBtn').onclick = () => engine.shuffleQuestions();
 $('resetBtn').onclick = () => { if (confirm('确定重新开始并清空所有积分？')) engine.resetGame(); }; $('clearBoardBtn').onclick = () => { if (confirm('确定清空排行榜？')) engine.clearLeaderboard(); };
-$('levelSelect').onchange = () => engine.filterByLevel($('levelSelect').value); $('modeSelect').onchange = () => engine.setMode($('modeSelect').value); $('roundSeconds').onchange = () => engine.setRoundSeconds($('roundSeconds').value); $('autoDelay').onchange = () => engine.setAutoDelay($('autoDelay').value); $('scorePerCorrect').onchange = () => engine.setScorePerCorrect($('scorePerCorrect').value);
+$('levelSelect').onchange = () => { engine.filterByLevel($('levelSelect').value); saveSettings(); }; $('modeSelect').onchange = () => { engine.setMode($('modeSelect').value); saveSettings(); }; $('roundSeconds').onchange = () => { engine.setRoundSeconds($('roundSeconds').value); saveSettings(); }; $('autoDelay').onchange = () => { engine.setAutoDelay($('autoDelay').value); saveSettings(); }; $('scorePerCorrect').onchange = () => { engine.setScorePerCorrect($('scorePerCorrect').value); saveSettings(); }; $('leaderboardScrollSpeed').onchange = () => { engine.setLeaderboardScrollSpeed($('leaderboardScrollSpeed').value); saveSettings(); }; $('leaderboardLimit').onchange = () => { engine.setLeaderboardLimit($('leaderboardLimit').value); saveSettings(); }; $('autoSpeak').onchange = saveSettings;
 async function overlayCommand(command, args = {}) { try { await tauri?.core?.invoke(command, args); } catch (error) { alert(`Overlay 操作失败：${error}`); } }
-$('offscreenOverlay').onchange = event => overlayCommand('set_overlay_offscreen', { offscreen: event.target.checked }); $('portraitOverlay').onchange = event => overlayCommand('set_overlay_orientation', { portrait: event.target.checked }); $('topOverlay').onchange = event => overlayCommand('set_overlay_always_on_top', { enabled: event.target.checked }); $('clickthroughOverlay').onchange = async event => { await overlayCommand('set_overlay_clickthrough', { enabled: event.target.checked }); tauri?.event?.emit('overlay-edit-mode', !event.target.checked).catch(() => {}); };
+$('offscreenOverlay').onchange = event => { overlayCommand('set_overlay_offscreen', { offscreen: event.target.checked }); saveSettings(); }; $('portraitOverlay').onchange = event => { overlayCommand('set_overlay_orientation', { portrait: event.target.checked }); saveSettings(); }; $('topOverlay').onchange = event => { overlayCommand('set_overlay_always_on_top', { enabled: event.target.checked }); saveSettings(); }; $('clickthroughOverlay').onchange = async event => { await overlayCommand('set_overlay_clickthrough', { enabled: event.target.checked }); tauri?.event?.emit('overlay-edit-mode', !event.target.checked).catch(() => {}); saveSettings(); };
 if (tauri?.event?.listen) { await tauri.event.listen('overlay-ready', () => tauri.event.emit('quiz-state', engine.snapshot())); }
 $('connectRoomBtn').onclick = async () => {
   const button = $('connectRoomBtn');
@@ -68,8 +126,10 @@ $('connectRoomBtn').onclick = async () => {
   } finally {
     button.disabled = false;
     roomInput.disabled = false;
+    saveSettings();
   }
 };
 $('disconnectRoomBtn').onclick = () => directProvider.stop();
 
-engine.notify();
+$('roomNumber').addEventListener('input', saveSettings);
+void restoreSettings().finally(() => engine.notify());

@@ -7,12 +7,44 @@ mod live_info;
 #[path = "../../vendor/dycast-desktop/src-tauri/src/ws_relay.rs"]
 mod ws_relay;
 
-use std::sync::Arc;
+use std::{fs, sync::Arc};
 use tauri::{AppHandle, Emitter, Manager, State};
 
 /// The latest snapshot survives Overlay startup timing and is delivered to the
 /// dedicated Overlay window with a native, targeted event.
 struct OverlayState(std::sync::Mutex<Option<serde_json::Value>>);
+
+fn persistent_settings_path(app: &AppHandle) -> Result<std::path::PathBuf, String> {
+    let directory = app
+        .path()
+        .app_data_dir()
+        .map_err(|error| format!("Cannot resolve application data directory: {error}"))?;
+    fs::create_dir_all(&directory)
+        .map_err(|error| format!("Cannot create application data directory: {error}"))?;
+    Ok(directory.join("settings-v1.json"))
+}
+
+/// Settings live outside the installer directory. Keeping this location tied to
+/// the immutable Tauri identifier makes normal NSIS upgrades data-safe.
+#[tauri::command]
+fn save_persistent_settings(app: AppHandle, settings: serde_json::Value) -> Result<(), String> {
+    let path = persistent_settings_path(&app)?;
+    let serialized = serde_json::to_vec_pretty(&settings)
+        .map_err(|error| format!("Cannot serialize settings: {error}"))?;
+    fs::write(path, serialized).map_err(|error| format!("Cannot save settings: {error}"))
+}
+
+#[tauri::command]
+fn load_persistent_settings(app: AppHandle) -> Result<Option<serde_json::Value>, String> {
+    let path = persistent_settings_path(&app)?;
+    if !path.exists() {
+        return Ok(None);
+    }
+    let contents = fs::read_to_string(path).map_err(|error| format!("Cannot read settings: {error}"))?;
+    serde_json::from_str(&contents)
+        .map(Some)
+        .map_err(|error| format!("Saved settings are invalid: {error}"))
+}
 
 #[tauri::command]
 fn sync_overlay_state(
@@ -115,6 +147,8 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             sync_overlay_state,
             get_overlay_state,
+            save_persistent_settings,
+            load_persistent_settings,
             show_overlay,
             hide_overlay,
             set_overlay_clickthrough,

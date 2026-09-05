@@ -1,4 +1,4 @@
-export function rankedPlayers(players, limit = 5) {
+export function rankedPlayers(players, limit = 50) {
   return Object.values(players)
     .sort((a, b) => b.score - a.score || b.correct - a.correct || a.nickname.localeCompare(b.nickname, 'zh-CN'))
     .slice(0, limit);
