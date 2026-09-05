@@ -21,6 +21,7 @@ export class QuizEngine {
     this.mode = options.mode ?? 'first_correct';
     this.leaderboardScrollSpeed = options.leaderboardScrollSpeed ?? 30;
     this.leaderboardLimit = options.leaderboardLimit ?? 50;
+    this.fullscreenOverlay = options.fullscreenOverlay ?? true;
     this.onChange = options.onChange ?? (() => {});
     this.onAutoNext = options.onAutoNext ?? (() => {});
     this.timer = null;
@@ -48,6 +49,7 @@ export class QuizEngine {
       remaining: this.state.remaining, mode: this.mode, roundSeconds: this.roundSeconds,
       autoDelayMs: this.autoDelayMs, scorePerCorrect: this.scorePerCorrect,
       leaderboardScrollSpeed: this.leaderboardScrollSpeed, leaderboardLimit: this.leaderboardLimit,
+      fullscreenOverlay: this.fullscreenOverlay,
       question: { ...q, answer: this.state.phase === 'revealed' ? q.answer : null },
       stats: { ...this.state.stats }, participantCount: Object.keys(this.state.answers).length,
       playerCount: Object.keys(this.state.players).length, leaderboard: rankedPlayers(this.state.players, this.leaderboardLimit),
@@ -69,6 +71,7 @@ export class QuizEngine {
   setScorePerCorrect(score) { const n = Number(score); if (Number.isFinite(n) && n >= 1 && n <= 9999) { this.scorePerCorrect = Math.round(n); this.notify(); } }
   setLeaderboardScrollSpeed(speed) { const n = Number(speed); if (Number.isFinite(n) && n >= 0 && n <= 200) { this.leaderboardScrollSpeed = Math.round(n); this.notify(); } }
   setLeaderboardLimit(limit) { const n = Number(limit); if (Number.isFinite(n) && n >= 3 && n <= 500) { this.leaderboardLimit = Math.round(n); this.notify(); } }
+  setFullscreenOverlay(enabled) { this.fullscreenOverlay = Boolean(enabled); this.notify(); }
   setDirectDycastStatus({ connected = 0, connecting = false, roomNumber = null, error = null, detail = null } = {}) {
     this.state.directDycastConnected = Number(connected) || 0;
     this.state.directDycastConnecting = Boolean(connecting);

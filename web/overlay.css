@@ -182,3 +182,20 @@ body { -webkit-user-select: none; user-select: none; }
   .rank-row { padding: 10px 6px; font-size: 14px; }
   .winner-name { font-size: 24px; }
 }
+
+/* Fullscreen fill mode (Overlay 全屏铺满) */
+body.fullscreen { background: #fffaf3 !important; }
+body.fullscreen .stage { padding: 0; }
+body.fullscreen .quiz-card,
+body.fullscreen .rank-card { top: 0; height: 100%; border-radius: 0; border: 0; box-shadow: none; backdrop-filter: none; }
+body.fullscreen .quiz-card { left: 0; width: 78%; background: transparent; padding: 30px 34px 24px; }
+body.fullscreen .rank-card { right: 0; width: 22%; background: #fff5ec; border-left: 1px solid rgba(220, 117, 94, .18); padding: 24px 20px 18px; }
+body.fullscreen .quiz-card::before { display: none; }
+
+@media (orientation: portrait) {
+  body.fullscreen .stage { padding: 0; gap: 0; }
+  body.fullscreen .quiz-card,
+  body.fullscreen .rank-card { top: auto; height: auto; border-radius: 0; }
+  body.fullscreen .quiz-card { left: auto; width: 100%; padding: 22px 18px; }
+  body.fullscreen .rank-card { right: auto; width: 100%; border-left: 0; border-top: 1px solid rgba(220, 117, 94, .18); padding: 18px 16px; }
+}

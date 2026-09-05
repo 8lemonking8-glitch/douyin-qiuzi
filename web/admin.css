@@ -225,3 +225,13 @@ button.ghost-danger { background: #fff1f2; color: #b65d71; }
   .meta { flex-wrap: wrap; }
   .brand h1 { font-size: 24px; }
 }
+
+/* Dev-only test panel (toggle with Ctrl+Shift+D) */
+.dev-panel { margin-top: 18px; border: 1px solid #ffd9c8; background: linear-gradient(145deg, #fff6f1, #ffffff); }
+.dev-panel .section-kicker { color: #d07050; }
+.dev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 14px; }
+.dev-group { display: flex; flex-direction: column; gap: 9px; padding: 14px; border: 1px solid #f3e7e7; border-radius: 14px; background: #fff; }
+.dev-label { margin: 0; color: #c05b3e; font-size: 13px; font-weight: 800; }
+.dev-panel label { display: block; margin: 0; color: #775f73; font-size: 13px; font-weight: 700; }
+.dev-panel input { width: 100%; margin-top: 6px; padding: 9px 11px; border: 1px solid #e9dce8; border-radius: 11px; outline: none; color: var(--ink); background: #fff; }
+.dev-panel > button { margin-top: 14px; }

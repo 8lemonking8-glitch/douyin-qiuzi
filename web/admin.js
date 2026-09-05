@@ -18,7 +18,7 @@ const directProvider = new DirectDycastProvider({
   onStatus: status => engine.setDirectDycastStatus(status)
 });
 const SETTINGS_STORAGE_KEY = 'douyin-live-quiz.settings.v1';
-const SAVED_SETTING_IDS = ['roomNumber', 'levelSelect', 'modeSelect', 'roundSeconds', 'autoDelay', 'scorePerCorrect', 'autoSpeak', 'offscreenOverlay', 'portraitOverlay', 'clickthroughOverlay', 'topOverlay', 'leaderboardScrollSpeed', 'leaderboardLimit'];
+const SAVED_SETTING_IDS = ['roomNumber', 'levelSelect', 'modeSelect', 'roundSeconds', 'autoDelay', 'scorePerCorrect', 'autoSpeak', 'offscreenOverlay', 'portraitOverlay', 'clickthroughOverlay', 'topOverlay', 'leaderboardScrollSpeed', 'leaderboardLimit', 'fullscreenOverlay'];
 
 function collectSettings() {
   return Object.fromEntries(SAVED_SETTING_IDS.map(id => {
@@ -42,6 +42,7 @@ function applySettings(saved) {
   engine.setScorePerCorrect($('scorePerCorrect').value);
   engine.setLeaderboardScrollSpeed($('leaderboardScrollSpeed').value);
   engine.setLeaderboardLimit($('leaderboardLimit').value);
+  engine.setFullscreenOverlay($('fullscreenOverlay').checked);
   void overlayCommand('set_overlay_offscreen', { offscreen: $('offscreenOverlay').checked });
   void overlayCommand('set_overlay_orientation', { portrait: $('portraitOverlay').checked });
   void overlayCommand('set_overlay_clickthrough', { enabled: $('clickthroughOverlay').checked });
@@ -109,7 +110,7 @@ function render(state) {
 
 $('startBtn').onclick = () => engine.startRound(); $('pauseBtn').onclick = () => engine.snapshot().phase === 'paused' ? engine.resume() : engine.pause(); $('revealBtn').onclick = () => engine.revealAnswer(false); $('nextBtn').onclick = () => engine.nextQuestion(true); $('prevBtn').onclick = () => engine.previousQuestion(); $('shuffleBtn').onclick = () => engine.shuffleQuestions();
 $('resetBtn').onclick = () => { if (confirm('确定重新开始并清空所有积分？')) engine.resetGame(); }; $('clearBoardBtn').onclick = () => { if (confirm('确定清空排行榜？')) engine.clearLeaderboard(); };
-$('levelSelect').onchange = () => { engine.filterByLevel($('levelSelect').value); saveSettings(); }; $('modeSelect').onchange = () => { engine.setMode($('modeSelect').value); saveSettings(); }; $('roundSeconds').onchange = () => { engine.setRoundSeconds($('roundSeconds').value); saveSettings(); }; $('autoDelay').onchange = () => { engine.setAutoDelay($('autoDelay').value); saveSettings(); }; $('scorePerCorrect').onchange = () => { engine.setScorePerCorrect($('scorePerCorrect').value); saveSettings(); }; $('leaderboardScrollSpeed').onchange = () => { engine.setLeaderboardScrollSpeed($('leaderboardScrollSpeed').value); saveSettings(); }; $('leaderboardLimit').onchange = () => { engine.setLeaderboardLimit($('leaderboardLimit').value); saveSettings(); }; $('autoSpeak').onchange = saveSettings;
+$('levelSelect').onchange = () => { engine.filterByLevel($('levelSelect').value); saveSettings(); }; $('modeSelect').onchange = () => { engine.setMode($('modeSelect').value); saveSettings(); }; $('roundSeconds').onchange = () => { engine.setRoundSeconds($('roundSeconds').value); saveSettings(); }; $('autoDelay').onchange = () => { engine.setAutoDelay($('autoDelay').value); saveSettings(); }; $('scorePerCorrect').onchange = () => { engine.setScorePerCorrect($('scorePerCorrect').value); saveSettings(); }; $('leaderboardScrollSpeed').onchange = () => { engine.setLeaderboardScrollSpeed($('leaderboardScrollSpeed').value); saveSettings(); }; $('leaderboardLimit').onchange = () => { engine.setLeaderboardLimit($('leaderboardLimit').value); saveSettings(); }; $('fullscreenOverlay').onchange = () => { engine.setFullscreenOverlay($('fullscreenOverlay').checked); saveSettings(); }; $('autoSpeak').onchange = saveSettings;
 async function overlayCommand(command, args = {}) { try { await tauri?.core?.invoke(command, args); } catch (error) { alert(`Overlay 操作失败：${error}`); } }
 $('offscreenOverlay').onchange = event => { overlayCommand('set_overlay_offscreen', { offscreen: event.target.checked }); saveSettings(); }; $('portraitOverlay').onchange = event => { overlayCommand('set_overlay_orientation', { portrait: event.target.checked }); saveSettings(); }; $('topOverlay').onchange = event => { overlayCommand('set_overlay_always_on_top', { enabled: event.target.checked }); saveSettings(); }; $('clickthroughOverlay').onchange = async event => { await overlayCommand('set_overlay_clickthrough', { enabled: event.target.checked }); tauri?.event?.emit('overlay-edit-mode', !event.target.checked).catch(() => {}); saveSettings(); };
 if (tauri?.event?.listen) { await tauri.event.listen('overlay-ready', () => tauri.event.emit('quiz-state', engine.snapshot())); }
@@ -133,3 +134,76 @@ $('disconnectRoomBtn').onclick = () => directProvider.stop();
 
 $('roomNumber').addEventListener('input', saveSettings);
 void restoreSettings().finally(() => engine.notify());
+
+// ---- Dev-only test tools (toggle with Ctrl+Shift+D) ----
+const DEV_STORAGE_KEY = 'douyin-live-quiz.dev-mode.v1';
+const devId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+
+function toggleDevPanel(force) {
+  const show = typeof force === 'boolean' ? force : $('devPanel').classList.contains('hidden');
+  $('devPanel').classList.toggle('hidden', !show);
+  try { localStorage.setItem(DEV_STORAGE_KEY, show ? '1' : '0'); } catch {}
+}
+
+window.addEventListener('keydown', event => {
+  if (event.ctrlKey && event.shiftKey && event.key && event.key.toLowerCase() === 'd') {
+    event.preventDefault();
+    toggleDevPanel();
+  }
+});
+
+function devEnsureAnswering() {
+  const phase = engine.snapshot().phase;
+  if (phase === 'idle' || phase === 'revealed') engine.startRound();
+  else if (phase === 'paused') engine.resume();
+}
+
+function devComment(content) {
+  return { userId: `dev-${devId()}`, nickname: `观众${1000 + Math.floor(Math.random() * 9000)}`, content, eventId: `dev-evt-${devId()}` };
+}
+
+function devSimulateAnswers(count, correctPercent) {
+  devEnsureAnswering();
+  const answer = engine.question.answer;
+  const wrong = ['A', 'B', 'C', 'D'].filter(k => k !== answer);
+  for (let i = 0; i < count; i++) {
+    const correct = Math.random() * 100 < correctPercent;
+    engine.handleComment(devComment(correct ? answer : wrong[Math.floor(Math.random() * wrong.length)]));
+  }
+}
+
+function devSimulateWin() {
+  devEnsureAnswering();
+  engine.handleComment(devComment(engine.question.answer));
+}
+
+function devSeedLeaderboard(count) {
+  const stamp = Date.now();
+  for (let i = 0; i < count; i++) {
+    const uid = `dev-seed-${stamp}-${i}`;
+    engine.state.players[uid] = { id: uid, nickname: `玩家${1000 + i}`, avatar: '', score: Math.floor(Math.random() * 30) * 10, correct: Math.floor(Math.random() * 25), answered: 20 + Math.floor(Math.random() * 30) };
+  }
+  engine.notify();
+}
+
+let devAutoTimer = null;
+function toggleAutoDemo() {
+  const button = $('devAutoBtn');
+  if (devAutoTimer) { clearInterval(devAutoTimer); devAutoTimer = null; button.textContent = '开始自动演示'; button.classList.remove('danger'); return; }
+  devEnsureAnswering();
+  button.textContent = '停止自动演示';
+  button.classList.add('danger');
+  devAutoTimer = setInterval(() => {
+    const phase = engine.snapshot().phase;
+    if (phase === 'answering') devSimulateWin();
+    else if (phase === 'idle' || phase === 'revealed') engine.startRound();
+  }, 2200);
+}
+
+$('devSimulateBtn').onclick = () => devSimulateAnswers(Number($('devSimCount').value) || 5, Number($('devSimCorrect').value) || 0);
+$('devSeedBtn').onclick = () => devSeedLeaderboard(Number($('devSeedCount').value) || 50);
+$('devWinBtn').onclick = devSimulateWin;
+$('devAutoBtn').onclick = toggleAutoDemo;
+$('devClearBtn').onclick = () => engine.clearLeaderboard();
+$('closeDevBtn').onclick = () => toggleDevPanel(false);
+if (localStorage.getItem(DEV_STORAGE_KEY) === '1') $('devPanel').classList.remove('hidden');

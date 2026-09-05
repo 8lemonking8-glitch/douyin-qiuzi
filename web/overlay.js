@@ -28,7 +28,9 @@ function renderRank(list, speed) {
 }
 
 function render(state) {
-  if (!state?.question) return;
+  if (!state) return;
+  document.body.classList.toggle('fullscreen', Boolean(state.fullscreenOverlay));
+  if (!state.question) return;
   const q = state.question;
   $('progress').textContent = `${state.idx + 1} / ${state.total}`;
   $('levelTag').textContent = state.activeLevelLabel || '全部';
