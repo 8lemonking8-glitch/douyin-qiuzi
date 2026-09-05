@@ -152,7 +152,8 @@ body { -webkit-user-select: none; user-select: none; }
 .winner-card > :not(.celebration-particles) { position: relative; z-index: 1; }
 .sparkles { color: #ffe3a0; font-size: 20px; letter-spacing: 2px; white-space: nowrap; }
 .winner-label { color: #d9f0da; font-size: 16px; font-weight: 800; }
-.winner-name { overflow: hidden; margin-top: 2px; color: #fff; font-size: 28px; font-weight: 900; text-overflow: ellipsis; white-space: nowrap; }
+.winner-name { overflow: hidden; margin-top: 2px; color: #ffe5a1; font-size: 40px; font-weight: 900; text-overflow: ellipsis; white-space: nowrap; text-shadow: 0 2px 10px rgba(0, 0, 0, .28); animation: name-pop .6s cubic-bezier(.16, 1.4, .3, 1) .12s both; }
+@keyframes name-pop { 0% { opacity: 0; transform: scale(.4); } 60% { opacity: 1; transform: scale(1.15); } 100% { opacity: 1; transform: scale(1); } }
 .winner-result { text-align: right; white-space: nowrap; }
 .winner-answer { color: #ecf7ed; font-size: 17px; font-weight: 700; }
 .winner-score { margin-top: 1px; color: #ffe5a1; font-size: 27px; font-weight: 900; }
@@ -230,3 +231,9 @@ body.fullscreen .quiz-card::before { display: none; }
 .countdown.low .cd-fg { stroke: #c0392b; }
 .countdown.low .cd-num { color: #c0392b; animation: countdown-pulse .5s ease-in-out infinite; }
 @keyframes countdown-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+
+/* 正确答案高亮 */
+.options div { transition: transform .25s ease, opacity .25s ease, filter .25s ease, box-shadow .25s ease; }
+.options div.is-correct { outline: 3px solid #3fae83; outline-offset: 2px; box-shadow: 0 0 0 6px rgba(90, 190, 140, .18), 0 0 30px rgba(90, 190, 140, .5); transform: scale(1.05); }
+.options div.is-wrong { opacity: .38; filter: saturate(.5); }
+.winner-answer { color: #ffe5a1; font-size: 19px; font-weight: 800; }

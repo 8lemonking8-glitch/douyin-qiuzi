@@ -94,7 +94,12 @@ function render(state) {
   $('levelTag').textContent = state.activeLevelLabel || '全部';
   $('q').textContent = q.question.replace(/ 含义？$/, '');
   $('qMeta').textContent = [state.phase === 'revealed' && q.pos, q.phonetic].filter(Boolean).join('  ');
-  for (const key of ['A', 'B', 'C', 'D']) $(key.toLowerCase()).textContent = q.options[key];
+  for (const key of ['A', 'B', 'C', 'D']) {
+    $(key.toLowerCase()).textContent = q.options[key];
+    const opt = document.querySelector('.answer-' + key.toLowerCase());
+    opt.classList.toggle('is-correct', state.phase === 'revealed' && q.answer === key);
+    opt.classList.toggle('is-wrong', state.phase === 'revealed' && q.answer !== key);
+  }
   if (state.idx !== lastIdx) { lastIdx = state.idx; triggerQuestionEnter(); }
   const cd = $('countdown');
   if (state.phase === 'answering' && state.mode !== 'manual') {
