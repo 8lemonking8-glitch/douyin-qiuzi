@@ -13,10 +13,13 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^2.11.0",
+    "canvas-confetti": "^1.9.4",
     "pako": "^2.1.0"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.8.0",
+    "@tsconfig/node22": "^22.0.6",
+    "@vue/tsconfig": "^0.9.1",
     "vite": "^6.2.4"
   },
   "type": "module"

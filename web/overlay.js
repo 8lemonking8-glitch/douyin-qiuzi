@@ -1,9 +1,11 @@
+import confetti from 'canvas-confetti';
 const $ = id => document.getElementById(id);
 const tauri = window.__TAURI__;
 const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
 
 const MEDALS = ['🥇', '🥈', '🥉'];
 let lastRankKey = null;
+let lastWinnerShown = false;
 
 function renderRank(list, speed) {
   const pinned = list.slice(0, 3);
@@ -27,6 +29,21 @@ function renderRank(list, speed) {
   }
 }
 
+function celebrate() {
+  const flash = $('flash');
+  if (flash) {
+    flash.classList.remove('flash-anim');
+    void flash.offsetWidth;
+    flash.classList.add('flash-anim');
+  }
+  const colors = ['#dc755e', '#efbd61', '#4f7d60', '#927cc5', '#d8a742', '#ffffff', '#679a73'];
+  try {
+    confetti({ particleCount: 130, spread: 80, startVelocity: 45, origin: { y: 0.55 }, colors, scalar: 1.05 });
+    confetti({ particleCount: 70, angle: 60, spread: 60, origin: { x: 0, y: 0.7 }, colors });
+    confetti({ particleCount: 70, angle: 120, spread: 60, origin: { x: 1, y: 0.7 }, colors });
+  } catch {}
+}
+
 function render(state) {
   if (!state) return;
   document.body.classList.toggle('fullscreen', Boolean(state.fullscreenOverlay));
@@ -43,6 +60,9 @@ function render(state) {
   if (state.phase === 'answering') { answerHint.classList.remove('hidden'); answerHint.textContent = state.mode === 'first_correct' ? '📝 评论区发送 A / B / C / D 参与抢答' : `⏱ 剩余 ${state.remaining}s · 评论区发送 A / B / C / D`; }
   else if (state.phase === 'paused') { answerHint.classList.remove('hidden'); answerHint.textContent = '⏸ 本题已暂停'; }
   else answerHint.classList.add('hidden');
+  const showWinner = Boolean(state.winner) || (state.phase === 'revealed' && Boolean(q.answer));
+  if (showWinner && !lastWinnerShown) celebrate();
+  lastWinnerShown = showWinner;
   const winner = $('winner');
   if (state.winner) { winner.classList.remove('hidden'); $('winnerLabel').textContent = '抢答成功'; $('winnerName').textContent = state.winner.nickname; $('winnerAnswer').textContent = `正确答案：${state.winner.answer}（${q.options[state.winner.answer]}）`; $('winnerScore').textContent = `+${state.winner.awarded} 分`; $('nextTip').textContent = `${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题…`; }
   else if (state.phase === 'revealed' && q.answer) { winner.classList.remove('hidden'); const lastCorrect = (state.recent || []).find(r => r.correct); $('winnerLabel').textContent = '正确答案'; $('winnerName').textContent = lastCorrect ? `${lastCorrect.nickname} +${state.scorePerCorrect} 分` : q.options[q.answer]; $('winnerAnswer').textContent = `✓ ${q.answer}`; $('winnerScore').textContent = ''; $('nextTip').textContent = state.mode === 'manual' ? '等待主播切题' : `${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题…`; }
