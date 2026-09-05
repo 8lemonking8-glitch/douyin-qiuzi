@@ -3,6 +3,7 @@ import { createPlayer, rankedPlayers } from './scoring.js';
 
 const VALID_MODES = new Set(['first_correct', 'timer', 'manual']);
 const VALID_ANSWERS = new Set(['A', 'B', 'C', 'D']);
+const STALE_ANSWER_BUFFER_MS = 3000;
 
 export const LEVEL_LABELS = {
   all: '全部题库', highschool: '高中基础', cet4: '四级', cet6: '六级',
@@ -33,7 +34,7 @@ export class QuizEngine {
   initialState() {
     return {
       idx: 0, phase: 'idle', remaining: this.roundSeconds,
-      stats: { A: 0, B: 0, C: 0, D: 0 }, answers: {}, players: {}, recent: [], comments: [], winner: null,
+      stats: { A: 0, B: 0, C: 0, D: 0 }, answers: {}, players: {}, recent: [], comments: [], winner: null, roundStartedAt: null,
       dycastConnected: 0, directDycastConnected: 0,
       directDycastConnecting: false, directDycastRoom: null, directDycastDetail: null,
       dycastLastMessageAt: null, dycastError: null
@@ -64,7 +65,7 @@ export class QuizEngine {
     };
   }
   clearTimers() { if (this.timer) clearInterval(this.timer); if (this.autoNextTimer) clearTimeout(this.autoNextTimer); this.timer = null; this.autoNextTimer = null; }
-  clearRound() { this.state.answers = {}; this.state.stats = { A: 0, B: 0, C: 0, D: 0 }; this.state.recent = []; this.state.winner = null; }
+  clearRound() { this.state.answers = {}; this.state.stats = { A: 0, B: 0, C: 0, D: 0 }; this.state.recent = []; this.state.winner = null; this.state.roundStartedAt = null; }
   setMode(mode) { if (!VALID_MODES.has(mode) || mode === this.mode) return; this.mode = mode; if (this.state.phase !== 'idle') { this.clearTimers(); this.clearRound(); this.state.phase = 'idle'; this.state.remaining = this.roundSeconds; } this.notify(); }
   setRoundSeconds(seconds) { const n = Number(seconds); if (Number.isFinite(n) && n >= 5 && n <= 120) { this.roundSeconds = Math.round(n); if (this.state.phase !== 'answering') this.state.remaining = this.roundSeconds; this.notify(); } }
   setAutoDelay(seconds) { const n = Number(seconds); if (Number.isFinite(n) && n >= 1 && n <= 30) { this.autoDelayMs = Math.round(n * 1000); this.notify(); } }
@@ -85,7 +86,7 @@ export class QuizEngine {
   shuffleQuestions() { for (let i = this.allQuestions.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [this.allQuestions[i], this.allQuestions[j]] = [this.allQuestions[j], this.allQuestions[i]]; } this.filterByLevel(this.activeLevel); }
   startRound() {
     if (this.state.phase !== 'idle' && this.state.phase !== 'revealed') return;
-    this.clearTimers(); this.clearRound(); this.state.phase = 'answering'; this.state.remaining = this.roundSeconds; this.notify();
+    this.clearTimers(); this.clearRound(); this.state.phase = 'answering'; this.state.remaining = this.roundSeconds; this.state.roundStartedAt = Date.now(); this.notify();
     if (this.mode !== 'manual') this.timer = setInterval(() => { this.state.remaining -= 1; this.state.remaining <= 0 ? this.revealAnswer(true) : this.notify(); }, 1000);
   }
   pause() { if (this.state.phase !== 'answering') return; this.clearTimers(); this.state.phase = 'paused'; this.notify(); }
@@ -97,12 +98,14 @@ export class QuizEngine {
   resetGame() { this.clearTimers(); this.seenEventIds.clear(); this.state = this.initialState(); this.notify(); }
   clearLeaderboard() { this.state.players = {}; this.notify(); }
   normalizeAnswer(content) { if (typeof content !== 'string') return null; const value = content.trim().toUpperCase().replace(/[ＡＢＣＤ]/g, char => ({ Ａ: 'A', Ｂ: 'B', Ｃ: 'C', Ｄ: 'D' })[char]).replace(/[\s，。！？,.!?:：；;]/g, ''); return VALID_ANSWERS.has(value) ? value : null; }
+  normalizeTimestamp(value) { const n = Number(value); if (!Number.isFinite(n) || n <= 0) return null; return n < 1e11 ? n * 1000 : n; }
+  isStaleAnswer(timestamp) { if (timestamp == null || this.state.roundStartedAt == null) return false; return timestamp < this.state.roundStartedAt - STALE_ANSWER_BUFFER_MS; }
   normalizeComment(raw) {
     if (!raw || raw.method !== 'WebcastChatMessage') return null;
     const user = raw.user || {};
     const userId = String(user.id || user.sec_openid || user.openId || user.unique_id || '');
     if (!userId) return null;
-    return { eventId: raw.id == null ? null : String(raw.id), userId, nickname: String(user.name || user.nickname || '匿名观众').slice(0, 24), avatar: String(user.avatar || user.avatar_url || ''), content: String(raw.content || '') };
+    return { eventId: raw.id == null ? null : String(raw.id), userId, nickname: String(user.name || user.nickname || '匿名观众').slice(0, 24), avatar: String(user.avatar || user.avatar_url || ''), content: String(raw.content || ''), timestamp: this.normalizeTimestamp(raw.timestamp) };
   }
   handleDycastPayload(payload) { let data = payload; if (typeof payload === 'string') { try { data = JSON.parse(payload); } catch { return 0; } } return (Array.isArray(data) ? data : [data]).reduce((count, raw) => count + Number(this.handleComment(raw)), 0); }
   handleComment(raw) {
@@ -116,6 +119,7 @@ export class QuizEngine {
     if (this.state.phase !== 'answering') { this.notify(); return false; }
     const answer = this.normalizeAnswer(comment.content);
     if (!answer || this.state.answers[comment.userId]) { this.notify(); return false; }
+    if (this.isStaleAnswer(comment.timestamp)) { this.notify(); return false; }
     const correct = answer === this.question.answer;
     this.state.answers[comment.userId] = { answer, correct, nickname: comment.nickname, at: Date.now() };
     this.state.stats[answer] += 1;
