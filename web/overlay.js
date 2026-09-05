@@ -33,7 +33,7 @@ function render(state) {
   $('progress').textContent = `${state.idx + 1} / ${state.total}`;
   $('levelTag').textContent = state.activeLevelLabel || '全部';
   $('q').textContent = q.question.replace(/ 含义？$/, '');
-  $('qMeta').textContent = [q.pos, q.phonetic].filter(Boolean).join('  ');
+  $('qMeta').textContent = [state.phase === 'revealed' && q.pos, q.phonetic].filter(Boolean).join('  ');
   for (const key of ['A', 'B', 'C', 'D']) $(key.toLowerCase()).textContent = q.options[key];
   $('participants').textContent = `${state.participantCount} 人参与`;
   $('hint').textContent = state.phase === 'answering' ? (state.mode === 'first_correct' ? '🎤 评论发送 A / B / C / D 抢答' : `⏱ 剩余 ${state.remaining}s · 评论 A/B/C/D`) : state.phase === 'paused' ? '⏸ 本题已暂停' : '等待主播开始本题';
