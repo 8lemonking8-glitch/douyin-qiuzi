@@ -204,3 +204,29 @@ body.fullscreen .quiz-card::before { display: none; }
   body.fullscreen .quiz-card { left: auto; width: 100%; padding: 22px 18px; }
   body.fullscreen .rank-card { right: auto; width: 100%; border-left: 0; border-top: 1px solid rgba(220, 117, 94, .18); padding: 18px 16px; }
 }
+
+/* 排行榜得分高亮 */
+.rank-row.score-flash { animation: score-flash 1.3s ease-out; }
+@keyframes score-flash { 0% { box-shadow: inset 0 0 0 999px rgba(239, 189, 97, .42); } 100% { box-shadow: inset 0 0 0 999px rgba(239, 189, 97, 0); } }
+
+/* 新题入场动画 */
+.quiz-card.q-enter h1 { animation: q-in .42s ease-out both; }
+.quiz-card.q-enter .q-meta { animation: q-in .42s ease-out both; animation-delay: .04s; }
+.quiz-card.q-enter .options div { animation: q-in .42s ease-out both; }
+.quiz-card.q-enter .options div:nth-child(1) { animation-delay: .08s; }
+.quiz-card.q-enter .options div:nth-child(2) { animation-delay: .15s; }
+.quiz-card.q-enter .options div:nth-child(3) { animation-delay: .22s; }
+.quiz-card.q-enter .options div:nth-child(4) { animation-delay: .29s; }
+@keyframes q-in { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* 倒计时 */
+.topline-meta { display: flex; align-items: center; gap: 12px; }
+.answer-chart { height: 120px; margin-top: 14px; }
+.countdown { position: relative; display: inline-grid; place-items: center; width: 52px; height: 52px; flex: 0 0 auto; }
+.countdown svg { position: absolute; inset: 0; width: 52px; height: 52px; transform: rotate(-90deg); }
+.countdown .cd-bg { fill: none; stroke: #f3e3d8; stroke-width: 5; }
+.countdown .cd-fg { fill: none; stroke: var(--coral); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 138.23; transition: stroke-dashoffset 1s linear, stroke .3s ease; }
+.countdown .cd-num { position: relative; font-size: 18px; font-weight: 900; color: var(--ink); line-height: 1; }
+.countdown.low .cd-fg { stroke: #c0392b; }
+.countdown.low .cd-num { color: #c0392b; animation: countdown-pulse .5s ease-in-out infinite; }
+@keyframes countdown-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }

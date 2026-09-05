@@ -1,6 +1,7 @@
 import { QuizEngine } from './src/game/engine.js';
 import { DirectDycastProvider } from './src/adapters/direct-dycast-provider.js';
 import questions from './questions.json';
+import * as Tone from 'tone';
 
 const $ = id => document.getElementById(id);
 const tauri = window.__TAURI__;
@@ -81,8 +82,18 @@ function phaseText(state) { return ({ idle: '等待开始', answering: state.mod
 function formatLastMessage(timestamp) { return timestamp ? new Date(timestamp).toLocaleTimeString('zh-CN', { hour12: false }) : '暂无'; }
 let lastPhase = null;
 function speakWord(word) { try { new Audio('https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(word) + '&type=1').play().catch(() => {}); } catch {} }
-let audioCtx = null; let lastRecentTs = null;
-function playSound(correct) { try { audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)(); if (audioCtx.state === 'suspended') audioCtx.resume(); const ctx = audioCtx; const now = ctx.currentTime; const tone = (freq, t, dur, type, peak, decay) => { const o = ctx.createOscillator(); const g = ctx.createGain(); o.type = type; o.frequency.value = freq; g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + 0.015); g.gain.exponentialRampToValueAtTime(0.0001, t + decay); o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t + decay + 0.02); }; if (correct) { [523.25, 659.25, 783.99].forEach((f, i) => tone(f, now + i * 0.09, 0.45, 'triangle', 0.24, 0.45)); } else { tone(160, now, 0.55, 'sine', 0.2, 0.55); tone(320, now, 0.45, 'sine', 0.06, 0.45); tone(140, now + 0.05, 0.5, 'triangle', 0.1, 0.5); } } catch {} }
+let lastRecentTs = null;
+let toneReady = false; let correctSynth = null; let wrongSynth = null;
+function ensureTone() {
+  if (toneReady) return;
+  try {
+    Tone.start();
+    correctSynth = new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.004, decay: 0.4, sustain: 0, release: 0.3 } }).toDestination();
+    wrongSynth = new Tone.Synth({ oscillator: { type: 'sawtooth' }, envelope: { attack: 0.008, decay: 0.3, sustain: 0.08, release: 0.2 }, volume: -8 }).toDestination();
+    toneReady = true;
+  } catch {}
+}
+function playSound(correct) { try { ensureTone(); if (!toneReady) return; const now = Tone.now(); if (correct) { correctSynth.triggerAttackRelease('C5', 0.16, now); correctSynth.triggerAttackRelease('G5', 0.4, now + 0.11); } else { wrongSynth.triggerAttackRelease('A3', 0.22, now); wrongSynth.triggerAttackRelease('E3', 0.35, now + 0.13); } } catch {} }
 function render(state) {
   const q = state.question;
   if (q) { const entered = state.phase === 'answering' && lastPhase !== 'answering' && lastPhase !== 'paused'; if (entered && $('autoSpeak').checked) speakWord(q.question.replace(/ 含义？$/, '')); lastPhase = state.phase; }
