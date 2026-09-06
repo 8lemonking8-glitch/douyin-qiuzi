@@ -237,3 +237,6 @@ body.fullscreen .quiz-card::before { display: none; }
 .options div.is-correct { outline: 3px solid #3fae83; outline-offset: 2px; box-shadow: 0 0 0 6px rgba(90, 190, 140, .18), 0 0 30px rgba(90, 190, 140, .5); transform: scale(1.05); }
 .options div.is-wrong { opacity: .38; filter: saturate(.5); }
 .winner-answer { color: #ffe5a1; font-size: 19px; font-weight: 800; }
+
+/* 连击徽章 */
+.winner-streak { display: inline-block; margin-top: 5px; padding: 3px 10px; border-radius: 999px; background: rgba(0, 0, 0, .22); color: #ffd27d; font-size: 15px; font-weight: 800; white-space: nowrap; }

@@ -5,5 +5,5 @@ export function rankedPlayers(players, limit = 50) {
 }
 
 export function createPlayer({ userId, nickname, avatar }) {
-  return { id: userId, nickname, avatar, score: 0, correct: 0, answered: 0 };
+  return { id: userId, nickname, avatar, score: 0, correct: 0, answered: 0, streak: 0 };
 }

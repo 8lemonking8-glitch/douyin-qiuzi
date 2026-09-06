@@ -39,7 +39,7 @@ function renderRank(list, speed) {
   }
 }
 
-function celebrate() {
+function celebrate(streak = 0) {
   const flash = $('flash');
   if (flash) {
     flash.classList.remove('flash-anim');
@@ -51,6 +51,7 @@ function celebrate() {
     confetti({ particleCount: 130, spread: 80, startVelocity: 45, origin: { y: 0.55 }, colors, scalar: 1.05 });
     confetti({ particleCount: 70, angle: 60, spread: 60, origin: { x: 0, y: 0.7 }, colors });
     confetti({ particleCount: 70, angle: 120, spread: 60, origin: { x: 1, y: 0.7 }, colors });
+    if (streak >= 3) { const fire = confetti.shapeFromText({ text: '🔥', scalar: 2 }); confetti({ shapes: [fire], particleCount: 30, spread: 120, startVelocity: 45, origin: { y: 0.5 }, scalar: 2 }); }
   } catch {}
 }
 
@@ -119,12 +120,14 @@ function render(state) {
   else if (state.phase === 'paused') { answerHint.classList.remove('hidden'); answerHint.textContent = '⏸ 本题已暂停'; }
   else answerHint.classList.add('hidden');
   const showWinner = Boolean(state.winner) || (state.phase === 'revealed' && Boolean(q.answer));
-  if (showWinner && !lastWinnerShown) celebrate();
+  if (showWinner && !lastWinnerShown) celebrate(state.winner?.streak);
   lastWinnerShown = showWinner;
   const winner = $('winner');
   if (state.winner) { winner.classList.remove('hidden'); $('winnerLabel').textContent = '抢答成功'; $('winnerName').textContent = state.winner.nickname; $('winnerAnswer').textContent = `正确答案：${state.winner.answer}（${q.options[state.winner.answer]}）`; $('winnerScore').textContent = `+${state.winner.awarded} 分`; $('nextTip').textContent = `${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题…`; }
   else if (state.phase === 'revealed' && q.answer) { winner.classList.remove('hidden'); const lastCorrect = (state.recent || []).find(r => r.correct); $('winnerLabel').textContent = '正确答案'; $('winnerName').textContent = lastCorrect ? `${lastCorrect.nickname} +${state.scorePerCorrect} 分` : q.options[q.answer]; $('winnerAnswer').textContent = `✓ ${q.answer}`; $('winnerScore').textContent = ''; $('nextTip').textContent = state.mode === 'manual' ? '等待主播切题' : `${Math.round(state.autoDelayMs / 1000)} 秒后自动下一题…`; }
   else winner.classList.add('hidden');
+  const streakEl = $('winnerStreak');
+  if (state.winner && state.winner.streak >= 2) { streakEl.classList.remove('hidden'); streakEl.textContent = `🔥 连对 x ${state.winner.streak}`; } else streakEl.classList.add('hidden');
   const list = state.leaderboard || [];
   const rankKey = JSON.stringify(list) + '|' + state.leaderboardScrollSpeed;
   if (rankKey !== lastRankKey) { lastRankKey = rankKey; renderRank(list, state.leaderboardScrollSpeed); }

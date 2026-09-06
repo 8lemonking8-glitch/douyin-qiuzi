@@ -125,10 +125,10 @@ export class QuizEngine {
     this.state.stats[answer] += 1;
     const player = this.state.players[comment.userId] ||= createPlayer(comment);
     player.nickname = comment.nickname; player.avatar = comment.avatar || player.avatar; player.answered += 1;
-    if (correct) { player.score += this.scorePerCorrect; player.correct += 1; }
+    if (correct) { player.score += this.scorePerCorrect; player.correct += 1; player.streak += 1; } else { player.streak = 0; }
     this.state.recent.push({ userId: comment.userId, nickname: comment.nickname, answer, correct, score: player.score, ts: Date.now() });
     if (this.state.recent.length > 30) this.state.recent.shift();
-    if (correct && this.mode === 'first_correct' && !this.state.winner) { this.state.winner = { ...comment, answer, awarded: this.scorePerCorrect, score: player.score }; this.state.phase = 'revealed'; this.clearTimers(); this.state.remaining = 0; this.notify(); this.scheduleNext(); return true; }
+    if (correct && this.mode === 'first_correct' && !this.state.winner) { this.state.winner = { ...comment, answer, awarded: this.scorePerCorrect, score: player.score, streak: player.streak }; this.state.phase = 'revealed'; this.clearTimers(); this.state.remaining = 0; this.notify(); this.scheduleNext(); return true; }
     this.notify(); return true;
   }
 }
